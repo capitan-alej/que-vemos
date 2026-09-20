@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <rect width="64" height="64" rx="10" fill="#000000"/>
+  <!-- film sprocket holes -->
+  <g fill="#d9a441">
+    <rect x="8" y="9" width="6" height="6" rx="1.5"/>
+    <rect x="8" y="24.5" width="6" height="6" rx="1.5"/>
+    <rect x="8" y="40" width="6" height="6" rx="1.5"/>
+    <rect x="50" y="9" width="6" height="6" rx="1.5"/>
+    <rect x="50" y="24.5" width="6" height="6" rx="1.5"/>
+    <rect x="50" y="40" width="6" height="6" rx="1.5"/>
+  </g>
+  <!-- frame -->
+  <rect x="18" y="9" width="28" height="46" rx="2" fill="#141414" stroke="#d9a441" stroke-width="2"/>
+  <!-- question mark -->
+  <text x="32" y="41" font-family="Georgia, 'Times New Roman', serif" font-size="30" font-weight="bold"
+        text-anchor="middle" fill="#f1ead9">?</text>
+</svg>

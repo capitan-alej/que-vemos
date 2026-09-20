@@ -1,0 +1,626 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>¿Qué vemos?</title>
+<meta name="description" content="Recomendaciones semanales de cine y plataformas en Argentina, cruzadas con Letterboxd, con watchlist familiar.">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&family=IBM+Plex+Mono:wght@400;600&display=swap">
+<style>
+  :root{
+    --bg:#0e0c09;
+    --paper:#1a1611;
+    --paper-raised:#211c15;
+    --ink:#f1ead9;
+    --ink-muted:#9c9182;
+    --line:#322b21;
+    --accent:#d9a441;
+    --accent-ink:#171006;
+    --badge-cine:#a8503c;
+    --badge-plataforma:#3f8177;
+    --badge-ink:#0e0c09;
+    --star:#d9a441;
+    --star-track:#3a3226;
+    color-scheme:dark;
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  [hidden]{display:none !important;}
+  body{
+    background:var(--bg);
+    color:var(--ink);
+    font-family:"Source Serif 4","Iowan Old Style",Georgia,serif;
+    padding-inline:20px;
+    padding-block:28px 48px;
+  }
+  a{color:inherit;}
+  .wrap{max-width:880px;margin-inline:auto;}
+
+  header.masthead{
+    border-bottom:3px solid var(--ink);
+    padding-bottom:16px;
+    margin-bottom:18px;
+    display:flex;
+    flex-wrap:wrap;
+    align-items:flex-end;
+    justify-content:space-between;
+    gap:12px;
+  }
+  .masthead h1{
+    font-family:"Bebas Neue","Oswald",Impact,sans-serif;
+    font-weight:400;
+    font-size:clamp(2.4rem,7vw,3.6rem);
+    letter-spacing:0.02em;
+    margin:0;
+    line-height:0.9;
+  }
+  .masthead .sub{
+    font-family:"IBM Plex Mono",ui-monospace,monospace;
+    font-size:0.72rem;
+    letter-spacing:0.08em;
+    text-transform:uppercase;
+    color:var(--ink-muted);
+    text-align:right;
+  }
+  .masthead .sub .week{display:block;font-size:0.95rem;color:var(--ink);letter-spacing:0.02em;margin-bottom:2px;}
+
+  .toolbar{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;margin-bottom:28px;}
+  .toolbar .tag{font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:0.72rem;color:var(--ink-muted);}
+  .filters{display:flex;gap:8px;flex-wrap:wrap;}
+  select.filter-select{
+    background:var(--paper);color:var(--ink);border:1px solid var(--line);border-radius:3px;
+    padding:7px 30px 7px 12px;font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:0.72rem;
+    letter-spacing:0.06em;text-transform:uppercase;appearance:none;
+    background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='10' height='6'><path d='M0 0l5 6 5-6z' fill='%239c9182'/></svg>");
+    background-repeat:no-repeat;background-position:right 12px center;cursor:pointer;
+  }
+  select.filter-select:focus-visible{outline:2px solid var(--accent);outline-offset:2px;}
+
+  .picks{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:18px;}
+  .card{background:var(--paper);border:1px solid var(--line);border-radius:2px;padding:20px 20px 18px;display:flex;flex-direction:column;gap:12px;position:relative;}
+  .card .rank{font-family:"Bebas Neue","Oswald",sans-serif;position:absolute;top:14px;right:50px;font-size:2.1rem;color:var(--line);line-height:1;}
+  .pick-btn{position:absolute;top:12px;right:12px;width:32px;height:32px;border-radius:50%;border:1px solid var(--line);background:var(--paper-raised);display:flex;align-items:center;justify-content:center;cursor:pointer;padding:0;transition:border-color .15s ease, background .15s ease;}
+  .pick-btn svg{width:15px;height:15px;fill:none;stroke:var(--ink-muted);stroke-width:1.6;transition:fill .15s ease, stroke .15s ease;}
+  .pick-btn:hover{border-color:var(--accent);}
+  .pick-btn[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);}
+  .pick-btn[aria-pressed="true"] svg{fill:var(--accent-ink);stroke:var(--accent-ink);}
+  .pick-btn:focus-visible{outline:2px solid var(--accent);outline-offset:2px;}
+  .pick-btn:disabled{opacity:.4;cursor:wait;}
+
+  .badge-row{display:flex;gap:6px;flex-wrap:wrap;align-items:center;}
+  .badge{font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:0.62rem;letter-spacing:0.09em;text-transform:uppercase;padding:3px 8px;border-radius:2px;color:var(--badge-ink);white-space:nowrap;}
+  .badge.cine{background:var(--badge-cine);}
+  .badge.plataforma{background:var(--badge-plataforma);}
+  .badge.outline{background:transparent;color:var(--ink-muted);border:1px solid var(--line);}
+
+  .card h2{font-family:"Bebas Neue","Oswald",Impact,sans-serif;font-weight:400;font-size:1.7rem;letter-spacing:0.015em;margin:0;line-height:1.02;padding-right:2.6rem;}
+  .card .meta{font-size:0.82rem;color:var(--ink-muted);font-family:"IBM Plex Mono",ui-monospace,monospace;}
+
+  .scores{display:flex;gap:18px;border-top:1px solid var(--line);padding-top:12px;margin-top:auto;}
+  .score{flex:1;min-width:0;}
+  .score .label{font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:0.62rem;letter-spacing:0.08em;text-transform:uppercase;color:var(--ink-muted);display:block;margin-bottom:3px;}
+  .score .val{font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:1.15rem;font-variant-numeric:tabular-nums;font-weight:600;}
+  .score .val small{font-size:0.68rem;color:var(--ink-muted);font-weight:400;}
+  .stars{display:inline-flex;gap:1px;vertical-align:middle;margin-right:6px;}
+  .stars svg{width:11px;height:11px;}
+
+  .poster-link{display:inline-flex;align-items:center;gap:5px;font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:0.68rem;letter-spacing:0.03em;color:var(--accent);text-decoration:none;width:fit-content;}
+  .poster-link svg{width:11px;height:11px;fill:none;stroke:currentColor;stroke-width:1.6;}
+  .poster-link:hover{text-decoration:underline;text-underline-offset:2px;}
+
+  .sources{font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:0.68rem;color:var(--ink-muted);display:flex;gap:10px;flex-wrap:wrap;}
+  .sources a{text-decoration:underline;text-underline-offset:2px;}
+  .sources a:hover{color:var(--accent);}
+
+  .who-row{display:flex;gap:5px;flex-wrap:wrap;align-items:center;min-height:20px;}
+  .avatar{
+    width:20px;height:20px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;
+    font-family:"IBM Plex Mono",monospace;font-size:0.6rem;font-weight:600;color:var(--accent-ink);
+    background:var(--accent);border:1px solid var(--bg);
+  }
+  .who-empty{font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:0.65rem;color:var(--ink-muted);}
+
+  footer.note{margin-top:34px;padding-top:16px;border-top:1px solid var(--line);font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:0.68rem;color:var(--ink-muted);display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px;}
+  .state-msg{font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:0.75rem;color:var(--ink-muted);padding:16px 0;}
+
+  .archive{margin-top:40px;}
+  .archive h3,.watchlist h3{font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:0.68rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--ink-muted);margin:0 0 10px;}
+  .archive ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:6px;}
+  .archive li{font-size:0.85rem;display:flex;gap:10px;align-items:baseline;border-bottom:1px dotted var(--line);padding-bottom:6px;cursor:pointer;}
+  .archive li .wk{font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:0.7rem;color:var(--ink-muted);min-width:5.5em;}
+  .archive li:hover{color:var(--accent);}
+
+  .watchlist{margin-top:40px;}
+  .watchlist summary{cursor:pointer;font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:0.68rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--ink-muted);list-style:none;display:flex;align-items:center;gap:8px;}
+  .watchlist summary::-webkit-details-marker{display:none;}
+  .watchlist summary::before{content:"▸";color:var(--accent);transition:transform .15s ease;}
+  .watchlist[open] summary::before{transform:rotate(90deg);}
+  .watchlist summary:hover{color:var(--ink);}
+  .watchlist summary .count{background:var(--paper-raised);border:1px solid var(--line);border-radius:10px;padding:1px 8px;color:var(--ink-muted);font-size:0.62rem;}
+  .watchlist-body{margin-top:14px;}
+  .watchlist-empty{font-size:0.85rem;color:var(--ink-muted);font-family:"IBM Plex Mono",ui-monospace,monospace;}
+  .watchlist ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:8px;}
+  .watchlist li{display:flex;align-items:center;justify-content:space-between;gap:10px;background:var(--paper);border:1px solid var(--line);border-radius:2px;padding:10px 14px;font-size:0.9rem;}
+  .watchlist li .wtitle{font-family:"Source Serif 4",serif;}
+  .watchlist li .wmeta{font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:0.65rem;color:var(--ink-muted);}
+  .watchlist li button{background:transparent;border:1px solid var(--line);color:var(--ink-muted);border-radius:2px;font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:0.62rem;letter-spacing:0.05em;text-transform:uppercase;padding:5px 9px;cursor:pointer;}
+  .watchlist li button:hover{border-color:var(--accent);color:var(--accent);}
+
+  .who-badge{margin-left:auto;display:flex;gap:4px;}
+
+  .name-modal-backdrop{position:fixed;inset:0;background:rgba(0,0,0,.6);display:flex;align-items:center;justify-content:center;padding:20px;z-index:50;}
+  .name-modal{background:var(--paper);border:1px solid var(--line);border-radius:4px;padding:24px;max-width:340px;width:100%;}
+  .name-modal h3{font-family:"Bebas Neue",sans-serif;font-size:1.4rem;margin:0 0 8px;font-weight:400;letter-spacing:.02em;}
+  .name-modal p{font-size:0.85rem;color:var(--ink-muted);margin:0 0 16px;line-height:1.4;}
+  .name-modal input{width:100%;background:var(--bg);border:1px solid var(--line);color:var(--ink);padding:10px 12px;border-radius:3px;font-family:"Source Serif 4",serif;font-size:1rem;margin-bottom:12px;}
+  .name-modal button{width:100%;background:var(--accent);color:var(--accent-ink);border:none;padding:10px 12px;border-radius:3px;font-family:"IBM Plex Mono",monospace;font-size:0.75rem;text-transform:uppercase;letter-spacing:.05em;cursor:pointer;}
+  .name-modal button:disabled{opacity:.5;cursor:wait;}
+  .name-modal .toggle-mode{background:none;border:none;color:var(--accent);text-decoration:underline;text-underline-offset:2px;font-family:"IBM Plex Mono",monospace;font-size:0.72rem;cursor:pointer;padding:0;width:auto;margin-top:10px;}
+  .name-modal .field-label{font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:0.62rem;letter-spacing:0.06em;text-transform:uppercase;color:var(--ink-muted);display:block;margin-bottom:4px;}
+  .name-modal .auth-error{color:#e08a6b;font-size:0.78rem;margin:-6px 0 12px;font-family:"IBM Plex Mono",monospace;}
+  #logout-link{background:none;border:none;color:var(--ink-muted);text-decoration:underline;text-underline-offset:2px;font-family:"IBM Plex Mono",monospace;font-size:0.68rem;cursor:pointer;padding:0;}
+  #logout-link:hover{color:var(--accent);}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="masthead">
+    <h1>¿Qué vemos?</h1>
+    <div class="sub"><span class="week" id="week-label">—</span>Buenos Aires · crítica × Letterboxd</div>
+  </header>
+
+  <div class="toolbar">
+    <span class="tag" id="intro-text">Estrenos de la semana en Argentina, cine y plataformas.</span>
+    <div class="filters">
+      <select id="filter-type" class="filter-select" aria-label="Filtrar por tipo">
+        <option value="todos">Todos</option>
+        <option value="cine">Cine</option>
+        <option value="plataforma">Plataforma</option>
+      </select>
+      <select id="filter-genre" class="filter-select" aria-label="Filtrar por género">
+        <option value="todos">Todo género</option>
+      </select>
+    </div>
+  </div>
+
+  <div id="content"><p class="state-msg">Cargando semana…</p></div>
+
+  <details class="watchlist" id="watchlist-wrap">
+    <summary>Mi watchlist <span class="count" id="watchlist-count">0</span></summary>
+    <div class="watchlist-body">
+      <p class="watchlist-empty" id="watchlist-empty">Todavía no marcaste ninguna. Tocá el círculo de una película para agregarla.</p>
+      <ul id="watchlist-list" hidden></ul>
+    </div>
+  </details>
+
+  <details class="watchlist" id="family-wrap">
+    <summary>Entre los tres <span class="count" id="family-count">0</span></summary>
+    <div class="watchlist-body">
+      <p class="watchlist-empty" id="family-empty">Nadie marcó nada todavía.</p>
+      <ul id="family-list" hidden></ul>
+    </div>
+  </details>
+
+  <div class="archive" id="archive-wrap" hidden>
+    <h3>Semanas anteriores</h3>
+    <ul id="archive-list"></ul>
+  </div>
+
+  <footer class="note">
+    <span id="updated-label">—</span>
+    <span id="who-am-i-wrap"><span id="who-am-i"></span> <button id="logout-link" type="button" hidden>cambiar de usuario</button></span>
+  </footer>
+</div>
+
+<div id="name-modal-root"></div>
+
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-app.js";
+import {
+  getAuth, onAuthStateChanged, signOut,
+  signInWithEmailAndPassword, createUserWithEmailAndPassword
+} from "https://www.gstatic.com/firebasejs/10.14.1/firebase-auth.js";
+import {
+  getFirestore, doc, getDoc, setDoc, deleteDoc, collection, query, where, onSnapshot
+} from "https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyAthOnaXKZCPfSUxkrqrfnhegkFKh09rQs",
+  authDomain: "que-vemos-74ff3.firebaseapp.com",
+  projectId: "que-vemos-74ff3",
+  storageBucket: "que-vemos-74ff3.firebasestorage.app",
+  messagingSenderId: "1014785903035",
+  appId: "1:1014785903035:web:4787887e2df9d0da6d5c9e"
+};
+
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+const db = getFirestore(app);
+
+const FALLBACK = {
+  weekKey: "2026-W38",
+  weekLabel: "18–24 sep 2026",
+  generatedAt: "2026-09-20T08:56:00-03:00",
+  picks: []
+};
+
+let UID = null;
+let MY_NAME = null;
+let currentWeekKey = FALLBACK.weekKey;
+let currentPicks = [];
+let myPickedKeys = new Set();
+let unsubFamily = null;
+
+function pickId(uid, weekKey, title){
+  const safe = (title||"").toLowerCase().replace(/[^a-z0-9]+/g,"-").replace(/(^-|-$)/g,"");
+  return `${uid}__${weekKey}__${safe}`.slice(0,300);
+}
+function pickKey(weekKey, title){ return weekKey + "::" + title; }
+
+function starsSVG(score){
+  if(score==null) return "";
+  const full = Math.round(score*2)/2;
+  let out = '<span class="stars">';
+  for(let i=1;i<=5;i++){
+    const fillPct = Math.max(0, Math.min(1, full - (i-1)));
+    out += `<svg viewBox="0 0 20 20"><defs><clipPath id="c${i}-${score}"><rect x="0" y="0" width="${fillPct*20}" height="20"/></clipPath></defs><path d="M10 1l2.7 6.06 6.3.63-4.8 4.5 1.35 6.68L10 15.9l-5.55 2.97L5.8 12.2 1 7.69l6.3-.63z" fill="var(--star-track)"/><path d="M10 1l2.7 6.06 6.3.63-4.8 4.5 1.35 6.68L10 15.9l-5.55 2.97L5.8 12.2 1 7.69l6.3-.63z" fill="var(--star)" clip-path="url(#c${i}-${score})"/></svg>`;
+  }
+  return out + '</span>';
+}
+function escapeHtml(s){
+  return String(s ?? "").replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+}
+function initials(name){
+  return (name||"?").trim().split(/\s+/).slice(0,2).map(w=>w[0]?.toUpperCase()||"").join("") || "?";
+}
+
+function applyFilter(){
+  const typeVal = document.getElementById("filter-type").value;
+  const genreVal = document.getElementById("filter-genre").value;
+  document.querySelectorAll(".card").forEach(card => {
+    const type = card.getAttribute("data-type");
+    const genre = card.getAttribute("data-genre");
+    const typeOk = typeVal === "todos" || typeVal === type;
+    const genreOk = genreVal === "todos" || genreVal === genre;
+    card.hidden = !(typeOk && genreOk);
+  });
+}
+
+function populateGenreFilter(picks){
+  const sel = document.getElementById("filter-genre");
+  const prev = sel.value || "todos";
+  const genres = [...new Set(picks.map(p => p.genre).filter(Boolean))].sort((a,b)=>a.localeCompare(b,"es"));
+  sel.innerHTML = `<option value="todos">Todo género</option>` + genres.map(g=>`<option value="${escapeHtml(g)}">${escapeHtml(g)}</option>`).join("");
+  sel.value = genres.includes(prev) ? prev : "todos";
+}
+
+function renderWeek(data){
+  currentWeekKey = data.weekKey || FALLBACK.weekKey;
+  currentPicks = data.picks || [];
+  document.getElementById("week-label").textContent = data.weekLabel || "—";
+  const gen = data.generatedAt ? new Date(data.generatedAt) : null;
+  document.getElementById("updated-label").textContent = gen
+    ? "actualizado " + gen.toLocaleDateString("es-AR",{day:"2-digit",month:"short",year:"numeric"})
+    : "—";
+
+  populateGenreFilter(currentPicks);
+
+  const html = currentPicks.map((p,i) => {
+    const badgeClass = p.type === "plataforma" ? "plataforma" : "cine";
+    const badgeLabel = p.type === "plataforma" ? "PLATAFORMA" : "CINE";
+    const lb = p.lbScore != null
+      ? `${starsSVG(p.lbScore)}<span class="val">${p.lbScore.toFixed(2)} <small>${p.lbCount ? "· "+escapeHtml(p.lbCount) : ""}</small></span>`
+      : `<span class="val" style="font-size:0.85rem;color:var(--ink-muted);">s/d</span>`;
+    const srcs = (p.sources||[]).map(s => `<a href="${escapeHtml(s.url)}" target="_blank" rel="noopener">${escapeHtml(s.label)}</a>`).join("");
+    const poster = p.posterUrl ? `<a class="poster-link" href="${escapeHtml(p.posterUrl)}" target="_blank" rel="noopener">Ver póster <svg viewBox="0 0 16 16"><rect x="3" y="3" width="10" height="10" rx="1"/><path d="M6 10l4-4M6 6h4v4"/></svg></a>` : "";
+    const picked = myPickedKeys.has(pickKey(currentWeekKey, p.title));
+    return `<article class="card" data-type="${badgeClass}" data-genre="${escapeHtml(p.genre||"")}" data-title="${escapeHtml(p.title)}">
+      <button class="pick-btn" type="button" aria-pressed="${picked?"true":"false"}" aria-label="Agregar a mi watchlist" data-title="${escapeHtml(p.title)}" data-venue="${escapeHtml(p.venue||"")}" data-type-val="${badgeClass}">
+        <svg viewBox="0 0 24 24"><path d="M12 3l2.7 6.4 6.9.6-5.2 4.6 1.6 6.8-6-3.7-6 3.7 1.6-6.8-5.2-4.6 6.9-.6z"/></svg>
+      </button>
+      <span class="rank">0${i+1}</span>
+      <div class="badge-row">
+        <span class="badge ${badgeClass}">${badgeLabel}</span>
+        ${p.genre ? `<span class="badge outline">${escapeHtml(p.genre)}</span>` : ""}
+        <span class="badge outline">${escapeHtml(p.venue||"")}</span>
+      </div>
+      <h2>${escapeHtml(p.title)}${p.original ? ` <span style="font-size:1rem;color:var(--ink-muted);font-family:'IBM Plex Mono',monospace;">(${escapeHtml(p.original)})</span>` : ""}</h2>
+      <div class="meta">dir. ${escapeHtml(p.director||"—")}</div>
+      <div class="scores">
+        <div class="score"><span class="label">${escapeHtml(p.criticLabel||"Crítica")}</span><span class="val" style="font-size:0.88rem;">${escapeHtml(p.criticScore||"s/d")}</span></div>
+        <div class="score"><span class="label">Letterboxd</span>${lb}</div>
+      </div>
+      ${poster}
+      <div class="who-row" data-who-for="${escapeHtml(p.title)}"></div>
+      <div class="sources">${srcs}</div>
+    </article>`;
+  }).join("");
+
+  document.getElementById("content").innerHTML = currentPicks.length
+    ? `<div class="picks">${html}</div>`
+    : `<p class="state-msg">Todavía no hay selección cargada para esta semana.</p>`;
+
+  document.querySelectorAll(".pick-btn").forEach(btn => {
+    btn.addEventListener("click", () => togglePick({
+      weekKey: currentWeekKey,
+      title: btn.getAttribute("data-title"),
+      venue: btn.getAttribute("data-venue"),
+      type: btn.getAttribute("data-type-val")
+    }, btn));
+  });
+
+  applyFilter();
+  renderFamilyOnCards();
+}
+
+async function loadArchiveIndex(){
+  try{
+    const res = await fetch("data/archive-index.json", {cache:"no-store"});
+    if(!res.ok) return [];
+    return await res.json();
+  }catch(e){ return []; }
+}
+
+function renderArchive(weekKeys){
+  const wrap = document.getElementById("archive-wrap");
+  const list = document.getElementById("archive-list");
+  if(!weekKeys || !weekKeys.length){ wrap.hidden = true; return; }
+  const sorted = [...weekKeys].sort().reverse();
+  list.innerHTML = sorted.map(wk => `<li data-key="${escapeHtml(wk)}"><span class="wk">${escapeHtml(wk)}</span><span>cargar semana</span></li>`).join("");
+  wrap.hidden = false;
+  list.querySelectorAll("li").forEach(li => {
+    li.addEventListener("click", async () => {
+      const key = li.getAttribute("data-key");
+      try{
+        const res = await fetch(`data/archive/${key}.json`, {cache:"no-store"});
+        if(res.ok) renderWeek(await res.json());
+      }catch(e){}
+    });
+  });
+}
+
+// ---------- Login (Firebase Auth, email+password) ----------
+// Usamos usuario+contraseña en vez de login anónimo para que la MISMA persona
+// tenga el mismo identificador entre el teléfono y la computadora. El "usuario"
+// se guarda internamente como un email ficticio (usuario@quevemos.app); no hace
+// falta un correo real.
+
+function usernameToEmail(u){
+  return u.trim().toLowerCase().replace(/[^a-z0-9._-]/g, "") + "@quevemos.app";
+}
+
+const AUTH_ERROR_MESSAGES = {
+  "auth/email-already-in-use": "Ese usuario ya existe — probá \"Ya tengo cuenta\" en vez de crear una nueva.",
+  "auth/invalid-credential": "Usuario o contraseña incorrectos.",
+  "auth/wrong-password": "Usuario o contraseña incorrectos.",
+  "auth/user-not-found": "No existe ese usuario todavía — probá \"Crear cuenta\".",
+  "auth/weak-password": "La contraseña tiene que tener al menos 6 caracteres.",
+  "auth/invalid-email": "Elegí un nombre de usuario usando solo letras y números.",
+  "auth/too-many-requests": "Demasiados intentos — esperá un minuto y probá de nuevo."
+};
+
+function renderLoginForm(){
+  const root = document.getElementById("name-modal-root");
+  let mode = "login"; // or "signup"
+
+  function paint(){
+    root.innerHTML = `
+      <div class="name-modal-backdrop">
+        <div class="name-modal">
+          <h3>${mode === "signup" ? "Crear cuenta" : "¿Quién sos?"}</h3>
+          <p>${mode === "signup"
+            ? "Elegí un usuario y una contraseña — vas a usar los mismos en cualquier dispositivo."
+            : "Ingresá con tu usuario y contraseña para ver y marcar tu watchlist."}</p>
+          ${mode === "signup" ? `
+            <label class="field-label" for="f-name">Tu nombre</label>
+            <input id="f-name" type="text" maxlength="24" placeholder="Ej: Alej">
+          ` : ""}
+          <label class="field-label" for="f-user">Usuario</label>
+          <input id="f-user" type="text" maxlength="24" placeholder="Ej: alej" autocapitalize="none" autocorrect="off">
+          <label class="field-label" for="f-pass">Contraseña</label>
+          <input id="f-pass" type="password" maxlength="64" placeholder="Al menos 6 caracteres">
+          <p class="auth-error" id="f-error" hidden></p>
+          <button id="f-submit" type="button">${mode === "signup" ? "Crear cuenta" : "Ingresar"}</button>
+          <button class="toggle-mode" id="f-toggle" type="button">${mode === "signup" ? "Ya tengo cuenta" : "Primera vez / crear cuenta"}</button>
+        </div>
+      </div>`;
+
+    document.getElementById("f-toggle").addEventListener("click", () => { mode = mode === "signup" ? "login" : "signup"; paint(); });
+    const userInput = document.getElementById("f-user");
+    const passInput = document.getElementById("f-pass");
+    const nameInput = document.getElementById("f-name");
+    const errEl = document.getElementById("f-error");
+    const submitBtn = document.getElementById("f-submit");
+
+    const submit = async () => {
+      const username = (userInput.value || "").trim();
+      const password = passInput.value || "";
+      const displayName = nameInput ? (nameInput.value || "").trim() : "";
+      errEl.hidden = true;
+      if(!username || !password || (mode === "signup" && !displayName)){
+        errEl.textContent = "Completá todos los campos.";
+        errEl.hidden = false;
+        return;
+      }
+      submitBtn.disabled = true;
+      const email = usernameToEmail(username);
+      try{
+        if(mode === "signup"){
+          const cred = await createUserWithEmailAndPassword(auth, email, password);
+          await setDoc(doc(db, "members", cred.user.uid), { id: cred.user.uid, name: displayName, lastSeen: new Date().toISOString() }, { merge: true });
+        } else {
+          await signInWithEmailAndPassword(auth, email, password);
+        }
+      }catch(err){
+        submitBtn.disabled = false;
+        errEl.textContent = AUTH_ERROR_MESSAGES[err.code] || "Algo salió mal, probá de nuevo.";
+        errEl.hidden = false;
+      }
+    };
+    submitBtn.addEventListener("click", submit);
+    [userInput, passInput, nameInput].filter(Boolean).forEach(el => el.addEventListener("keydown", e => { if(e.key === "Enter") submit(); }));
+  }
+  paint();
+}
+
+async function resolveMyName(uid){
+  try{
+    const snap = await getDoc(doc(db, "members", uid));
+    if(snap.exists() && snap.data().name){ return snap.data().name; }
+  }catch(e){}
+  return "vos";
+}
+
+async function loadMyPicks(){
+  myPickedKeys = new Set();
+  if(!UID) return;
+  // picks are per-doc-id (uid__week__title), so we can't query "all mine" without an index field.
+  // We store uid as a field too, so query by it.
+  const q = query(collection(db, "picks"), where("uid", "==", UID));
+  const snap = await getDocsSafe(q);
+  snap.forEach(d => {
+    const it = d.data();
+    myPickedKeys.add(pickKey(it.weekKey, it.title));
+  });
+}
+
+async function getDocsSafe(q){
+  const { getDocs } = await import("https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore.js");
+  return getDocs(q);
+}
+
+async function togglePick(item, btn){
+  if(!UID){ return; }
+  btn.disabled = true;
+  const id = pickId(UID, item.weekKey, item.title);
+  const k = pickKey(item.weekKey, item.title);
+  try{
+    if(myPickedKeys.has(k)){
+      await deleteDoc(doc(db, "picks", id));
+      myPickedKeys.delete(k);
+      btn.setAttribute("aria-pressed","false");
+    } else {
+      await setDoc(doc(db, "picks", id), {
+        uid: UID, name: MY_NAME, weekKey: item.weekKey, title: item.title,
+        venue: item.venue||"", type: item.type||"cine", addedAt: new Date().toISOString()
+      });
+      myPickedKeys.add(k);
+      btn.setAttribute("aria-pressed","true");
+    }
+  }catch(e){ console.error(e); }
+  btn.disabled = false;
+  renderMyWatchlist();
+}
+
+function renderMyWatchlist(){
+  const items = [...myPickedKeys].map(k => {
+    const [weekKey, title] = k.split("::");
+    const p = currentPicks.find(p => p.title === title) || {};
+    return { weekKey, title, venue: p.venue || "" };
+  });
+  document.getElementById("watchlist-count").textContent = items.length;
+  const emptyEl = document.getElementById("watchlist-empty");
+  const listEl = document.getElementById("watchlist-list");
+  if(!items.length){ emptyEl.hidden = false; listEl.hidden = true; listEl.innerHTML=""; return; }
+  emptyEl.hidden = true; listEl.hidden = false;
+  listEl.innerHTML = items.map(it => `
+    <li>
+      <span><span class="wtitle">${escapeHtml(it.title)}</span><span class="wmeta"> · ${escapeHtml(it.venue)}</span></span>
+      <button type="button" data-week="${escapeHtml(it.weekKey)}" data-title="${escapeHtml(it.title)}">Quitar</button>
+    </li>`).join("");
+  listEl.querySelectorAll("button").forEach(b => {
+    b.addEventListener("click", () => {
+      const weekKey = b.getAttribute("data-week");
+      const title = b.getAttribute("data-title");
+      const cardBtn = document.querySelector(`.pick-btn[data-title="${CSS.escape(title)}"]`);
+      togglePick({weekKey, title}, cardBtn || {setAttribute(){}, disabled:false});
+    });
+  });
+}
+
+let familyPicksForWeek = {}; // title -> [{name, uid}]
+
+function subscribeFamily(){
+  if(unsubFamily) unsubFamily();
+  const q = query(collection(db, "picks"), where("weekKey", "==", currentWeekKey));
+  unsubFamily = onSnapshot(q, snap => {
+    familyPicksForWeek = {};
+    snap.forEach(d => {
+      const it = d.data();
+      (familyPicksForWeek[it.title] ||= []).push({ name: it.name || "Alguien", uid: it.uid });
+    });
+    renderFamilyOnCards();
+    renderFamilySection();
+  }, err => console.error(err));
+}
+
+function renderFamilyOnCards(){
+  document.querySelectorAll("[data-who-for]").forEach(el => {
+    const title = el.getAttribute("data-who-for");
+    const people = familyPicksForWeek[title] || [];
+    if(!people.length){ el.innerHTML = ""; return; }
+    el.innerHTML = people.map(p => `<span class="avatar" title="${escapeHtml(p.name)}">${escapeHtml(initials(p.name))}</span>`).join("");
+  });
+}
+
+function renderFamilySection(){
+  const entries = Object.entries(familyPicksForWeek).sort((a,b) => b[1].length - a[1].length);
+  document.getElementById("family-count").textContent = entries.length;
+  const emptyEl = document.getElementById("family-empty");
+  const listEl = document.getElementById("family-list");
+  if(!entries.length){ emptyEl.hidden = false; listEl.hidden = true; listEl.innerHTML=""; return; }
+  emptyEl.hidden = true; listEl.hidden = false;
+  listEl.innerHTML = entries.map(([title, people]) => `
+    <li>
+      <span class="wtitle">${escapeHtml(title)}</span>
+      <span class="who-badge">${people.map(p=>`<span class="avatar" title="${escapeHtml(p.name)}">${escapeHtml(initials(p.name))}</span>`).join("")}</span>
+    </li>`).join("");
+}
+
+async function boot(){
+  document.getElementById("filter-type").addEventListener("change", applyFilter);
+  document.getElementById("filter-genre").addEventListener("change", applyFilter);
+
+  // load this week's data (static JSON, updated weekly)
+  let weekData = FALLBACK;
+  try{
+    const res = await fetch("data/current.json", {cache:"no-store"});
+    if(res.ok) weekData = await res.json();
+  }catch(e){}
+  renderWeek(weekData);
+
+  loadArchiveIndex().then(renderArchive);
+
+  // auth + watchlist
+  const modalRoot = document.getElementById("name-modal-root");
+  const logoutBtn = document.getElementById("logout-link");
+  logoutBtn.addEventListener("click", () => { signOut(auth).catch(e => console.error(e)); });
+
+  onAuthStateChanged(auth, async (user) => {
+    if(!user){
+      UID = null;
+      MY_NAME = "";
+      if(unsubFamily){ unsubFamily(); unsubFamily = null; }
+      document.getElementById("who-am-i").textContent = "";
+      logoutBtn.hidden = true;
+      renderLoginForm();
+      return;
+    }
+    UID = user.uid;
+    modalRoot.innerHTML = "";
+    document.getElementById("who-am-i").textContent = "";
+    MY_NAME = await resolveMyName(UID);
+    document.getElementById("who-am-i").textContent = "vos: " + MY_NAME;
+    logoutBtn.hidden = false;
+    await loadMyPicks();
+    renderWeek(weekData);
+    renderMyWatchlist();
+    subscribeFamily();
+  });
+}
+
+boot();
+</script>
+</body>
+</html>
