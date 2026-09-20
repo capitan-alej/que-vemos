@@ -1,0 +1,66 @@
+{
+  "weekKey": "2026-W38",
+  "weekLabel": "18–24 sep 2026",
+  "generatedAt": "2026-09-20T09:25:00-03:00",
+  "picks": [
+    {
+      "title": "Hamnet",
+      "original": "",
+      "director": "Chloé Zhao",
+      "type": "plataforma",
+      "genre": "Drama",
+      "venue": "HBO Max",
+      "criticLabel": "Cobertura crítica",
+      "criticScore": "Muy elogiada",
+      "lbScore": 4.20,
+      "lbCount": "41k+",
+      "posterUrl": "https://letterboxd.com/film/hamnet/",
+      "sources": [{"label": "Letterboxd", "url": "https://letterboxd.com/film/hamnet/"}]
+    },
+    {
+      "title": "Las mejores",
+      "original": "Best of the Best",
+      "director": "Lena Khan",
+      "type": "plataforma",
+      "genre": "Comedia",
+      "venue": "Netflix",
+      "criticLabel": "Cobertura crítica",
+      "criticScore": "Recibimiento positivo, comedia liviana",
+      "lbScore": 3.29,
+      "lbCount": "",
+      "posterUrl": "https://letterboxd.com/film/best-of-the-best-2026/",
+      "sources": [{"label": "Letterboxd", "url": "https://letterboxd.com/film/best-of-the-best-2026/"}]
+    },
+    {
+      "title": "Desobediente",
+      "original": "",
+      "director": "Federico Coringrato",
+      "type": "cine",
+      "genre": "Documental",
+      "venue": "Cines (AR) · estrenó 17/9",
+      "criticLabel": "Cobertura crítica",
+      "criticScore": "Muy elogiada",
+      "lbScore": null,
+      "lbCount": "",
+      "posterUrl": "https://cinenacional.com/pelicula/desobediente",
+      "sources": [
+        {"label": "cinenacional", "url": "https://cinenacional.com/pelicula/desobediente"},
+        {"label": "Funcinema", "url": "https://www.funcinema.com.ar/2026/09/se-estrena-desobediente-documental-sobre-los-hijos-de-represores-que-rompieron-el-silencio/"}
+      ]
+    },
+    {
+      "title": "Resident Evil",
+      "original": "",
+      "director": "Zach Cregger",
+      "type": "cine",
+      "genre": "Terror",
+      "venue": "Cines (AR) · estrenó 18/9",
+      "criticLabel": "Cobertura crítica",
+      "criticScore": "Recibimiento dividido, mayoría positiva",
+      "lbScore": 3.86,
+      "lbCount": "",
+      "posterUrl": "https://letterboxd.com/film/resident-evil-2026/",
+      "sources": [{"label": "Letterboxd", "url": "https://letterboxd.com/film/resident-evil-2026/"}]
+    }
+  ]
+}
