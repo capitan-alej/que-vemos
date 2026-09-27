@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>¿Qué vemos?</title>
-<meta name="description" content="Recomendaciones semanales de cine y plataformas en Argentina, cruzadas con Letterboxd, con watchlist familiar.">
+<meta name="description" content="Recomendaciones semanales de cine y plataformas en Argentina, cruzadas con crítica, con watchlist familiar.">
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&family=IBM+Plex+Mono:wght@400;600&display=swap">
 <style>
@@ -167,7 +167,7 @@
 <div class="wrap">
   <header class="masthead">
     <h1>¿Qué vemos?</h1>
-    <div class="sub"><span class="week" id="week-label">—</span>Buenos Aires · crítica × Letterboxd</div>
+    <div class="sub"><span class="week" id="week-label">—</span>Buenos Aires · crítica × plataformas</div>
   </header>
 
   <div class="toolbar">
@@ -348,7 +348,7 @@ function renderWeek(data){
       <div class="meta">dir. ${escapeHtml(p.director||"—")}</div>
       <div class="scores">
         <div class="score"><span class="label">${escapeHtml(p.criticLabel||"Crítica")}</span><span class="val" style="font-size:0.88rem;">${escapeHtml(p.criticScore||"s/d")}</span></div>
-        <div class="score"><span class="label">Letterboxd</span>${lb}</div>
+        <div class="score"><span class="label">${escapeHtml(p.scoreLabel||"Letterboxd")}</span>${lb}</div>
       </div>
       ${poster}
       <div class="who-row" data-who-for="${escapeHtml(p.title)}"></div>
