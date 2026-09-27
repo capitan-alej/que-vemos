@@ -134,6 +134,13 @@
   .week-block-head h2{font-family:"Bebas Neue",sans-serif;font-size:1.4rem;letter-spacing:0.02em;color:var(--ink);margin:0;}
   .week-block-head .current-tag{font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:0.62rem;letter-spacing:0.08em;text-transform:uppercase;color:var(--accent-ink);background:var(--accent);padding:2px 8px;border-radius:3px;}
 
+  .week-block-past > summary.week-block-head{cursor:pointer;list-style:none;}
+  .week-block-past > summary.week-block-head::-webkit-details-marker{display:none;}
+  .week-block-past > summary.week-block-head::before{content:"▾";color:var(--accent);margin-right:4px;transition:transform .15s ease;display:inline-block;}
+  .week-block-past:not([open]) > summary.week-block-head::before{transform:rotate(-90deg);}
+  .week-block-past > summary.week-block-head:hover h2{color:var(--accent);}
+  .week-block-past[open] > .picks{margin-top:0;}
+
   .watchlist{margin-top:40px;}
   .watchlist summary{cursor:pointer;font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:0.68rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--ink-muted);list-style:none;display:flex;align-items:center;gap:8px;}
   .watchlist summary::-webkit-details-marker{display:none;}
@@ -377,13 +384,20 @@ function renderAllWeeks(weeks){
     const cardsHtml = picks.length
       ? `<div class="picks">${picks.map((p,i) => buildCardHtml(p, w.weekKey, i)).join("")}</div>`
       : `<p class="state-msg">Sin selección cargada para esta semana.</p>`;
-    return `<section class="week-block" data-week="${escapeHtml(w.weekKey)}">
-      <div class="week-block-head">
-        <h2>${escapeHtml(w.weekLabel || w.weekKey)}</h2>
-        ${wi === 0 ? `<span class="current-tag">Esta semana</span>` : ""}
-      </div>
+    const head = `<h2>${escapeHtml(w.weekLabel || w.weekKey)}</h2>${wi === 0 ? `<span class="current-tag">Esta semana</span>` : ""}`;
+
+    if(wi === 0){
+      // la semana actual queda siempre desplegada, sin opción de colapsar
+      return `<section class="week-block" data-week="${escapeHtml(w.weekKey)}">
+        <div class="week-block-head">${head}</div>
+        ${cardsHtml}
+      </section>`;
+    }
+    // semanas pasadas: desplegadas por default, pero colapsables
+    return `<details class="week-block week-block-past" data-week="${escapeHtml(w.weekKey)}" open>
+      <summary class="week-block-head">${head}</summary>
       ${cardsHtml}
-    </section>`;
+    </details>`;
   }).join("");
 
   document.getElementById("content").innerHTML = blocks || `<p class="state-msg">Todavía no hay semanas cargadas.</p>`;
