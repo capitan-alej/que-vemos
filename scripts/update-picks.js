@@ -85,8 +85,14 @@ async function getProvidersAR(movieId) {
 }
 
 async function getDetails(movieId) {
-  const j = await tmdb(`/movie/${movieId}`, { append_to_response: "external_ids" });
+  const j = await tmdb(`/movie/${movieId}`, { append_to_response: "external_ids,credits" });
   return j;
+}
+
+function directorFrom(details) {
+  const crew = (details.credits && details.credits.crew) || [];
+  const directors = crew.filter((c) => c.job === "Director").map((c) => c.name);
+  return directors.join(", ");
 }
 
 // --- score combinado -------------------------------------------------------
@@ -143,7 +149,7 @@ async function buildPick(movieId, type, venueOverride) {
   return {
     title: details.title,
     original: details.original_title !== details.title ? details.original_title : "",
-    director: "", // TMDB requiere una llamada extra a /credits; se omite para mantener el script liviano
+    director: directorFrom(details),
     type,
     genre: genreNames(details.genres ? details.genres.map((g) => g.id) : details.genre_ids) [0] || "",
     duration: duration || null,
