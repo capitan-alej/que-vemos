@@ -124,12 +124,15 @@
   footer.note{margin-top:34px;padding-top:16px;border-top:1px solid var(--line);font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:0.68rem;color:var(--ink-muted);display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px;}
   .state-msg{font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:0.75rem;color:var(--ink-muted);padding:16px 0;}
 
-  .archive{margin-top:40px;}
-  .archive h3,.watchlist h3{font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:0.68rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--ink-muted);margin:0 0 10px;}
-  .archive ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:6px;}
-  .archive li{font-size:0.85rem;display:flex;gap:10px;align-items:baseline;border-bottom:1px dotted var(--line);padding-bottom:6px;cursor:pointer;}
-  .archive li .wk{font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:0.7rem;color:var(--ink-muted);min-width:5.5em;}
-  .archive li:hover{color:var(--accent);}
+  .watchlists-panel{display:flex;flex-direction:column;gap:2px;margin:18px 0 28px;padding:14px 16px;background:var(--paper-raised);border:1px solid var(--line);border-radius:8px;}
+  .watchlists-panel .watchlist{margin-top:0;padding:6px 0;}
+  .watchlists-panel .watchlist:not(:last-child){border-bottom:1px dotted var(--line);}
+
+  .week-block{margin-top:36px;padding-top:22px;border-top:1px solid var(--line);}
+  .week-block:first-of-type{margin-top:0;padding-top:0;border-top:none;}
+  .week-block-head{display:flex;align-items:baseline;gap:10px;margin-bottom:14px;flex-wrap:wrap;}
+  .week-block-head h2{font-family:"Bebas Neue",sans-serif;font-size:1.4rem;letter-spacing:0.02em;color:var(--ink);margin:0;}
+  .week-block-head .current-tag{font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:0.62rem;letter-spacing:0.08em;text-transform:uppercase;color:var(--accent-ink);background:var(--accent);padding:2px 8px;border-radius:3px;}
 
   .watchlist{margin-top:40px;}
   .watchlist summary{cursor:pointer;font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:0.68rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--ink-muted);list-style:none;display:flex;align-items:center;gap:8px;}
@@ -190,28 +193,25 @@
     </div>
   </div>
 
-  <div id="content"><p class="state-msg">Cargando semana…</p></div>
+  <div class="watchlists-panel">
+    <details class="watchlist" id="watchlist-wrap">
+      <summary>Mi watchlist <span class="count" id="watchlist-count">0</span></summary>
+      <div class="watchlist-body">
+        <p class="watchlist-empty" id="watchlist-empty">Todavía no marcaste ninguna. Tocá el círculo de una película para agregarla.</p>
+        <ul id="watchlist-list" hidden></ul>
+      </div>
+    </details>
 
-  <details class="watchlist" id="watchlist-wrap">
-    <summary>Mi watchlist <span class="count" id="watchlist-count">0</span></summary>
-    <div class="watchlist-body">
-      <p class="watchlist-empty" id="watchlist-empty">Todavía no marcaste ninguna. Tocá el círculo de una película para agregarla.</p>
-      <ul id="watchlist-list" hidden></ul>
-    </div>
-  </details>
-
-  <details class="watchlist" id="family-wrap">
-    <summary>Entre los tres <span class="count" id="family-count">0</span></summary>
-    <div class="watchlist-body">
-      <p class="watchlist-empty" id="family-empty">Todavía no hay coincidencias (se van acumulando de todas las semanas, no solo la actual).</p>
-      <ul id="family-list" hidden></ul>
-    </div>
-  </details>
-
-  <div class="archive" id="archive-wrap" hidden>
-    <h3>Semanas anteriores</h3>
-    <ul id="archive-list"></ul>
+    <details class="watchlist" id="family-wrap">
+      <summary>Entre los tres <span class="count" id="family-count">0</span></summary>
+      <div class="watchlist-body">
+        <p class="watchlist-empty" id="family-empty">Todavía no hay coincidencias (se van acumulando de todas las semanas, no solo la actual).</p>
+        <ul id="family-list" hidden></ul>
+      </div>
+    </details>
   </div>
+
+  <div id="content"><p class="state-msg">Cargando semanas…</p></div>
 
   <footer class="note">
     <span id="updated-label">—</span>
@@ -255,6 +255,8 @@ let UID = null;
 let MY_NAME = null;
 let currentWeekKey = FALLBACK.weekKey;
 let currentPicks = [];
+let loadedWeeks = [];
+let allPicksByKey = new Map(); // pickKey(weekKey,title) -> pick (de todas las semanas cargadas)
 let myPickedKeys = new Set();
 let unsubFamily = null;
 
@@ -301,68 +303,94 @@ function applyFilter(){
     const durOk = durVal === "todos" || durVal === dur;
     card.hidden = !(typeOk && genreOk && durOk);
   });
+  document.querySelectorAll(".week-block").forEach(block => {
+    const visible = [...block.querySelectorAll(".card")].some(c => !c.hidden);
+    block.hidden = !visible;
+  });
 }
 
-function populateGenreFilter(picks){
+function populateGenreFilter(allPicks){
   const sel = document.getElementById("filter-genre");
   const prev = sel.value || "todos";
-  const genres = [...new Set(picks.map(p => p.genre).filter(Boolean))].sort((a,b)=>a.localeCompare(b,"es"));
+  const genres = [...new Set(allPicks.map(p => p.genre).filter(Boolean))].sort((a,b)=>a.localeCompare(b,"es"));
   sel.innerHTML = `<option value="todos">Todo género</option>` + genres.map(g=>`<option value="${escapeHtml(g)}">${escapeHtml(g)}</option>`).join("");
   sel.value = genres.includes(prev) ? prev : "todos";
 }
 
-function renderWeek(data){
-  currentWeekKey = data.weekKey || FALLBACK.weekKey;
-  currentPicks = data.picks || [];
-  document.getElementById("week-label").textContent = data.weekLabel || "—";
-  const gen = data.generatedAt ? new Date(data.generatedAt) : null;
+function buildCardHtml(p, weekKey, i){
+  const badgeClass = p.type === "plataforma" ? "plataforma" : "cine";
+  const badgeLabel = p.type === "plataforma" ? "PLATAFORMA" : "CINE";
+  const lb = p.lbScore != null
+    ? `${starsSVG(p.lbScore)}<span class="val">${p.lbScore.toFixed(2)} <small>${p.lbCount ? "· "+escapeHtml(p.lbCount) : ""}</small></span>`
+    : `<span class="val" style="font-size:0.85rem;color:var(--ink-muted);">s/d</span>`;
+  const srcs = (p.sources||[]).map(s => `<a href="${escapeHtml(s.url)}" target="_blank" rel="noopener">${escapeHtml(s.label)}</a>`).join("");
+  const poster = p.posterUrl ? `<a class="poster-link" href="${escapeHtml(p.posterUrl)}" target="_blank" rel="noopener">Ver póster <svg viewBox="0 0 16 16"><rect x="3" y="3" width="10" height="10" rx="1"/><path d="M6 10l4-4M6 6h4v4"/></svg></a>` : "";
+  const key = pickKey(weekKey, p.title);
+  const picked = myPickedKeys.has(key);
+  const durBucket = durationBucket(p.duration);
+  const durLabel = p.duration ? `${p.duration} min` : "";
+  return `<article class="card" data-type="${badgeClass}" data-genre="${escapeHtml(p.genre||"")}" data-duration-bucket="${durBucket}" data-title="${escapeHtml(p.title)}" data-week="${escapeHtml(weekKey)}">
+    <button class="pick-btn" type="button" aria-pressed="${picked?"true":"false"}" aria-label="Agregar a mi watchlist" data-title="${escapeHtml(p.title)}" data-venue="${escapeHtml(p.venue||"")}" data-type-val="${badgeClass}" data-week="${escapeHtml(weekKey)}">
+      <svg viewBox="0 0 24 24"><path d="M12 3l2.7 6.4 6.9.6-5.2 4.6 1.6 6.8-6-3.7-6 3.7 1.6-6.8-5.2-4.6 6.9-.6z"/></svg>
+    </button>
+    <span class="rank">0${i+1}</span>
+    <div class="badge-row">
+      <span class="badge ${badgeClass}">${badgeLabel}</span>
+      ${p.genre ? `<span class="badge outline">${escapeHtml(p.genre)}</span>` : ""}
+      ${durLabel ? `<span class="badge outline">${escapeHtml(durLabel)}</span>` : ""}
+      <span class="badge outline">${escapeHtml(p.venue||"")}</span>
+    </div>
+    <h2>${escapeHtml(p.title)}${p.original ? ` <span style="font-size:1rem;color:var(--ink-muted);font-family:'IBM Plex Mono',monospace;">(${escapeHtml(p.original)})</span>` : ""}</h2>
+    <div class="meta">dir. ${escapeHtml(p.director||"—")}</div>
+    <div class="scores">
+      <div class="score"><span class="label">${escapeHtml(p.criticLabel||"Crítica")}</span><span class="val" style="font-size:0.88rem;">${escapeHtml(p.criticScore||"s/d")}</span></div>
+      <div class="score"><span class="label">${escapeHtml(p.scoreLabel||"Letterboxd")}</span>${lb}</div>
+    </div>
+    ${poster}
+    <div class="who-row" data-who-for="${escapeHtml(key)}"></div>
+    <div class="sources">${srcs}</div>
+  </article>`;
+}
+
+// weeks: array de {weekKey, weekLabel, generatedAt, picks}, más reciente primero.
+function renderAllWeeks(weeks){
+  loadedWeeks = weeks;
+  const top = weeks[0] || FALLBACK;
+  currentWeekKey = top.weekKey || FALLBACK.weekKey;
+
+  document.getElementById("week-label").textContent = top.weekLabel || "—";
+  const gen = top.generatedAt ? new Date(top.generatedAt) : null;
   document.getElementById("updated-label").textContent = gen
     ? "actualizado " + gen.toLocaleDateString("es-AR",{day:"2-digit",month:"short",year:"numeric"})
     : "—";
 
-  populateGenreFilter(currentPicks);
+  allPicksByKey = new Map();
+  const allPicksFlat = [];
+  weeks.forEach(w => (w.picks||[]).forEach(p => {
+    allPicksByKey.set(pickKey(w.weekKey, p.title), { ...p, weekKey: w.weekKey });
+    allPicksFlat.push(p);
+  }));
+  populateGenreFilter(allPicksFlat);
 
-  const html = currentPicks.map((p,i) => {
-    const badgeClass = p.type === "plataforma" ? "plataforma" : "cine";
-    const badgeLabel = p.type === "plataforma" ? "PLATAFORMA" : "CINE";
-    const lb = p.lbScore != null
-      ? `${starsSVG(p.lbScore)}<span class="val">${p.lbScore.toFixed(2)} <small>${p.lbCount ? "· "+escapeHtml(p.lbCount) : ""}</small></span>`
-      : `<span class="val" style="font-size:0.85rem;color:var(--ink-muted);">s/d</span>`;
-    const srcs = (p.sources||[]).map(s => `<a href="${escapeHtml(s.url)}" target="_blank" rel="noopener">${escapeHtml(s.label)}</a>`).join("");
-    const poster = p.posterUrl ? `<a class="poster-link" href="${escapeHtml(p.posterUrl)}" target="_blank" rel="noopener">Ver póster <svg viewBox="0 0 16 16"><rect x="3" y="3" width="10" height="10" rx="1"/><path d="M6 10l4-4M6 6h4v4"/></svg></a>` : "";
-    const picked = myPickedKeys.has(pickKey(currentWeekKey, p.title));
-    const durBucket = durationBucket(p.duration);
-    const durLabel = p.duration ? `${p.duration} min` : "";
-    return `<article class="card" data-type="${badgeClass}" data-genre="${escapeHtml(p.genre||"")}" data-duration-bucket="${durBucket}" data-title="${escapeHtml(p.title)}">
-      <button class="pick-btn" type="button" aria-pressed="${picked?"true":"false"}" aria-label="Agregar a mi watchlist" data-title="${escapeHtml(p.title)}" data-venue="${escapeHtml(p.venue||"")}" data-type-val="${badgeClass}">
-        <svg viewBox="0 0 24 24"><path d="M12 3l2.7 6.4 6.9.6-5.2 4.6 1.6 6.8-6-3.7-6 3.7 1.6-6.8-5.2-4.6 6.9-.6z"/></svg>
-      </button>
-      <span class="rank">0${i+1}</span>
-      <div class="badge-row">
-        <span class="badge ${badgeClass}">${badgeLabel}</span>
-        ${p.genre ? `<span class="badge outline">${escapeHtml(p.genre)}</span>` : ""}
-        ${durLabel ? `<span class="badge outline">${escapeHtml(durLabel)}</span>` : ""}
-        <span class="badge outline">${escapeHtml(p.venue||"")}</span>
+  const blocks = weeks.map((w, wi) => {
+    const picks = w.picks || [];
+    const cardsHtml = picks.length
+      ? `<div class="picks">${picks.map((p,i) => buildCardHtml(p, w.weekKey, i)).join("")}</div>`
+      : `<p class="state-msg">Sin selección cargada para esta semana.</p>`;
+    return `<section class="week-block" data-week="${escapeHtml(w.weekKey)}">
+      <div class="week-block-head">
+        <h2>${escapeHtml(w.weekLabel || w.weekKey)}</h2>
+        ${wi === 0 ? `<span class="current-tag">Esta semana</span>` : ""}
       </div>
-      <h2>${escapeHtml(p.title)}${p.original ? ` <span style="font-size:1rem;color:var(--ink-muted);font-family:'IBM Plex Mono',monospace;">(${escapeHtml(p.original)})</span>` : ""}</h2>
-      <div class="meta">dir. ${escapeHtml(p.director||"—")}</div>
-      <div class="scores">
-        <div class="score"><span class="label">${escapeHtml(p.criticLabel||"Crítica")}</span><span class="val" style="font-size:0.88rem;">${escapeHtml(p.criticScore||"s/d")}</span></div>
-        <div class="score"><span class="label">${escapeHtml(p.scoreLabel||"Letterboxd")}</span>${lb}</div>
-      </div>
-      ${poster}
-      <div class="who-row" data-who-for="${escapeHtml(p.title)}"></div>
-      <div class="sources">${srcs}</div>
-    </article>`;
+      ${cardsHtml}
+    </section>`;
   }).join("");
 
-  document.getElementById("content").innerHTML = currentPicks.length
-    ? `<div class="picks">${html}</div>`
-    : `<p class="state-msg">Todavía no hay selección cargada para esta semana.</p>`;
+  document.getElementById("content").innerHTML = blocks || `<p class="state-msg">Todavía no hay semanas cargadas.</p>`;
 
   document.querySelectorAll(".pick-btn").forEach(btn => {
     btn.addEventListener("click", () => togglePick({
-      weekKey: currentWeekKey,
+      weekKey: btn.getAttribute("data-week"),
       title: btn.getAttribute("data-title"),
       venue: btn.getAttribute("data-venue"),
       type: btn.getAttribute("data-type-val")
@@ -373,30 +401,27 @@ function renderWeek(data){
   renderFamilyOnCards();
 }
 
-async function loadArchiveIndex(){
+async function loadAllWeeks(){
+  const weeks = [];
+  try{
+    const res = await fetch("data/current.json", {cache:"no-store"});
+    weeks.push(res.ok ? await res.json() : FALLBACK);
+  }catch(e){ weeks.push(FALLBACK); }
+
+  let index = [];
   try{
     const res = await fetch("data/archive-index.json", {cache:"no-store"});
-    if(!res.ok) return [];
-    return await res.json();
-  }catch(e){ return []; }
-}
+    if(res.ok) index = await res.json();
+  }catch(e){}
 
-function renderArchive(weekKeys){
-  const wrap = document.getElementById("archive-wrap");
-  const list = document.getElementById("archive-list");
-  if(!weekKeys || !weekKeys.length){ wrap.hidden = true; return; }
-  const sorted = [...weekKeys].sort().reverse();
-  list.innerHTML = sorted.map(wk => `<li data-key="${escapeHtml(wk)}"><span class="wk">${escapeHtml(wk)}</span><span>cargar semana</span></li>`).join("");
-  wrap.hidden = false;
-  list.querySelectorAll("li").forEach(li => {
-    li.addEventListener("click", async () => {
-      const key = li.getAttribute("data-key");
-      try{
-        const res = await fetch(`data/archive/${key}.json`, {cache:"no-store"});
-        if(res.ok) renderWeek(await res.json());
-      }catch(e){}
-    });
-  });
+  const sortedKeys = [...new Set(index)].filter(k => k !== weeks[0].weekKey).sort().reverse();
+  for(const wk of sortedKeys){
+    try{
+      const res = await fetch(`data/archive/${wk}.json`, {cache:"no-store"});
+      if(res.ok) weeks.push(await res.json());
+    }catch(e){}
+  }
+  return weeks;
 }
 
 // ---------- Login (Firebase Auth, email+password) ----------
@@ -535,7 +560,7 @@ async function togglePick(item, btn){
 function renderMyWatchlist(){
   const items = [...myPickedKeys].map(k => {
     const [weekKey, title] = k.split("::");
-    const p = currentPicks.find(p => p.title === title) || {};
+    const p = allPicksByKey.get(k) || {};
     return { weekKey, title, venue: p.venue || "" };
   });
   document.getElementById("watchlist-count").textContent = items.length;
@@ -552,13 +577,13 @@ function renderMyWatchlist(){
     b.addEventListener("click", () => {
       const weekKey = b.getAttribute("data-week");
       const title = b.getAttribute("data-title");
-      const cardBtn = document.querySelector(`.pick-btn[data-title="${CSS.escape(title)}"]`);
+      const cardBtn = document.querySelector(`.pick-btn[data-week="${CSS.escape(weekKey)}"][data-title="${CSS.escape(title)}"]`);
       togglePick({weekKey, title}, cardBtn || {setAttribute(){}, disabled:false});
     });
   });
 }
 
-let familyPicksForWeek = {}; // title -> [{name, uid}]  (acumulado de TODAS las semanas, no solo la actual)
+let familyPicksForWeek = {}; // pickKey(weekKey,title) -> [{name, uid}]  (acumulado de TODAS las semanas, no solo la actual)
 
 function subscribeFamily(){
   if(unsubFamily) unsubFamily();
@@ -569,7 +594,8 @@ function subscribeFamily(){
     familyPicksForWeek = {};
     snap.forEach(d => {
       const it = d.data();
-      (familyPicksForWeek[it.title] ||= []).push({ name: it.name || "Alguien", uid: it.uid });
+      const key = pickKey(it.weekKey, it.title);
+      (familyPicksForWeek[key] ||= []).push({ name: it.name || "Alguien", uid: it.uid });
     });
     renderFamilyOnCards();
     renderFamilySection();
@@ -578,8 +604,8 @@ function subscribeFamily(){
 
 function renderFamilyOnCards(){
   document.querySelectorAll("[data-who-for]").forEach(el => {
-    const title = el.getAttribute("data-who-for");
-    const people = familyPicksForWeek[title] || [];
+    const key = el.getAttribute("data-who-for");
+    const people = familyPicksForWeek[key] || [];
     if(!people.length){ el.innerHTML = ""; return; }
     el.innerHTML = people.map(p => `<span class="avatar" title="${escapeHtml(p.name)}">${escapeHtml(initials(p.name))}</span>`).join("");
   });
@@ -595,11 +621,14 @@ function renderFamilySection(){
   const listEl = document.getElementById("family-list");
   if(!entries.length){ emptyEl.hidden = false; listEl.hidden = true; listEl.innerHTML=""; return; }
   emptyEl.hidden = true; listEl.hidden = false;
-  listEl.innerHTML = entries.map(([title, people]) => `
+  listEl.innerHTML = entries.map(([key, people]) => {
+    const title = (allPicksByKey.get(key) || {}).title || key.split("::")[1] || key;
+    return `
     <li>
       <span class="wtitle">${escapeHtml(title)}</span>
       <span class="who-badge">${people.map(p=>`<span class="avatar" title="${escapeHtml(p.name)}">${escapeHtml(initials(p.name))}</span>`).join("")}</span>
-    </li>`).join("");
+    </li>`;
+  }).join("");
 }
 
 async function boot(){
@@ -607,15 +636,9 @@ async function boot(){
   document.getElementById("filter-genre").addEventListener("change", applyFilter);
   document.getElementById("filter-duration").addEventListener("change", applyFilter);
 
-  // load this week's data (static JSON, updated weekly)
-  let weekData = FALLBACK;
-  try{
-    const res = await fetch("data/current.json", {cache:"no-store"});
-    if(res.ok) weekData = await res.json();
-  }catch(e){}
-  renderWeek(weekData);
-
-  loadArchiveIndex().then(renderArchive);
+  // cargar TODAS las semanas (actual + archivadas) y mostrarlas apiladas
+  const weeks = await loadAllWeeks();
+  renderAllWeeks(weeks.length ? weeks : [FALLBACK]);
 
   // auth + watchlist
   const modalRoot = document.getElementById("name-modal-root");
@@ -639,7 +662,7 @@ async function boot(){
     document.getElementById("who-am-i").textContent = "vos: " + MY_NAME;
     logoutBtn.hidden = false;
     await loadMyPicks();
-    renderWeek(weekData);
+    renderAllWeeks(loadedWeeks);
     renderMyWatchlist();
     subscribeFamily();
   });
