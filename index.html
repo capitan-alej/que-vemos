@@ -203,7 +203,7 @@
   <details class="watchlist" id="family-wrap">
     <summary>Entre los tres <span class="count" id="family-count">0</span></summary>
     <div class="watchlist-body">
-      <p class="watchlist-empty" id="family-empty">Nadie marcó nada todavía.</p>
+      <p class="watchlist-empty" id="family-empty">Todavía no hay coincidencias (se van acumulando de todas las semanas, no solo la actual).</p>
       <ul id="family-list" hidden></ul>
     </div>
   </details>
@@ -558,11 +558,13 @@ function renderMyWatchlist(){
   });
 }
 
-let familyPicksForWeek = {}; // title -> [{name, uid}]
+let familyPicksForWeek = {}; // title -> [{name, uid}]  (acumulado de TODAS las semanas, no solo la actual)
 
 function subscribeFamily(){
   if(unsubFamily) unsubFamily();
-  const q = query(collection(db, "picks"), where("weekKey", "==", currentWeekKey));
+  // Sin filtro de weekKey a propósito: "entre los tres" es un cruce histórico
+  // que se va acumulando semana a semana, no algo que se reinicia cuando cambia la semana.
+  const q = query(collection(db, "picks"));
   unsubFamily = onSnapshot(q, snap => {
     familyPicksForWeek = {};
     snap.forEach(d => {
@@ -584,7 +586,10 @@ function renderFamilyOnCards(){
 }
 
 function renderFamilySection(){
-  const entries = Object.entries(familyPicksForWeek).sort((a,b) => b[1].length - a[1].length);
+  // Solo coincidencias reales: títulos que le gustaron a 2 o más personas (acumulado de todas las semanas).
+  const entries = Object.entries(familyPicksForWeek)
+    .filter(([, people]) => people.length >= 2)
+    .sort((a,b) => b[1].length - a[1].length);
   document.getElementById("family-count").textContent = entries.length;
   const emptyEl = document.getElementById("family-empty");
   const listEl = document.getElementById("family-list");
