@@ -1,70 +1,107 @@
 {
-  "weekKey": "2026-W38",
-  "weekLabel": "18–24 sep 2026",
-  "generatedAt": "2026-09-20T09:25:00-03:00",
+  "weekKey": "2026-W39",
+  "weekLabel": "27 sept–3 oct",
+  "generatedAt": "2026-09-27T00:46:57.006Z",
   "picks": [
     {
-      "title": "Hamnet",
-      "original": "",
-      "director": "Chloé Zhao",
+      "title": "La hipótesis del amor",
+      "original": "The Love Hypothesis",
+      "director": "",
       "type": "plataforma",
-      "genre": "Drama",
-      "duration": 126,
-      "venue": "HBO Max",
-      "criticLabel": "Cobertura crítica",
-      "criticScore": "Muy elogiada",
-      "lbScore": 4.20,
-      "lbCount": "41k+",
-      "posterUrl": "https://letterboxd.com/film/hamnet/",
-      "sources": [{"label": "Letterboxd", "url": "https://letterboxd.com/film/hamnet/"}]
-    },
-    {
-      "title": "Las mejores",
-      "original": "Best of the Best",
-      "director": "Lena Khan",
-      "type": "plataforma",
-      "genre": "Comedia",
-      "duration": 116,
-      "venue": "Netflix",
-      "criticLabel": "Cobertura crítica",
-      "criticScore": "Recibimiento positivo, comedia liviana",
-      "lbScore": 3.29,
-      "lbCount": "",
-      "posterUrl": "https://letterboxd.com/film/best-of-the-best-2026/",
-      "sources": [{"label": "Letterboxd", "url": "https://letterboxd.com/film/best-of-the-best-2026/"}]
-    },
-    {
-      "title": "Desobediente",
-      "original": "",
-      "director": "Federico Coringrato",
-      "type": "cine",
-      "genre": "Documental",
-      "duration": 108,
-      "venue": "Cines (AR) · estrenó 17/9",
-      "criticLabel": "Cobertura crítica",
-      "criticScore": "Muy elogiada",
-      "lbScore": null,
-      "lbCount": "",
-      "posterUrl": "https://cinenacional.com/pelicula/desobediente",
+      "genre": "Romance",
+      "duration": 110,
+      "venue": "Amazon Prime Video",
+      "criticLabel": "Puntaje combinado",
+      "criticScore": "TMDB 8.3 · Metascore 67100 · 220 votos",
+      "scoreLabel": "Puntaje combinado",
+      "lbScore": 1546.76,
+      "lbCount": "220 votos",
+      "posterUrl": "https://image.tmdb.org/t/p/w500/ylrSdW6fZYwaInYH6WAqvIEnSiV.jpg",
       "sources": [
-        {"label": "cinenacional", "url": "https://cinenacional.com/pelicula/desobediente"},
-        {"label": "Funcinema", "url": "https://www.funcinema.com.ar/2026/09/se-estrena-desobediente-documental-sobre-los-hijos-de-represores-que-rompieron-el-silencio/"}
+        {
+          "label": "TMDB",
+          "url": "https://www.themoviedb.org/movie/1032863"
+        },
+        {
+          "label": "IMDb",
+          "url": "https://www.imdb.com/title/tt22526100/"
+        }
       ]
     },
     {
-      "title": "Resident Evil",
+      "title": "Toy Story 5",
       "original": "",
-      "director": "Zach Cregger",
+      "director": "",
+      "type": "plataforma",
+      "genre": "Animación",
+      "duration": 102,
+      "venue": "Disney Plus",
+      "criticLabel": "Puntaje combinado",
+      "criticScore": "TMDB 8.3 · RT 93% · Metascore 73100 · 2.3k votos",
+      "scoreLabel": "Puntaje combinado",
+      "lbScore": 863.22,
+      "lbCount": "2.3k votos",
+      "posterUrl": "https://image.tmdb.org/t/p/w500/pTjZfbFVWUIwUM5OzX3LVh84ejU.jpg",
+      "sources": [
+        {
+          "label": "TMDB",
+          "url": "https://www.themoviedb.org/movie/1084244"
+        },
+        {
+          "label": "IMDb",
+          "url": "https://www.imdb.com/title/tt29355505/"
+        }
+      ]
+    },
+    {
+      "title": "UNABOMBER",
+      "original": "",
+      "director": "",
+      "type": "plataforma",
+      "genre": "Suspense",
+      "duration": 101,
+      "venue": "Netflix",
+      "criticLabel": "Puntaje combinado",
+      "criticScore": "TMDB 7.1 · 45 votos",
+      "scoreLabel": "Puntaje combinado",
+      "lbScore": 3.55,
+      "lbCount": "45 votos",
+      "posterUrl": "https://image.tmdb.org/t/p/w500/39aMkR8Y5vhCG9dTkjiqRl8AVqp.jpg",
+      "sources": [
+        {
+          "label": "TMDB",
+          "url": "https://www.themoviedb.org/movie/1492640"
+        },
+        {
+          "label": "IMDb",
+          "url": "https://www.imdb.com/title/tt6933238/"
+        }
+      ]
+    },
+    {
+      "title": "La isla olvidada",
+      "original": "Forgotten Island",
+      "director": "",
       "type": "cine",
-      "genre": "Terror",
-      "duration": 95,
-      "venue": "Cines (AR) · estrenó 18/9",
-      "criticLabel": "Cobertura crítica",
-      "criticScore": "Recibimiento dividido, mayoría positiva",
-      "lbScore": 3.86,
-      "lbCount": "",
-      "posterUrl": "https://letterboxd.com/film/resident-evil-2026/",
-      "sources": [{"label": "Letterboxd", "url": "https://letterboxd.com/film/resident-evil-2026/"}]
+      "genre": "Animación",
+      "duration": 109,
+      "venue": "Cines (AR)",
+      "criticLabel": "Puntaje combinado",
+      "criticScore": "TMDB 7.9 · Metascore 73100 · 21 votos",
+      "scoreLabel": "Puntaje combinado",
+      "lbScore": 1511.86,
+      "lbCount": "21 votos",
+      "posterUrl": "https://image.tmdb.org/t/p/w500/vpTdXFoZGzwnCWzkVYU7JH8teAZ.jpg",
+      "sources": [
+        {
+          "label": "TMDB",
+          "url": "https://www.themoviedb.org/movie/1465063"
+        },
+        {
+          "label": "IMDb",
+          "url": "https://www.imdb.com/title/tt36583977/"
+        }
+      ]
     }
   ]
 }
