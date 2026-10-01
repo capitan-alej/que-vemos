@@ -1,21 +1,21 @@
 {
-  "weekKey": "2026-W40",
-  "weekLabel": "1 oct–7 oct",
-  "generatedAt": "2026-10-01T12:22:02.952Z",
+  "weekKey": "2026-W39",
+  "weekLabel": "27 sept–3 oct",
+  "generatedAt": "2026-09-27T00:46:57.006Z",
   "picks": [
     {
       "title": "La hipótesis del amor",
       "original": "The Love Hypothesis",
-      "director": "Claire Scanlon",
+      "director": "",
       "type": "plataforma",
       "genre": "Romance",
       "duration": 110,
       "venue": "Amazon Prime Video",
       "criticLabel": "Puntaje combinado",
-      "criticScore": "TMDB 8.1 · Metascore 67100 · 391 votos",
+      "criticScore": "TMDB 8.3 · Metascore 67100 · 220 votos",
       "scoreLabel": "Puntaje combinado",
-      "lbScore": 1463.12,
-      "lbCount": "391 votos",
+      "lbScore": 1546.76,
+      "lbCount": "220 votos",
       "posterUrl": "https://image.tmdb.org/t/p/w500/ylrSdW6fZYwaInYH6WAqvIEnSiV.jpg",
       "sources": [
         {
@@ -31,16 +31,16 @@
     {
       "title": "Toy Story 5",
       "original": "",
-      "director": "Andrew Stanton",
+      "director": "",
       "type": "plataforma",
       "genre": "Animación",
       "duration": 102,
       "venue": "Disney Plus",
       "criticLabel": "Puntaje combinado",
-      "criticScore": "TMDB 8.3 · RT 93% · Metascore 73100 · 2.4k votos",
+      "criticScore": "TMDB 8.3 · RT 93% · Metascore 73100 · 2.3k votos",
       "scoreLabel": "Puntaje combinado",
       "lbScore": 863.22,
-      "lbCount": "2.4k votos",
+      "lbCount": "2.3k votos",
       "posterUrl": "https://image.tmdb.org/t/p/w500/pTjZfbFVWUIwUM5OzX3LVh84ejU.jpg",
       "sources": [
         {
@@ -56,17 +56,17 @@
     {
       "title": "UNABOMBER",
       "original": "",
-      "director": "Janus Metz",
+      "director": "",
       "type": "plataforma",
       "genre": "Suspense",
       "duration": 101,
       "venue": "Netflix",
       "criticLabel": "Puntaje combinado",
-      "criticScore": "TMDB 6.7 · Metascore 46100 · 227 votos",
+      "criticScore": "TMDB 7.1 · 45 votos",
       "scoreLabel": "Puntaje combinado",
-      "lbScore": 789.11,
-      "lbCount": "227 votos",
-      "posterUrl": "https://image.tmdb.org/t/p/w500/crV6ba2FVfHW64PzjJehMxUj9e7.jpg",
+      "lbScore": 3.55,
+      "lbCount": "45 votos",
+      "posterUrl": "https://image.tmdb.org/t/p/w500/39aMkR8Y5vhCG9dTkjiqRl8AVqp.jpg",
       "sources": [
         {
           "label": "TMDB",
@@ -81,16 +81,16 @@
     {
       "title": "La isla olvidada",
       "original": "Forgotten Island",
-      "director": "Januel Mercado, Joel Crawford",
+      "director": "",
       "type": "cine",
       "genre": "Animación",
       "duration": 109,
       "venue": "Cines (AR)",
       "criticLabel": "Puntaje combinado",
-      "criticScore": "TMDB 8.2 · Metascore 73100 · 37 votos",
+      "criticScore": "TMDB 7.9 · Metascore 73100 · 21 votos",
       "scoreLabel": "Puntaje combinado",
-      "lbScore": 1441.45,
-      "lbCount": "37 votos",
+      "lbScore": 1511.86,
+      "lbCount": "21 votos",
       "posterUrl": "https://image.tmdb.org/t/p/w500/vpTdXFoZGzwnCWzkVYU7JH8teAZ.jpg",
       "sources": [
         {
