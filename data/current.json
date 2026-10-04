@@ -1,33 +1,8 @@
 {
   "weekKey": "2026-W40",
-  "weekLabel": "1 oct–7 oct",
-  "generatedAt": "2026-10-01T12:22:02.952Z",
+  "weekLabel": "4 oct–10 oct",
+  "generatedAt": "2026-10-04T15:03:22.680Z",
   "picks": [
-    {
-      "title": "La hipótesis del amor",
-      "original": "The Love Hypothesis",
-      "director": "Claire Scanlon",
-      "type": "plataforma",
-      "genre": "Romance",
-      "duration": 110,
-      "venue": "Amazon Prime Video",
-      "criticLabel": "Puntaje combinado",
-      "criticScore": "TMDB 8.1 · Metascore 67100 · 391 votos",
-      "scoreLabel": "Puntaje combinado",
-      "lbScore": 1463.12,
-      "lbCount": "391 votos",
-      "posterUrl": "https://image.tmdb.org/t/p/w500/ylrSdW6fZYwaInYH6WAqvIEnSiV.jpg",
-      "sources": [
-        {
-          "label": "TMDB",
-          "url": "https://www.themoviedb.org/movie/1032863"
-        },
-        {
-          "label": "IMDb",
-          "url": "https://www.imdb.com/title/tt22526100/"
-        }
-      ]
-    },
     {
       "title": "Toy Story 5",
       "original": "",
@@ -37,10 +12,10 @@
       "duration": 102,
       "venue": "Disney Plus",
       "criticLabel": "Puntaje combinado",
-      "criticScore": "TMDB 8.3 · RT 93% · Metascore 73100 · 2.4k votos",
+      "criticScore": "TMDB 8.3 · RT 93% · Metascore 73 · 2.5k votos",
       "scoreLabel": "Puntaje combinado",
-      "lbScore": 863.22,
-      "lbCount": "2.4k votos",
+      "lbScore": 4.07,
+      "lbCount": "2.5k votos",
       "posterUrl": "https://image.tmdb.org/t/p/w500/pTjZfbFVWUIwUM5OzX3LVh84ejU.jpg",
       "sources": [
         {
@@ -54,52 +29,77 @@
       ]
     },
     {
-      "title": "UNABOMBER",
-      "original": "",
-      "director": "Janus Metz",
+      "title": "La hipótesis del amor",
+      "original": "The Love Hypothesis",
+      "director": "Claire Scanlon",
       "type": "plataforma",
-      "genre": "Suspense",
-      "duration": 101,
-      "venue": "Netflix",
+      "genre": "Romance",
+      "duration": 110,
+      "venue": "Amazon Prime Video",
       "criticLabel": "Puntaje combinado",
-      "criticScore": "TMDB 6.7 · Metascore 46100 · 227 votos",
+      "criticScore": "TMDB 8.0 · Metascore 67 · 449 votos",
       "scoreLabel": "Puntaje combinado",
-      "lbScore": 789.11,
-      "lbCount": "227 votos",
-      "posterUrl": "https://image.tmdb.org/t/p/w500/crV6ba2FVfHW64PzjJehMxUj9e7.jpg",
+      "lbScore": 3.73,
+      "lbCount": "449 votos",
+      "posterUrl": "https://image.tmdb.org/t/p/w500/ylrSdW6fZYwaInYH6WAqvIEnSiV.jpg",
       "sources": [
         {
           "label": "TMDB",
-          "url": "https://www.themoviedb.org/movie/1492640"
+          "url": "https://www.themoviedb.org/movie/1032863"
         },
         {
           "label": "IMDb",
-          "url": "https://www.imdb.com/title/tt6933238/"
+          "url": "https://www.imdb.com/title/tt22526100/"
         }
       ]
     },
     {
-      "title": "La isla olvidada",
-      "original": "Forgotten Island",
-      "director": "Januel Mercado, Joel Crawford",
-      "type": "cine",
-      "genre": "Animación",
-      "duration": 109,
-      "venue": "Cines (AR)",
+      "title": "Las cartas de la vida",
+      "original": "Doing Life",
+      "director": "Tyler Perry",
+      "type": "plataforma",
+      "genre": "Drama",
+      "duration": 112,
+      "venue": "Netflix",
       "criticLabel": "Puntaje combinado",
-      "criticScore": "TMDB 8.2 · Metascore 73100 · 37 votos",
+      "criticScore": "TMDB 6.5 · 37 votos",
       "scoreLabel": "Puntaje combinado",
-      "lbScore": 1441.45,
+      "lbScore": 3.25,
       "lbCount": "37 votos",
-      "posterUrl": "https://image.tmdb.org/t/p/w500/vpTdXFoZGzwnCWzkVYU7JH8teAZ.jpg",
+      "posterUrl": "https://image.tmdb.org/t/p/w500/oGZkPxg5NqALN7OJbm9DuPOIVEJ.jpg",
       "sources": [
         {
           "label": "TMDB",
-          "url": "https://www.themoviedb.org/movie/1465063"
+          "url": "https://www.themoviedb.org/movie/1458857"
         },
         {
           "label": "IMDb",
-          "url": "https://www.imdb.com/title/tt36583977/"
+          "url": "https://www.imdb.com/title/tt36429458/"
+        }
+      ]
+    },
+    {
+      "title": "Vengadores: Endgame",
+      "original": "Avengers: Endgame",
+      "director": "Anthony Russo, Joe Russo",
+      "type": "cine",
+      "genre": "Aventura",
+      "duration": 181,
+      "venue": "Cines (AR)",
+      "criticLabel": "Puntaje combinado",
+      "criticScore": "TMDB 8.2 · RT 94% · Metascore 78 · 28.9k votos",
+      "scoreLabel": "Puntaje combinado",
+      "lbScore": 4.22,
+      "lbCount": "28.9k votos",
+      "posterUrl": "https://image.tmdb.org/t/p/w500/br6krBFpaYmCSglLBWRuhui7tPc.jpg",
+      "sources": [
+        {
+          "label": "TMDB",
+          "url": "https://www.themoviedb.org/movie/299534"
+        },
+        {
+          "label": "IMDb",
+          "url": "https://www.imdb.com/title/tt4154796/"
         }
       ]
     }
