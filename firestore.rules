@@ -1,0 +1,48 @@
+rules_version = '2';
+
+// Reglas de Firestore de "¿Qué vemos?" — COMPLETAS, para pegar tal cual en
+// Firebase → Firestore Database → Reglas → Publicar.
+//
+// Qué cambió respecto de lo anterior (2026-10-04):
+//  - members y picks: mismo criterio de siempre (lectura abierta, escritura solo del
+//    propio uid). Escritas explícitas para que siga andando todo lo que hace el sitio:
+//    alta de members con {id, name, lastSeen}, el lastSeen con merge en cada ingreso,
+//    crear/reescribir picks propios (incluida la restauración de picks viejos con el
+//    mismo id), borrar picks propios (botón y migración de sesiones anónimas).
+//    Nuevo: un pick no puede cambiar de dueño al actualizarse.
+//  - NUEVO pushTokens/{id}: tokens de avisos de cada dispositivo. Cada uno crea,
+//    actualiza y borra solo los suyos. La lectura está cerrada para los clientes
+//    (el token es un dato privado); la GitHub Action lo lee con la cuenta de servicio,
+//    que no pasa por estas reglas.
+//  - NUEVO: todo lo que no esté listado acá queda denegado.
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    function signedIn() { return request.auth != null; }
+
+    // Nombre visible de cada usuario. Doc id = uid.
+    match /members/{uid} {
+      allow read: if true;
+      allow write: if signedIn() && request.auth.uid == uid;
+    }
+
+    // Watchlist. Doc id = uid__weekKey__slug(título); el dueño va en el campo uid.
+    match /picks/{pickId} {
+      allow read: if true;
+      allow create: if signedIn() && request.resource.data.uid == request.auth.uid;
+      allow update: if signedIn() && resource.data.uid == request.auth.uid
+                    && request.resource.data.uid == request.auth.uid;
+      allow delete: if signedIn() && resource.data.uid == request.auth.uid;
+    }
+
+    // Tokens de Web Push (FCM). Doc id = sha256(token).
+    match /pushTokens/{id} {
+      allow read: if false;
+      allow create: if signedIn() && request.resource.data.uid == request.auth.uid;
+      allow update: if signedIn() && resource.data.uid == request.auth.uid
+                    && request.resource.data.uid == request.auth.uid;
+      allow delete: if signedIn() && resource.data.uid == request.auth.uid;
+    }
+  }
+}

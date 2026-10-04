@@ -6,6 +6,13 @@
 <title>¿Qué vemos?</title>
 <meta name="description" content="Recomendaciones semanales de cine y plataformas en Argentina, cruzadas con crítica, con watchlist familiar.">
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+<meta name="theme-color" content="#0e0c09">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="¿Qué vemos?">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&family=IBM+Plex+Mono:wght@400;600&display=swap">
 <style>
   :root{
@@ -33,6 +40,9 @@
     font-family:"Source Serif 4","Iowan Old Style",Georgia,serif;
     padding-inline:20px;
     padding-block:28px 48px;
+    /* app instalada en iPhone: la barra de estado es translúcida, el contenido baja */
+    padding-top:calc(28px + env(safe-area-inset-top, 0px));
+    padding-bottom:calc(48px + env(safe-area-inset-bottom, 0px));
   }
   a{color:inherit;}
   .wrap{max-width:880px;margin-inline:auto;}
@@ -176,6 +186,17 @@
   .name-modal .auth-error{color:#e08a6b;font-size:0.78rem;margin:-6px 0 12px;font-family:"IBM Plex Mono",monospace;}
   #logout-link{background:none;border:none;color:var(--ink-muted);text-decoration:underline;text-underline-offset:2px;font-family:"IBM Plex Mono",monospace;font-size:0.68rem;cursor:pointer;padding:0;}
   #logout-link:hover{color:var(--accent);}
+
+  .install-hint,.push-row{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin:0 0 18px;font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:0.72rem;line-height:1.45;color:var(--ink-muted);}
+  .install-hint{flex-wrap:nowrap;padding:10px 12px;background:var(--paper-raised);border:1px solid var(--line);border-left:2px solid var(--accent);border-radius:3px;color:var(--ink);}
+  .install-hint p{margin:0;flex:1;}
+  .install-hint .share-ico{width:15px;height:15px;vertical-align:-3px;fill:none;stroke:var(--accent);stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;}
+  .install-hint button{background:none;border:none;color:var(--ink-muted);font-size:1.15rem;line-height:1;cursor:pointer;padding:2px 4px;}
+  .push-btn{background:transparent;border:1px solid var(--accent);color:var(--accent);border-radius:3px;font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:0.72rem;letter-spacing:0.03em;padding:7px 12px;cursor:pointer;}
+  .push-btn:disabled{opacity:.5;cursor:wait;}
+  .push-row .linkish{background:none;border:none;color:var(--ink-muted);text-decoration:underline;text-underline-offset:2px;font-family:inherit;font-size:inherit;cursor:pointer;padding:0;}
+  .push-row .err{color:#e08a6b;}
+  .toast{position:fixed;left:50%;bottom:calc(16px + env(safe-area-inset-bottom, 0px));transform:translateX(-50%);width:max-content;max-width:calc(100% - 32px);background:var(--paper-raised);border:1px solid var(--accent);border-radius:3px;padding:10px 14px;font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:0.72rem;color:var(--ink);z-index:60;}
 </style>
 </head>
 <body>
@@ -184,6 +205,12 @@
     <h1>¿Qué vemos?</h1>
     <div class="sub"><span class="week" id="week-label">—</span>Buenos Aires · crítica × plataformas</div>
   </header>
+
+  <div class="install-hint" id="install-hint" hidden>
+    <p>Instalala: Compartir <svg class="share-ico" viewBox="0 0 24 24" aria-label="(ícono de compartir)"><path d="M12 3v12M8 7l4-4 4 4"/><path d="M8 11H6a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-8a1 1 0 0 0-1-1h-2"/></svg> → Agregar a inicio. Así abre como app y te puede avisar los jueves.</p>
+    <button type="button" id="install-hint-close" aria-label="Cerrar">×</button>
+  </div>
+  <div class="push-row" id="push-row" hidden></div>
 
   <div class="toolbar">
     <span class="tag" id="intro-text">Estrenos de la semana en Argentina, cine y plataformas.</span>
@@ -232,6 +259,30 @@
 </div>
 
 <div id="name-modal-root"></div>
+<div class="toast" id="toast" role="status" hidden></div>
+
+<script>
+// Service worker (caché offline + avisos) y aviso "instalala" para iPhone.
+// Va aparte del módulo de Firebase para que ande aunque Firebase no cargue.
+(function(){
+  if("serviceWorker" in navigator){
+    window.QV_SW = navigator.serviceWorker.register("sw.js", { scope: "./" })
+      .catch(function(e){ console.error(e); return null; });
+  }
+  var isIOS = /iPhone|iPad|iPod/.test(navigator.userAgent) || (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1);
+  var standalone = navigator.standalone === true || window.matchMedia("(display-mode: standalone)").matches;
+  var KEY = "qv-install-hint-off";
+  var off = false;
+  try{ off = localStorage.getItem(KEY) === "1"; }catch(e){}
+  if(!isIOS || standalone || off) return;
+  var hint = document.getElementById("install-hint");
+  hint.hidden = false;
+  document.getElementById("install-hint-close").addEventListener("click", function(){
+    hint.hidden = true;
+    try{ localStorage.setItem(KEY, "1"); }catch(e){}
+  });
+})();
+</script>
 
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-app.js";
@@ -727,7 +778,141 @@ function renderFamilySection(){
   }).join("");
 }
 
+// ---------- Avisos de los jueves (Web Push con Firebase Cloud Messaging) ----------
+// Solo en la app instalada (en iPhone, Web Push existe únicamente así, iOS 16.4+).
+// El permiso se pide SOLO dentro del clic (requisito de iOS). El token de este
+// dispositivo va a pushTokens/{sha256(token)}; lo lee la GitHub Action, nunca los clientes.
+const VAPID_KEY = "BGdIBL8281FnBmce3aJpqAJuZW0nyO9PM9dvSMIfGqHaT3Mj9ACg_4Ol9kcAwBQs4kMB2X6DaKSmsB6ZZCZ4-yg";
+const PUSH_KEY = "qv-push"; // {uid, id, createdAt} del token activo en este dispositivo
+const IS_IOS = /iPhone|iPad|iPod/.test(navigator.userAgent) || (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1);
+const IS_STANDALONE = navigator.standalone === true || window.matchMedia("(display-mode: standalone)").matches;
+let fcm = null;        // módulo firebase-messaging (se carga solo si hace falta)
+let messaging = null;
+let pushError = false;
+
+function readPush(){
+  try{ return JSON.parse(localStorage.getItem(PUSH_KEY) || "null"); }catch(e){ return null; }
+}
+function writePush(v){
+  try{ v ? localStorage.setItem(PUSH_KEY, JSON.stringify(v)) : localStorage.removeItem(PUSH_KEY); }catch(e){}
+}
+function pushIsOn(){
+  const p = readPush();
+  return !!(messaging && Notification.permission === "granted" && p && p.uid === UID);
+}
+
+async function tokenDocId(token){
+  const buf = await crypto.subtle.digest("SHA-256", new TextEncoder().encode(token));
+  return [...new Uint8Array(buf)].map(b => b.toString(16).padStart(2, "0")).join("");
+}
+
+async function loadMessaging(){
+  if(messaging) return;
+  if(!("Notification" in window) || !("PushManager" in window) || !window.QV_SW) return;
+  fcm = await import("https://www.gstatic.com/firebasejs/10.14.1/firebase-messaging.js");
+  if(!(await fcm.isSupported())) return;
+  messaging = fcm.getMessaging(app);
+  // Con la app a la vista el SW no muestra la notificación: acá solo un aviso discreto.
+  fcm.onMessage(messaging, payload => {
+    showToast(payload.notification?.title || "Llegó la selección de la semana");
+    refreshWeeks();
+  });
+}
+
+// Pide (o refresca) el token y lo guarda en Firestore. Requiere permiso concedido.
+async function saveToken(){
+  const reg = await window.QV_SW;
+  if(!reg) throw new Error("sin service worker");
+  const token = await fcm.getToken(messaging, { vapidKey: VAPID_KEY, serviceWorkerRegistration: reg });
+  if(!token) throw new Error("sin token");
+  const id = await tokenDocId(token);
+  const prev = readPush();
+  const now = new Date().toISOString();
+  const createdAt = (prev && prev.uid === UID && prev.id === id && prev.createdAt) || now;
+  if(prev && prev.id !== id) await deleteDoc(doc(db, "pushTokens", prev.id)).catch(e => console.error(e));
+  await setDoc(doc(db, "pushTokens", id), {
+    uid: UID, name: MY_NAME, token, ua: navigator.userAgent.slice(0, 300), createdAt, updatedAt: now
+  });
+  writePush({ uid: UID, id, createdAt });
+}
+
+// Borra el token de este dispositivo (Firestore + suscripción). Antes del signOut: sin sesión no se puede borrar.
+async function pushOff(){
+  const prev = readPush();
+  writePush(null);
+  if(prev && prev.uid === UID) await deleteDoc(doc(db, "pushTokens", prev.id)).catch(e => console.error(e));
+  if(messaging) await fcm.deleteToken(messaging).catch(e => console.error(e));
+}
+
+function paintPush(){
+  const row = document.getElementById("push-row");
+  if(!UID || !IS_STANDALONE){ row.hidden = true; row.innerHTML = ""; return; }
+  row.hidden = false;
+  if(!messaging){
+    row.innerHTML = `<span>🔔 Este dispositivo no admite avisos${IS_IOS ? " (hace falta iOS 16.4 o más)" : ""}.</span>`;
+  } else if(Notification.permission === "denied"){
+    row.innerHTML = IS_IOS
+      ? `<span>🔕 Avisos bloqueados. Para reactivarlos: Ajustes → Notificaciones → ¿Qué vemos? → Permitir notificaciones.</span>`
+      : `<span>🔕 Avisos bloqueados. Permitilos en la configuración del sitio del navegador.</span>`;
+  } else if(pushIsOn()){
+    row.innerHTML = `<span>🔔 Te avisamos los jueves.</span> <button type="button" class="linkish" id="push-off">desactivar</button>`;
+    document.getElementById("push-off").addEventListener("click", async e => {
+      e.target.disabled = true;
+      await pushOff();
+      paintPush();
+    });
+  } else {
+    row.innerHTML = `<button type="button" class="push-btn" id="push-on">🔔 Avisarme los jueves</button>${pushError ? ` <span class="err">No se pudo activar, probá de nuevo.</span>` : ""}`;
+    document.getElementById("push-on").addEventListener("click", async e => {
+      e.target.disabled = true;
+      pushError = false;
+      try{
+        // Lo primero del clic, sin awaits antes: iOS solo acepta el pedido dentro del gesto.
+        const perm = await Notification.requestPermission();
+        if(perm === "granted") await saveToken();
+      }catch(err){ console.error(err); pushError = true; }
+      paintPush();
+    });
+  }
+}
+
+async function setupPush(){
+  if(IS_STANDALONE){
+    try{ await loadMessaging(); }catch(e){ console.error(e); }
+    const prev = readPush();
+    if(messaging && prev && prev.uid === UID){
+      // Ya estaba activado: refrescar updatedAt (y el token si cambió). Si sacaron el permiso en Ajustes, borrar.
+      if(Notification.permission === "granted") saveToken().catch(e => console.error(e));
+      else await pushOff();
+    }
+  }
+  paintPush();
+}
+
+let toastTimer = null;
+function showToast(text){
+  const el = document.getElementById("toast");
+  el.textContent = text;
+  el.hidden = false;
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => { el.hidden = true; }, 6000);
+}
+
+// El SW avisa cuando data/*.json cambió respecto de lo guardado: redibujar con lo nuevo.
+let refreshTimer = null;
+function refreshWeeks(){
+  clearTimeout(refreshTimer);
+  refreshTimer = setTimeout(async () => {
+    const weeks = await loadAllWeeks();
+    if(weeks.length) renderAllWeeks(weeks);
+  }, 400);
+}
+
 async function boot(){
+  // Antes de pedir los JSON: el SW puede avisar que cambiaron apenas los revalida.
+  if("serviceWorker" in navigator){
+    navigator.serviceWorker.addEventListener("message", e => { if(e.data && e.data.type === "qv-data-updated") refreshWeeks(); });
+  }
   document.getElementById("filter-type").addEventListener("change", applyFilter);
   document.getElementById("filter-genre").addEventListener("change", applyFilter);
   document.getElementById("filter-duration").addEventListener("change", applyFilter);
@@ -739,7 +924,10 @@ async function boot(){
   // auth + watchlist
   const modalRoot = document.getElementById("name-modal-root");
   const logoutBtn = document.getElementById("logout-link");
-  logoutBtn.addEventListener("click", () => { signOut(auth).catch(e => console.error(e)); });
+  logoutBtn.addEventListener("click", async () => {
+    if(readPush()) await pushOff();
+    signOut(auth).catch(e => console.error(e));
+  });
 
   onAuthStateChanged(auth, async (user) => {
     if(user && user.isAnonymous){
@@ -756,6 +944,7 @@ async function boot(){
       renderMyWatchlist();
       document.getElementById("who-am-i").textContent = "";
       logoutBtn.hidden = true;
+      paintPush();
       renderLoginForm();
       return;
     }
@@ -771,6 +960,7 @@ async function boot(){
     await restorePending();
     subscribeMyPicks();
     subscribeFamily();
+    setupPush();
   });
 }
 

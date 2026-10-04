@@ -4,7 +4,13 @@ on:
   schedule:
     # Todos los jueves a las 09:00 hora Argentina (12:00 UTC)
     - cron: "0 12 * * 4"
-  workflow_dispatch: {}
+  workflow_dispatch:
+    inputs:
+      notificar:
+        description: "¿Mandar el aviso push? (validar = FCM lo chequea sin entregarlo)"
+        type: choice
+        options: ["no", "validar", "si"]
+        default: "no"
 
 permissions:
   contents: write
@@ -34,3 +40,13 @@ jobs:
           git add data/
           git diff --cached --quiet || git commit -m "Actualización semanal automática"
           git push
+
+      # El aviso es secundario: si falla, el sitio ya quedó actualizado (continue-on-error).
+      # Corre siempre en el cron del jueves; a mano, solo si se eligió "validar" o "si".
+      - name: Avisar a la familia (push)
+        if: github.event_name == 'schedule' || inputs.notificar == 'validar' || inputs.notificar == 'si'
+        continue-on-error: true
+        env:
+          FIREBASE_SERVICE_ACCOUNT: ${{ secrets.FIREBASE_SERVICE_ACCOUNT }}
+          NOTIFY_FLAGS: ${{ inputs.notificar == 'validar' && '--validate-only' || '' }}
+        run: node scripts/notify.js $NOTIFY_FLAGS

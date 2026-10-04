@@ -1,0 +1,18 @@
+{
+  "id": "/que-vemos/",
+  "name": "¿Qué vemos?",
+  "short_name": "¿Qué vemos?",
+  "description": "Recomendaciones semanales de cine y plataformas en Argentina, con watchlist familiar.",
+  "lang": "es-AR",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#0e0c09",
+  "theme_color": "#0e0c09",
+  "icons": [
+    { "src": "icons/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "icons/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "icons/icon-maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" },
+    { "src": "icons/apple-touch-icon.png", "sizes": "180x180", "type": "image/png" }
+  ]
+}
