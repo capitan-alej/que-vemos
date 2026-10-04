@@ -98,8 +98,9 @@ function directorFrom(details) {
 // --- score combinado -------------------------------------------------------
 
 function num(v) {
-  const n = parseFloat(String(v).replace(/[^\d.]/g, ""));
-  return Number.isFinite(n) ? n : null;
+  // primer número del texto: "67/100" → 67, "7.3/10" → 7.3, "93%" → 93, "N/A" → null
+  const m = String(v).match(/\d+(\.\d+)?/);
+  return m ? parseFloat(m[0]) : null;
 }
 
 function combinedScore({ tmdbAvg, tmdbVotes, rt, metascore, imdbRating }) {
