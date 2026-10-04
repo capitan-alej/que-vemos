@@ -1,7 +1,7 @@
 {
   "weekKey": "2026-W40",
   "weekLabel": "4 oct–10 oct",
-  "generatedAt": "2026-10-04T15:37:11.212Z",
+  "generatedAt": "2026-10-04T23:16:30.882Z",
   "picks": [
     {
       "title": "Toy Story 5",
@@ -37,10 +37,10 @@
       "duration": 110,
       "venue": "Amazon Prime Video",
       "criticLabel": "Puntaje combinado",
-      "criticScore": "TMDB 8.0 · Metascore 67 · 449 votos",
+      "criticScore": "TMDB 8.0 · Metascore 67 · 464 votos",
       "scoreLabel": "Puntaje combinado",
       "lbScore": 3.73,
-      "lbCount": "449 votos",
+      "lbCount": "464 votos",
       "posterUrl": "https://image.tmdb.org/t/p/w500/ylrSdW6fZYwaInYH6WAqvIEnSiV.jpg",
       "sources": [
         {
@@ -62,10 +62,10 @@
       "duration": 112,
       "venue": "Netflix",
       "criticLabel": "Puntaje combinado",
-      "criticScore": "TMDB 6.5 · 37 votos",
+      "criticScore": "TMDB 6.6 · 45 votos",
       "scoreLabel": "Puntaje combinado",
-      "lbScore": 3.25,
-      "lbCount": "37 votos",
+      "lbScore": 3.32,
+      "lbCount": "45 votos",
       "posterUrl": "https://image.tmdb.org/t/p/w500/oGZkPxg5NqALN7OJbm9DuPOIVEJ.jpg",
       "sources": [
         {
