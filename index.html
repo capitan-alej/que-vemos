@@ -79,8 +79,12 @@
 
   .picks{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:18px;}
   .card{background:var(--paper);border:1px solid var(--line);border-radius:2px;padding:20px 20px 18px;display:flex;flex-direction:column;gap:12px;position:relative;}
-  .card .rank{font-family:"Bebas Neue","Oswald",sans-serif;position:absolute;top:14px;right:50px;font-size:2.1rem;color:var(--line);line-height:1;}
-  .pick-btn{position:absolute;top:12px;right:12px;width:32px;height:32px;border-radius:50%;border:1px solid var(--line);background:var(--paper-raised);display:flex;align-items:center;justify-content:center;cursor:pointer;padding:0;transition:border-color .15s ease, background .15s ease;}
+  .card-head{display:flex;align-items:flex-start;gap:10px;}
+  .card-head .badge-row{flex:1;min-width:0;padding-top:2px;}
+  .card-head .badge{max-width:100%;white-space:normal;overflow-wrap:anywhere;}
+  .card-tools{display:flex;align-items:center;gap:8px;flex-shrink:0;margin:-8px -8px 0 0;}
+  .card .rank{font-family:"Bebas Neue","Oswald",sans-serif;font-size:2.1rem;color:var(--line);line-height:1;}
+  .pick-btn{flex-shrink:0;width:32px;height:32px;border-radius:50%;border:1px solid var(--line);background:var(--paper-raised);display:flex;align-items:center;justify-content:center;cursor:pointer;padding:0;transition:border-color .15s ease, background .15s ease;}
   .pick-btn svg{width:15px;height:15px;fill:none;stroke:var(--ink-muted);stroke-width:1.6;transition:fill .15s ease, stroke .15s ease;}
   .pick-btn:hover{border-color:var(--accent);}
   .pick-btn[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);}
@@ -94,7 +98,7 @@
   .badge.plataforma{background:var(--badge-plataforma);}
   .badge.outline{background:transparent;color:var(--ink-muted);border:1px solid var(--line);}
 
-  .card h2{font-family:"Bebas Neue","Oswald",Impact,sans-serif;font-weight:400;font-size:1.7rem;letter-spacing:0.015em;margin:0;line-height:1.02;padding-right:2.6rem;}
+  .card h2{font-family:"Bebas Neue","Oswald",Impact,sans-serif;font-weight:400;font-size:1.7rem;letter-spacing:0.015em;margin:0;line-height:1.02;}
   .card .meta{font-size:0.82rem;color:var(--ink-muted);font-family:"IBM Plex Mono",ui-monospace,monospace;}
 
   .scores{display:flex;gap:18px;border-top:1px solid var(--line);padding-top:12px;margin-top:auto;}
@@ -168,6 +172,7 @@
   .name-modal button:disabled{opacity:.5;cursor:wait;}
   .name-modal .toggle-mode{background:none;border:none;color:var(--accent);text-decoration:underline;text-underline-offset:2px;font-family:"IBM Plex Mono",monospace;font-size:0.72rem;cursor:pointer;padding:0;width:auto;margin-top:10px;}
   .name-modal .field-label{font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:0.62rem;letter-spacing:0.06em;text-transform:uppercase;color:var(--ink-muted);display:block;margin-bottom:4px;}
+  .name-modal .auth-notice{color:var(--ink);border-left:2px solid var(--accent);padding-left:10px;}
   .name-modal .auth-error{color:#e08a6b;font-size:0.78rem;margin:-6px 0 12px;font-family:"IBM Plex Mono",monospace;}
   #logout-link{background:none;border:none;color:var(--ink-muted);text-decoration:underline;text-underline-offset:2px;font-family:"IBM Plex Mono",monospace;font-size:0.68rem;cursor:pointer;padding:0;}
   #logout-link:hover{color:var(--accent);}
@@ -266,6 +271,22 @@ let loadedWeeks = [];
 let allPicksByKey = new Map(); // pickKey(weekKey,title) -> pick (de todas las semanas cargadas)
 let myPickedKeys = new Set();
 let unsubFamily = null;
+let unsubMine = null;
+let signupName = null;       // nombre recién elegido al crear cuenta (members/{uid} todavía puede no existir)
+let showLegacyNotice = false; // se detectó una sesión anónima vieja en este navegador
+
+// Picks de una sesión anónima vieja, guardados para re-crearlos con la cuenta real.
+const PENDING_KEY = "qv-pending-picks";
+function readPending(){
+  try{ return JSON.parse(localStorage.getItem(PENDING_KEY) || "[]") || []; }catch(e){ return []; }
+}
+function writePending(items){
+  try{
+    if(items.length) localStorage.setItem(PENDING_KEY, JSON.stringify(items));
+    else localStorage.removeItem(PENDING_KEY);
+    return true;
+  }catch(e){ return false; }
+}
 
 function pickId(uid, weekKey, title){
   const safe = (title||"").toLowerCase().replace(/[^a-z0-9]+/g,"-").replace(/(^-|-$)/g,"");
@@ -337,15 +358,19 @@ function buildCardHtml(p, weekKey, i){
   const durBucket = durationBucket(p.duration);
   const durLabel = p.duration ? `${p.duration} min` : "";
   return `<article class="card" data-type="${badgeClass}" data-genre="${escapeHtml(p.genre||"")}" data-duration-bucket="${durBucket}" data-title="${escapeHtml(p.title)}" data-week="${escapeHtml(weekKey)}">
-    <button class="pick-btn" type="button" aria-pressed="${picked?"true":"false"}" aria-label="Agregar a mi watchlist" data-title="${escapeHtml(p.title)}" data-venue="${escapeHtml(p.venue||"")}" data-type-val="${badgeClass}" data-week="${escapeHtml(weekKey)}">
-      <svg viewBox="0 0 24 24"><path d="M12 3l2.7 6.4 6.9.6-5.2 4.6 1.6 6.8-6-3.7-6 3.7 1.6-6.8-5.2-4.6 6.9-.6z"/></svg>
-    </button>
-    <span class="rank">0${i+1}</span>
+    <div class="card-head">
     <div class="badge-row">
       <span class="badge ${badgeClass}">${badgeLabel}</span>
       ${p.genre ? `<span class="badge outline">${escapeHtml(p.genre)}</span>` : ""}
       ${durLabel ? `<span class="badge outline">${escapeHtml(durLabel)}</span>` : ""}
       <span class="badge outline">${escapeHtml(p.venue||"")}</span>
+    </div>
+    <div class="card-tools">
+    <span class="rank">0${i+1}</span>
+    <button class="pick-btn" type="button" aria-pressed="${picked?"true":"false"}" aria-label="Agregar a mi watchlist" data-title="${escapeHtml(p.title)}" data-venue="${escapeHtml(p.venue||"")}" data-type-val="${badgeClass}" data-week="${escapeHtml(weekKey)}">
+      <svg viewBox="0 0 24 24"><path d="M12 3l2.7 6.4 6.9.6-5.2 4.6 1.6 6.8-6-3.7-6 3.7 1.6-6.8-5.2-4.6 6.9-.6z"/></svg>
+    </button>
+    </div>
     </div>
     <h2>${escapeHtml(p.title)}${p.original ? ` <span style="font-size:1rem;color:var(--ink-muted);font-family:'IBM Plex Mono',monospace;">(${escapeHtml(p.original)})</span>` : ""}</h2>
     <div class="meta">dir. ${escapeHtml(p.director||"—")}</div>
@@ -465,23 +490,24 @@ function renderLoginForm(){
   function paint(){
     root.innerHTML = `
       <div class="name-modal-backdrop">
-        <div class="name-modal">
+        <form class="name-modal" id="f-form" novalidate>
           <h3>${mode === "signup" ? "Crear cuenta" : "¿Quién sos?"}</h3>
           <p>${mode === "signup"
             ? "Elegí un usuario y una contraseña — vas a usar los mismos en cualquier dispositivo."
             : "Ingresá con tu usuario y contraseña para ver y marcar tu watchlist."}</p>
+          ${(showLegacyNotice || readPending().length) ? `<p class="auth-notice">Actualizamos el sistema: entrá con tu usuario y contraseña (o creá tu cuenta) para tener la misma watchlist en todos tus dispositivos. Tus marcas se pasan solas.</p>` : ""}
           ${mode === "signup" ? `
             <label class="field-label" for="f-name">Tu nombre</label>
-            <input id="f-name" type="text" maxlength="24" placeholder="Ej: Alej">
+            <input id="f-name" type="text" maxlength="24" placeholder="Ej: Alej" autocomplete="nickname">
           ` : ""}
           <label class="field-label" for="f-user">Usuario</label>
-          <input id="f-user" type="text" maxlength="24" placeholder="Ej: alej" autocapitalize="none" autocorrect="off">
+          <input id="f-user" type="text" maxlength="24" placeholder="Ej: alej" autocapitalize="none" autocorrect="off" spellcheck="false" autocomplete="username">
           <label class="field-label" for="f-pass">Contraseña</label>
-          <input id="f-pass" type="password" maxlength="64" placeholder="Al menos 6 caracteres">
+          <input id="f-pass" type="password" maxlength="64" placeholder="Al menos 6 caracteres" autocomplete="${mode === "signup" ? "new-password" : "current-password"}">
           <p class="auth-error" id="f-error" hidden></p>
-          <button id="f-submit" type="button">${mode === "signup" ? "Crear cuenta" : "Ingresar"}</button>
+          <button id="f-submit" type="submit">${mode === "signup" ? "Crear cuenta" : "Ingresar"}</button>
           <button class="toggle-mode" id="f-toggle" type="button">${mode === "signup" ? "Ya tengo cuenta" : "Primera vez / crear cuenta"}</button>
-        </div>
+        </form>
       </div>`;
 
     document.getElementById("f-toggle").addEventListener("click", () => { mode = mode === "signup" ? "login" : "signup"; paint(); });
@@ -505,19 +531,21 @@ function renderLoginForm(){
       const email = usernameToEmail(username);
       try{
         if(mode === "signup"){
+          signupName = displayName;
           const cred = await createUserWithEmailAndPassword(auth, email, password);
           await setDoc(doc(db, "members", cred.user.uid), { id: cred.user.uid, name: displayName, lastSeen: new Date().toISOString() }, { merge: true });
         } else {
           await signInWithEmailAndPassword(auth, email, password);
         }
       }catch(err){
+        signupName = null;
         submitBtn.disabled = false;
         errEl.textContent = AUTH_ERROR_MESSAGES[err.code] || "Algo salió mal, probá de nuevo.";
         errEl.hidden = false;
       }
     };
-    submitBtn.addEventListener("click", submit);
-    [userInput, passInput, nameInput].filter(Boolean).forEach(el => el.addEventListener("keydown", e => { if(e.key === "Enter") submit(); }));
+    // <form> + submit: Enter funciona solo y el llavero de iOS ofrece guardar la contraseña.
+    document.getElementById("f-form").addEventListener("submit", e => { e.preventDefault(); submit(); });
   }
   paint();
 }
@@ -530,17 +558,67 @@ async function resolveMyName(uid){
   return "vos";
 }
 
-async function loadMyPicks(){
-  myPickedKeys = new Set();
-  if(!UID) return;
-  // picks are per-doc-id (uid__week__title), so we can't query "all mine" without an index field.
-  // We store uid as a field too, so query by it.
+// Watchlist propia en vivo: si marcás en el teléfono, aparece en la compu sin recargar.
+function subscribeMyPicks(){
+  if(unsubMine) unsubMine();
   const q = query(collection(db, "picks"), where("uid", "==", UID));
-  const snap = await getDocsSafe(q);
-  snap.forEach(d => {
-    const it = d.data();
-    myPickedKeys.add(pickKey(it.weekKey, it.title));
+  unsubMine = onSnapshot(q, snap => {
+    myPickedKeys = new Set();
+    snap.forEach(d => {
+      const it = d.data();
+      myPickedKeys.add(pickKey(it.weekKey, it.title));
+    });
+    syncPickButtons();
+    renderMyWatchlist();
+  }, err => console.error(err));
+}
+
+function syncPickButtons(){
+  document.querySelectorAll(".pick-btn").forEach(btn => {
+    const k = pickKey(btn.getAttribute("data-week"), btn.getAttribute("data-title"));
+    btn.setAttribute("aria-pressed", myPickedKeys.has(k) ? "true" : "false");
   });
+}
+
+// Sesión anónima vieja (de antes del login con usuario): guardamos sus picks en
+// localStorage, los borramos de Firestore (solo ese uid puede) y cerramos sesión.
+// Si no se pueden guardar localmente, NO se borran (mejor duplicado que perdido).
+async function migrateAnonymous(user){
+  showLegacyNotice = true;
+  try{
+    const snap = await getDocsSafe(query(collection(db, "picks"), where("uid", "==", user.uid)));
+    const found = [];
+    snap.forEach(d => {
+      const it = d.data();
+      found.push({ id: d.id, weekKey: it.weekKey, title: it.title, venue: it.venue || "", type: it.type || "cine", addedAt: it.addedAt || null });
+    });
+    const pending = readPending();
+    const seen = new Set(pending.map(it => pickKey(it.weekKey, it.title)));
+    found.forEach(it => { if(!seen.has(pickKey(it.weekKey, it.title))){ seen.add(pickKey(it.weekKey, it.title)); pending.push(it); } });
+    if(writePending(pending)){
+      for(const it of found){
+        try{ await deleteDoc(doc(db, "picks", it.id)); }catch(e){ console.error(e); }
+      }
+    }
+  }catch(e){ console.error(e); }
+  await signOut(auth).catch(e => console.error(e));
+}
+
+// Re-crea con la cuenta real los picks traídos de la sesión anónima.
+// Mismo doc id determinístico → si ya existía, no se duplica.
+async function restorePending(){
+  const pending = readPending();
+  if(!pending.length) return;
+  const left = [];
+  for(const it of pending){
+    try{
+      await setDoc(doc(db, "picks", pickId(UID, it.weekKey, it.title)), {
+        uid: UID, name: MY_NAME, weekKey: it.weekKey, title: it.title,
+        venue: it.venue || "", type: it.type || "cine", addedAt: it.addedAt || new Date().toISOString()
+      });
+    }catch(e){ console.error(e); left.push(it); }
+  }
+  writePending(left);
 }
 
 async function getDocsSafe(q){
@@ -609,7 +687,11 @@ function subscribeFamily(){
     snap.forEach(d => {
       const it = d.data();
       const key = pickKey(it.weekKey, it.title);
-      (familyPicksForWeek[key] ||= []).push({ name: it.name || "Alguien", uid: it.uid });
+      // Una persona cuenta una sola vez por título aunque tenga picks con más de un uid
+      // (sesiones anónimas viejas de distintos dispositivos que todavía no migraron).
+      const person = (it.name || "").trim().toLowerCase() || it.uid;
+      const list = (familyPicksForWeek[key] ||= []);
+      if(!list.some(p => p.person === person)) list.push({ name: it.name || "Alguien", uid: it.uid, person });
     });
     renderFamilyOnCards();
     renderFamilySection();
@@ -660,10 +742,18 @@ async function boot(){
   logoutBtn.addEventListener("click", () => { signOut(auth).catch(e => console.error(e)); });
 
   onAuthStateChanged(auth, async (user) => {
+    if(user && user.isAnonymous){
+      await migrateAnonymous(user); // termina en signOut → vuelve acá con user null
+      return;
+    }
     if(!user){
       UID = null;
       MY_NAME = "";
       if(unsubFamily){ unsubFamily(); unsubFamily = null; }
+      if(unsubMine){ unsubMine(); unsubMine = null; }
+      myPickedKeys = new Set();
+      syncPickButtons();
+      renderMyWatchlist();
       document.getElementById("who-am-i").textContent = "";
       logoutBtn.hidden = true;
       renderLoginForm();
@@ -672,12 +762,14 @@ async function boot(){
     UID = user.uid;
     modalRoot.innerHTML = "";
     document.getElementById("who-am-i").textContent = "";
-    MY_NAME = await resolveMyName(UID);
+    MY_NAME = signupName || await resolveMyName(UID);
+    signupName = null;
     document.getElementById("who-am-i").textContent = "vos: " + MY_NAME;
     logoutBtn.hidden = false;
-    await loadMyPicks();
-    renderAllWeeks(loadedWeeks);
-    renderMyWatchlist();
+    showLegacyNotice = false;
+    setDoc(doc(db, "members", UID), { lastSeen: new Date().toISOString() }, { merge: true }).catch(e => console.error(e));
+    await restorePending();
+    subscribeMyPicks();
     subscribeFamily();
   });
 }
