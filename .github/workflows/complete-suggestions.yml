@@ -1,0 +1,47 @@
+name: Completar fichas sugeridas
+
+on:
+  schedule:
+    # Cada hora: completa las pelis que sugirió la familia desde el sitio
+    - cron: "0 * * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+# Mismo grupo que update-picks.yml: los dos pushean a data/ y así no chocan.
+concurrency:
+  group: data-push
+  cancel-in-progress: false
+
+jobs:
+  complete:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Completar fichas
+        env:
+          TMDB_API_KEY: ${{ secrets.TMDB_API_KEY }}
+          OMDB_API_KEY: ${{ secrets.OMDB_API_KEY }}
+          FIREBASE_SERVICE_ACCOUNT: ${{ secrets.FIREBASE_SERVICE_ACCOUNT }}
+        run: node scripts/complete-suggestions.js
+
+      - name: Commit y push si cambió sugeridas.json
+        run: |
+          git config user.name "que-vemos-bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add data/sugeridas.json 2>/dev/null || true
+          if git diff --cached --quiet; then
+            echo "Sin cambios."
+          else
+            git commit -m "Completar fichas sugeridas"
+            git pull --rebase
+            git push
+          fi

@@ -107,6 +107,7 @@
   .badge.cine{background:var(--badge-cine);}
   .badge.plataforma{background:var(--badge-plataforma);}
   .badge.outline{background:transparent;color:var(--ink-muted);border:1px solid var(--line);}
+  .badge.otra{background:transparent;color:var(--ink);border:1px solid var(--accent);}
 
   .card h2{font-family:"Bebas Neue","Oswald",Impact,sans-serif;font-weight:400;font-size:1.7rem;letter-spacing:0.015em;margin:0;line-height:1.02;}
   .card .meta{font-size:0.82rem;color:var(--ink-muted);font-family:"IBM Plex Mono",ui-monospace,monospace;}
@@ -196,6 +197,20 @@
   .push-btn:disabled{opacity:.5;cursor:wait;}
   .push-row .linkish{background:none;border:none;color:var(--ink-muted);text-decoration:underline;text-underline-offset:2px;font-family:inherit;font-size:inherit;cursor:pointer;padding:0;}
   .push-row .err{color:#e08a6b;}
+  /* Sugeridas por la familia: entre la semana actual y las anteriores */
+  .sug-block{margin:36px 0;padding:22px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line);}
+  .sug-form{display:flex;gap:8px;margin:0 0 8px;}
+  .sug-form input{flex:1;min-width:0;background:var(--paper);border:1px solid var(--line);color:var(--ink);padding:9px 12px;border-radius:3px;font-family:"Source Serif 4",serif;font-size:1rem;}
+  .sug-form input:focus-visible{outline:2px solid var(--accent);outline-offset:1px;}
+  .sug-form button{flex-shrink:0;background:var(--accent);color:var(--accent-ink);border:none;border-radius:3px;font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:0.72rem;letter-spacing:0.05em;text-transform:uppercase;padding:0 14px;cursor:pointer;}
+  .sug-form button:disabled{opacity:.5;cursor:wait;}
+  .sug-msg{font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:0.72rem;color:var(--ink-muted);margin:0 0 14px;}
+  .sug-msg.err{color:#e08a6b;}
+  .sug-status{font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:0.75rem;line-height:1.45;color:var(--ink-muted);margin:0;}
+  .sug-status.warn{color:#e08a6b;}
+  .sug-foot{display:flex;align-items:center;gap:10px;flex-wrap:wrap;font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:0.65rem;color:var(--ink-muted);}
+  .sug-del{background:none;border:none;color:var(--ink-muted);text-decoration:underline;text-underline-offset:2px;font-family:inherit;font-size:inherit;cursor:pointer;padding:0;}
+  .sug-del:hover{color:var(--accent);}
   .toast{position:fixed;left:50%;bottom:calc(16px + env(safe-area-inset-bottom, 0px));transform:translateX(-50%);width:max-content;max-width:calc(100% - 32px);background:var(--paper-raised);border:1px solid var(--accent);border-radius:3px;padding:10px 14px;font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:0.72rem;color:var(--ink);z-index:60;}
 </style>
 </head>
@@ -252,6 +267,17 @@
 
   <div id="content"><p class="state-msg">Cargando semanas…</p></div>
 
+  <!-- El JS lo mueve dentro de #content, entre la semana actual y las anteriores. -->
+  <section class="sug-block" id="sug-block" hidden>
+    <div class="week-block-head"><h2>Sugeridas por la familia</h2></div>
+    <form class="sug-form" id="sug-form" hidden>
+      <input id="sug-input" type="text" maxlength="120" placeholder="Agregar un título…" aria-label="Agregar un título" autocomplete="off" enterkeyhint="send">
+      <button type="submit" id="sug-submit">Agregar</button>
+    </form>
+    <p class="sug-msg" id="sug-msg" role="status" hidden></p>
+    <div id="sug-list"></div>
+  </section>
+
   <footer class="note">
     <span id="updated-label">—</span>
     <span id="who-am-i-wrap"><span id="who-am-i"></span> <button id="logout-link" type="button" hidden>cambiar de usuario</button></span>
@@ -291,7 +317,7 @@ import {
   signInWithEmailAndPassword, createUserWithEmailAndPassword
 } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-auth.js";
 import {
-  getFirestore, doc, getDoc, setDoc, deleteDoc, collection, query, where, onSnapshot
+  getFirestore, doc, getDoc, setDoc, deleteDoc, collection, query, where, onSnapshot, serverTimestamp
 } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore.js";
 
 const firebaseConfig = {
@@ -396,9 +422,10 @@ function populateGenreFilter(allPicks){
   sel.value = genres.includes(prev) ? prev : "todos";
 }
 
-function buildCardHtml(p, weekKey, i){
-  const badgeClass = p.type === "plataforma" ? "plataforma" : "cine";
-  const badgeLabel = p.type === "plataforma" ? "PLATAFORMA" : "CINE";
+// i < 0 → sin número de orden (sugeridas). extraHtml va al pie de la tarjeta.
+function buildCardHtml(p, weekKey, i, extraHtml = ""){
+  const badgeClass = p.type === "plataforma" ? "plataforma" : p.type === "otra" ? "otra" : "cine";
+  const badgeLabel = p.type === "plataforma" ? "PLATAFORMA" : p.type === "otra" ? "OTRA" : "CINE";
   const lb = p.lbScore != null
     ? `${starsSVG(p.lbScore)}<span class="val">${p.lbScore.toFixed(2)} <small>${p.lbCount ? "· "+escapeHtml(p.lbCount) : ""}</small></span>`
     : `<span class="val" style="font-size:0.85rem;color:var(--ink-muted);">s/d</span>`;
@@ -417,7 +444,7 @@ function buildCardHtml(p, weekKey, i){
       <span class="badge outline">${escapeHtml(p.venue||"")}</span>
     </div>
     <div class="card-tools">
-    <span class="rank">0${i+1}</span>
+    ${i >= 0 ? `<span class="rank">0${i+1}</span>` : ""}
     <button class="pick-btn" type="button" aria-pressed="${picked?"true":"false"}" aria-label="Agregar a mi watchlist" data-title="${escapeHtml(p.title)}" data-venue="${escapeHtml(p.venue||"")}" data-type-val="${badgeClass}" data-week="${escapeHtml(weekKey)}">
       <svg viewBox="0 0 24 24"><path d="M12 3l2.7 6.4 6.9.6-5.2 4.6 1.6 6.8-6-3.7-6 3.7 1.6-6.8-5.2-4.6 6.9-.6z"/></svg>
     </button>
@@ -432,6 +459,7 @@ function buildCardHtml(p, weekKey, i){
     ${poster}
     <div class="who-row" data-who-for="${escapeHtml(key)}"></div>
     <div class="sources">${srcs}</div>
+    ${extraHtml}
   </article>`;
 }
 
@@ -478,7 +506,7 @@ function renderAllWeeks(weeks){
 
   document.getElementById("content").innerHTML = blocks || `<p class="state-msg">Todavía no hay semanas cargadas.</p>`;
 
-  document.querySelectorAll(".pick-btn").forEach(btn => {
+  document.querySelectorAll("#content .week-block .pick-btn").forEach(btn => {
     btn.addEventListener("click", () => togglePick({
       weekKey: btn.getAttribute("data-week"),
       title: btn.getAttribute("data-title"),
@@ -489,6 +517,12 @@ function renderAllWeeks(weeks){
 
   applyFilter();
   renderFamilyOnCards();
+
+  // Sugeridas: el mismo nodo de siempre (no pierde lo que se está escribiendo), después de la semana actual.
+  const firstWeek = document.querySelector("#content .week-block");
+  if(firstWeek) firstWeek.after(sugBlockEl); else document.getElementById("content").appendChild(sugBlockEl);
+  sugBlockEl.hidden = false;
+  renderSugeridas();
 }
 
 async function loadAllWeeks(){
@@ -778,6 +812,171 @@ function renderFamilySection(){
   }).join("");
 }
 
+// ---------- Sugeridas por la familia ----------
+// Cualquiera logueado escribe un título → sugerencias/{slug} en Firestore. Una GitHub Action
+// (cada hora) lo busca en TMDB/OMDb y deja la ficha en data/sugeridas.json.
+// Firestore manda en QUÉ sugerencias existen (si alguien borra la suya, desaparece ya);
+// el json pone los datos. La Action también descarta del json lo que ya no está en Firestore.
+const SUG_WEEK = "sugeridas"; // weekKey de las sugeridas en la watchlist (pickId = uid__sugeridas__slug)
+const sugBlockEl = document.getElementById("sug-block");
+let sugDocs = new Map();  // sugId -> {title, uid, name, addedAt}
+let sugLoaded = false;    // llegó el primer snapshot de Firestore
+let sugError = false;
+let sugJsonItems = [];    // items de data/sugeridas.json
+
+// Doc id: minúsculas, sin acentos, sin puntuación, espacios → guiones (máx. 120).
+function sugSlug(title){
+  return String(title || "").normalize("NFD").replace(/[̀-ͯ]/g, "").toLowerCase()
+    .replace(/[^a-z0-9\s-]/g, "").trim().replace(/[\s-]+/g, "-").replace(/^-+|-+$/g, "")
+    .slice(0, 120).replace(/-+$/, "");
+}
+
+async function loadSugeridasJson(){
+  try{
+    const res = await fetch("data/sugeridas.json", {cache:"no-store"});
+    const data = res.ok ? await res.json() : null; // 404 = la Action todavía no corrió → vacío
+    sugJsonItems = Array.isArray(data && data.items) ? data.items : [];
+  }catch(e){ console.error(e); } // error de red: queda lo que había
+}
+
+function subscribeSugerencias(){
+  onSnapshot(collection(db, "sugerencias"), snap => {
+    sugDocs = new Map();
+    snap.forEach(d => sugDocs.set(d.id, d.data()));
+    sugLoaded = true;
+    sugError = false;
+    renderSugeridas();
+  }, err => { console.error(err); sugError = true; renderSugeridas(); });
+}
+
+// Lista combinada, la más nueva primero. Sin Firestore (todavía o por error) se muestra lo del json.
+function sugItems(){
+  const byId = new Map(sugJsonItems.filter(it => it && it.sugId).map(it => [it.sugId, it]));
+  const ids = sugLoaded ? [...sugDocs.keys()] : [...byId.keys()];
+  return ids.map(id => {
+    const d = sugDocs.get(id) || {};
+    const j = byId.get(id) || null;
+    const ts = (d.addedAt && d.addedAt.toMillis) ? d.addedAt.toMillis()
+      : (d.uid ? Date.now() : (j && Date.parse(j.suggestedAt)) || 0); // recién creada: addedAt todavía null
+    return { sugId: id, title: d.title || (j && j.query) || id, uid: d.uid || null,
+      name: d.name || (j && j.suggestedBy) || "alguien", ts, json: j };
+  }).sort((a, b) => b.ts - a.ts);
+}
+
+function renderSugeridas(){
+  document.getElementById("sug-form").hidden = !UID;
+  for(const k of [...allPicksByKey.keys()]) if(k.startsWith(SUG_WEEK + "::")) allPicksByKey.delete(k);
+  const items = sugItems();
+  const okPicks = [];
+  const cards = items.map(it => {
+    const j = it.json;
+    const foot = `<div class="sug-foot"><span>sugerida por ${escapeHtml(it.name)}</span>${UID && it.uid === UID
+      ? `<button type="button" class="sug-del" data-sug="${escapeHtml(it.sugId)}" data-title="${escapeHtml(it.title)}">borrar</button>` : ""}</div>`;
+    if(j && j.status === "ok" && j.title){
+      okPicks.push(j);
+      allPicksByKey.set(pickKey(SUG_WEEK, j.title), { ...j, weekKey: SUG_WEEK });
+      return buildCardHtml(j, SUG_WEEK, -1, foot);
+    }
+    const st = j ? j.status : "";
+    const msg = st === "no_encontrado" ? "No encontré ese título — probá escribirlo distinto"
+      : st === "duplicado" ? "Ya estaba: " + (j.duplicateOf || "en otra semana")
+      : "Buscando datos… (se completa en menos de una hora)";
+    return `<article class="card sug-card" data-type="" data-genre="" data-duration-bucket="" data-sug-status="${escapeHtml(st || "buscando")}">
+      <div class="card-head"><div class="badge-row"><span class="badge outline">Sugerida</span></div></div>
+      <h2>${escapeHtml(it.title)}</h2>
+      <p class="sug-status${st === "no_encontrado" ? " warn" : ""}">${escapeHtml(msg)}</p>
+      ${foot}
+    </article>`;
+  });
+
+  const list = document.getElementById("sug-list");
+  if(!cards.length){
+    list.innerHTML = sugError && !sugLoaded
+      ? `<p class="state-msg">No se pudieron leer las sugerencias (¿faltan publicar las reglas nuevas de Firestore?).</p>`
+      : `<p class="state-msg">Todavía no hay sugerencias.${UID ? " Escribí un título arriba y la ficha se completa sola." : ""}</p>`;
+  } else {
+    list.innerHTML = `<div class="picks">${cards.join("")}</div>`;
+  }
+
+  list.querySelectorAll(".pick-btn").forEach(btn => {
+    btn.addEventListener("click", () => togglePick({
+      weekKey: btn.getAttribute("data-week"),
+      title: btn.getAttribute("data-title"),
+      venue: btn.getAttribute("data-venue"),
+      type: btn.getAttribute("data-type-val")
+    }, btn));
+  });
+  list.querySelectorAll(".sug-del").forEach(btn => {
+    btn.addEventListener("click", async () => {
+      if(!confirm(`¿Borrar tu sugerencia «${btn.getAttribute("data-title")}»?`)) return;
+      btn.disabled = true;
+      try{ await deleteDoc(doc(db, "sugerencias", btn.getAttribute("data-sug"))); }
+      catch(e){ console.error(e); btn.disabled = false; sugMsg("No se pudo borrar. Probá de nuevo.", true); }
+    });
+  });
+
+  populateGenreFilter(loadedWeeks.flatMap(w => w.picks || []).concat(okPicks));
+  applyFilter();
+  renderFamilyOnCards();
+  renderMyWatchlist();
+}
+
+function sugMsg(text, isErr){
+  const el = document.getElementById("sug-msg");
+  el.textContent = text;
+  el.classList.toggle("err", !!isErr);
+  el.hidden = !text;
+}
+
+// ¿Ya está en alguna semana o ya la sugirió alguien? Devuelve el aviso, o null.
+function findDuplicate(id){
+  for(const [wi, w] of loadedWeeks.entries()){
+    for(const p of (w.picks || [])){
+      if([p.title, p.original].some(t => t && sugSlug(t) === id)){
+        return `Ya está: ${wi === 0 ? "esta semana" : "Semana " + (w.weekLabel || w.weekKey)} («${p.title}»).`;
+      }
+    }
+  }
+  for(const it of sugItems()){
+    const j = it.json || {};
+    const names = [it.title, j.query, j.status === "ok" && j.title, j.status === "ok" && j.original];
+    if(it.sugId === id || names.some(t => t && sugSlug(t) === id)){
+      return it.uid && it.uid === UID ? `Ya la sugeriste vos («${it.title}»).` : `Ya lo sugirió ${it.name} («${it.title}»).`;
+    }
+  }
+  return null;
+}
+
+async function addSugerencia(){
+  if(!UID) return;
+  const input = document.getElementById("sug-input");
+  const btn = document.getElementById("sug-submit");
+  const title = input.value.trim().replace(/\s+/g, " ").slice(0, 120);
+  const id = sugSlug(title);
+  if(!id){ sugMsg("Escribí el título de una película.", true); return; }
+  const dup = findDuplicate(id);
+  if(dup){ sugMsg(dup, true); return; }
+  btn.disabled = true;
+  try{
+    // Doc id = slug: si ya existe, las reglas lo rechazan (no se permite update) → no hay duplicados.
+    await setDoc(doc(db, "sugerencias", id), { title, uid: UID, name: MY_NAME, addedAt: serverTimestamp() });
+    input.value = "";
+    sugMsg(`Listo: «${title}». La ficha se completa en menos de una hora.`);
+  }catch(err){
+    console.error(err);
+    let text = "No se pudo agregar. Probá de nuevo en un rato.";
+    if(err && err.code === "permission-denied"){
+      text = "Firestore no la aceptó: faltan publicar las reglas nuevas (sugerencias) en la consola de Firebase.";
+      try{
+        const snap = await getDoc(doc(db, "sugerencias", id));
+        if(snap.exists()) text = `Ya lo sugirió ${snap.data().name || "alguien"} («${snap.data().title || title}»).`;
+      }catch(e){}
+    }
+    sugMsg(text, true);
+  }
+  btn.disabled = false;
+}
+
 // ---------- Avisos de los jueves (Web Push con Firebase Cloud Messaging) ----------
 // Solo en la app instalada (en iPhone, Web Push existe únicamente así, iOS 16.4+).
 // El permiso se pide SOLO dentro del clic (requisito de iOS). El token de este
@@ -903,7 +1102,7 @@ let refreshTimer = null;
 function refreshWeeks(){
   clearTimeout(refreshTimer);
   refreshTimer = setTimeout(async () => {
-    const weeks = await loadAllWeeks();
+    const [weeks] = await Promise.all([loadAllWeeks(), loadSugeridasJson()]);
     if(weeks.length) renderAllWeeks(weeks);
   }, 400);
 }
@@ -916,10 +1115,16 @@ async function boot(){
   document.getElementById("filter-type").addEventListener("change", applyFilter);
   document.getElementById("filter-genre").addEventListener("change", applyFilter);
   document.getElementById("filter-duration").addEventListener("change", applyFilter);
+  document.getElementById("sug-form").addEventListener("submit", e => { e.preventDefault(); addSugerencia(); });
+  // Al volver a la app: pedir de nuevo sugeridas.json (si el SW tenía uno viejo, avisa y se redibuja).
+  document.addEventListener("visibilitychange", () => {
+    if(document.visibilityState === "visible") loadSugeridasJson().then(renderSugeridas);
+  });
 
   // cargar TODAS las semanas (actual + archivadas) y mostrarlas apiladas
-  const weeks = await loadAllWeeks();
+  const [weeks] = await Promise.all([loadAllWeeks(), loadSugeridasJson()]);
   renderAllWeeks(weeks.length ? weeks : [FALLBACK]);
+  subscribeSugerencias(); // lectura abierta: no depende del login
 
   // auth + watchlist
   const modalRoot = document.getElementById("name-modal-root");
@@ -944,6 +1149,7 @@ async function boot(){
       renderMyWatchlist();
       document.getElementById("who-am-i").textContent = "";
       logoutBtn.hidden = true;
+      renderSugeridas();
       paintPush();
       renderLoginForm();
       return;
@@ -957,6 +1163,7 @@ async function boot(){
     logoutBtn.hidden = false;
     showLegacyNotice = false;
     setDoc(doc(db, "members", UID), { lastSeen: new Date().toISOString() }, { merge: true }).catch(e => console.error(e));
+    renderSugeridas();
     await restorePending();
     subscribeMyPicks();
     subscribeFamily();

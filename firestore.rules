@@ -3,7 +3,16 @@ rules_version = '2';
 // Reglas de Firestore de "¿Qué vemos?" — COMPLETAS, para pegar tal cual en
 // Firebase → Firestore Database → Reglas → Publicar.
 //
-// Qué cambió respecto de lo anterior (2026-10-04):
+// Qué cambió respecto de lo anterior (2026-10-05):
+//  - NUEVO sugerencias/{sugId}: títulos que agrega la familia desde el cuadro
+//    "Agregar un título"; una GitHub Action los completa cada hora. Doc id = slug del
+//    título (minúsculas, sin acentos, guiones) → el mismo título no se puede cargar dos
+//    veces: crear sobre uno existente es un update, y update está prohibido. Lectura
+//    abierta; crea cualquiera logueado, a su nombre (uid), con título de 1 a 120
+//    caracteres; borra solo quien la sugirió.
+//  - members, picks y pushTokens: sin cambios.
+//
+// Antes (2026-10-04):
 //  - members y picks: mismo criterio de siempre (lectura abierta, escritura solo del
 //    propio uid). Escritas explícitas para que siga andando todo lo que hace el sitio:
 //    alta de members con {id, name, lastSeen}, el lastSeen con merge en cada ingreso,
@@ -42,6 +51,20 @@ service cloud.firestore {
       allow create: if signedIn() && request.resource.data.uid == request.auth.uid;
       allow update: if signedIn() && resource.data.uid == request.auth.uid
                     && request.resource.data.uid == request.auth.uid;
+      allow delete: if signedIn() && resource.data.uid == request.auth.uid;
+    }
+
+    // Sugerencias de la familia. Doc id = slug(título), p. ej. "toy-story-5".
+    match /sugerencias/{sugId} {
+      allow read: if true;
+      allow create: if signedIn()
+                    && request.resource.data.uid == request.auth.uid
+                    && request.resource.data.title is string
+                    && request.resource.data.title.trim().size() > 0
+                    && request.resource.data.title.size() <= 120
+                    && sugId.size() <= 120
+                    && sugId.matches('^[a-z0-9]+(-[a-z0-9]+)*$');
+      allow update: if false;
       allow delete: if signedIn() && resource.data.uid == request.auth.uid;
     }
   }

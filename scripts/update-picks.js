@@ -9,15 +9,12 @@ const path = require("path");
 
 const TMDB_KEY = process.env.TMDB_API_KEY;
 const OMDB_KEY = process.env.OMDB_API_KEY;
-if (!TMDB_KEY || !OMDB_KEY) {
-  console.error("Faltan TMDB_API_KEY y/o OMDB_API_KEY como variables de entorno.");
-  process.exit(1);
-}
 
 const DATA_DIR = path.join(__dirname, "..", "data");
 const CURRENT_PATH = path.join(DATA_DIR, "current.json");
 const ARCHIVE_DIR = path.join(DATA_DIR, "archive");
 const ARCHIVE_INDEX_PATH = path.join(DATA_DIR, "archive-index.json");
+const SUGERIDAS_PATH = path.join(DATA_DIR, "sugeridas.json");
 
 const TMDB_BASE = "https://api.themoviedb.org/3";
 const REGION = "AR";
@@ -72,8 +69,12 @@ async function getNowPlayingCine() {
 async function getTrendingPool() {
   const j = await tmdb("/trending/movie/week");
   const j2 = await tmdb("/movie/popular", { region: REGION, page: 1 });
+  // página 2 de popular: reserva por si el historial deja corto el pool de plataforma
+  const j3 = await tmdb("/movie/popular", { region: REGION, page: 2 });
   const seen = new Map();
-  for (const m of [...(j.results || []), ...(j2.results || [])]) seen.set(m.id, m);
+  for (const m of [...(j.results || []), ...(j2.results || []), ...(j3.results || [])]) {
+    if (!seen.has(m.id)) seen.set(m.id, m);
+  }
   return [...seen.values()];
 }
 
@@ -162,23 +163,101 @@ async function buildPick(movieId, type, venueOverride) {
     lbCount: formatVotes(details.vote_count) + (details.vote_count ? " votos" : ""),
     posterUrl: details.poster_path ? `https://image.tmdb.org/t/p/w500${details.poster_path}` : "",
     sources,
+    tmdbId: Number(movieId),
     _score: score10 || 0,
   };
 }
 
+// --- historial: lo ya recomendado no se repite ----------------------------
+
+function readJson(file, fallback) {
+  try { return JSON.parse(fs.readFileSync(file, "utf8")); } catch (e) { return fallback; }
+}
+
+// minúsculas, sin acentos, sin puntuación
+function normTitle(t) {
+  return String(t || "")
+    .normalize("NFD").replace(/[\u0300-\u036f]/g, "")
+    .toLowerCase().replace(/[^a-z0-9]+/g, " ").trim();
+}
+
+// tmdbId del pick; los viejos no lo tienen y se saca del link de TMDB en sources
+function pickTmdbId(p) {
+  if (p.tmdbId) return Number(p.tmdbId);
+  for (const s of p.sources || []) {
+    const m = String(s.url || "").match(/themoviedb\.org\/movie\/(\d+)/);
+    if (m) return Number(m[1]);
+  }
+  return null;
+}
+
+// Semanas publicadas: las archivadas (según archive-index.json) + current.json.
+function loadWeeks() {
+  const weeks = [];
+  for (const key of readJson(ARCHIVE_INDEX_PATH, [])) {
+    const w = readJson(path.join(ARCHIVE_DIR, `${key}.json`), null);
+    if (w) weeks.push(w);
+  }
+  const cur = readJson(CURRENT_PATH, null);
+  if (cur) weeks.push(cur);
+  return weeks;
+}
+
+// ids y títulos ya usados. Si current.json es la misma semana que se regenera, no cuenta.
+function loadUsed(weekKey) {
+  const used = { ids: new Set(), titles: new Set() };
+  const add = (p) => {
+    const id = pickTmdbId(p);
+    if (id) { used.ids.add(id); return; }
+    for (const t of [p.title, p.original]) if (normTitle(t)) used.titles.add(normTitle(t));
+  };
+  for (const w of loadWeeks()) {
+    if (w.weekKey === weekKey) continue;
+    for (const p of w.picks || []) add(p);
+  }
+  for (const it of readJson(SUGERIDAS_PATH, { items: [] }).items || []) add(it);
+  return used;
+}
+
+function isUsed(used, m) {
+  return used.ids.has(Number(m.id)) ||
+    used.titles.has(normTitle(m.title)) || used.titles.has(normTitle(m.original_title));
+}
+
+// --- semana anclada al jueves --------------------------------------------
+
+// Último jueves <= ahora, en hora Argentina (UTC-3, sin horario de verano).
+// Devuelve la fecha local a medianoche, que es lo que esperan isoWeekKey / weekLabelFor.
+function thursdayAnchor(now = new Date()) {
+  const art = new Date(now.getTime() - 3 * 3600 * 1000);
+  const back = (art.getUTCDay() - 4 + 7) % 7;
+  return new Date(art.getUTCFullYear(), art.getUTCMonth(), art.getUTCDate() - back);
+}
+
 // --- main ------------------------------------------------------------------
 
-async function main() {
+async function main(now = new Date()) {
+  if (!TMDB_KEY || !OMDB_KEY) {
+    console.error("Faltan TMDB_API_KEY y/o OMDB_API_KEY como variables de entorno.");
+    process.exit(1);
+  }
+
+  // weekKey / weekLabel salen del jueves de la semana, no del día de la corrida
+  const anchor = thursdayAnchor(now);
+  const weekKey = isoWeekKey(anchor);
+  const weekLabel = weekLabelFor(anchor);
+  const used = loadUsed(weekKey);
+
   await loadGenres();
 
-  // 1) candidatos de cine
+  // 1) candidatos de cine (sin lo ya recomendado)
   const nowPlaying = await getNowPlayingCine();
-  const cineCandidates = nowPlaying.slice(0, 10);
+  const cineCandidates = nowPlaying.filter((m) => !isUsed(used, m)).slice(0, 10);
 
   // 2) candidatos de plataforma: del pool de trending/popular, los que tengan flatrate en AR
   const pool = await getTrendingPool();
   const platCandidates = [];
-  for (const m of pool.slice(0, 25)) {
+  for (const m of pool.filter((m) => !isUsed(used, m))) {
     const prov = await getProvidersAR(m.id);
     if (prov.flatrate.length) {
       platCandidates.push({ movie: m, venue: prov.flatrate[0].provider_name });
@@ -205,7 +284,9 @@ async function main() {
     chosenPlat.push(platPicks[chosenPlat.length]);
   }
   const remainingSlots = Math.max(0, 4 - chosenPlat.length);
-  const chosenCine = cinePicks.slice(0, Math.min(remainingSlots, 2));
+  // una peli que está en cines y en plataforma a la vez no sale dos veces
+  const platIds = new Set(chosenPlat.map((p) => p.tmdbId));
+  const chosenCine = cinePicks.filter((p) => !platIds.has(p.tmdbId)).slice(0, Math.min(remainingSlots, 2));
 
   const picks = [...chosenPlat, ...chosenCine].map((p) => {
     const { _score, ...rest } = p;
@@ -217,11 +298,7 @@ async function main() {
     process.exit(1);
   }
 
-  // 5) calcular weekKey / weekLabel de esta semana
-  const now = new Date();
-  const weekKey = isoWeekKey(now);
-  const weekLabel = weekLabelFor(now);
-
+  // 5) armar la semana
   const newData = {
     weekKey,
     weekLabel,
@@ -266,4 +343,12 @@ function weekLabelFor(d) {
   return `${fmt(start)}–${fmt(end)}`;
 }
 
-main().catch((e) => { console.error(e); process.exit(1); });
+if (require.main === module) {
+  main().catch((e) => { console.error(e); process.exit(1); });
+}
+
+module.exports = {
+  tmdb, loadGenres, getNowPlayingCine, getProvidersAR, buildPick,
+  normTitle, pickTmdbId, loadWeeks, loadUsed, isUsed,
+  thursdayAnchor, isoWeekKey, weekLabelFor, main,
+};

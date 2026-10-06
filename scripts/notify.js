@@ -80,11 +80,12 @@ function parseTokenDocs(documents) {
   return out;
 }
 
-async function listTokens(accessToken) {
+// Todos los documentos de una colección (paginado).
+async function listDocs(accessToken, collection) {
   const docs = [];
   let pageToken = "";
   do {
-    const url = new URL(`${FIRESTORE}/pushTokens`);
+    const url = new URL(`${FIRESTORE}/${collection}`);
     url.searchParams.set("pageSize", "300");
     if (pageToken) url.searchParams.set("pageToken", pageToken);
     const res = await fetch(url, { headers: { Authorization: `Bearer ${accessToken}` } });
@@ -93,7 +94,11 @@ async function listTokens(accessToken) {
     docs.push(...(j.documents || []));
     pageToken = j.nextPageToken || "";
   } while (pageToken);
-  return parseTokenDocs(docs);
+  return docs;
+}
+
+async function listTokens(accessToken) {
+  return parseTokenDocs(await listDocs(accessToken, "pushTokens"));
 }
 
 async function deleteDoc(accessToken, docName) {
@@ -214,4 +219,4 @@ if (require.main === module) {
   );
 }
 
-module.exports = { signJwt, parseTokenDocs, buildNotification, buildMessage, classifySend, mask, main };
+module.exports = { signJwt, getAccessToken, listDocs, parseTokenDocs, buildNotification, buildMessage, classifySend, mask, main };
