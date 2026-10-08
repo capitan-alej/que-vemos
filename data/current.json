@@ -1,111 +1,111 @@
 {
-  "weekKey": "2026-W40",
-  "weekLabel": "1 oct–7 oct",
-  "generatedAt": "2026-10-06T03:01:30.780Z",
+  "weekKey": "2026-W41",
+  "weekLabel": "8 oct–14 oct",
+  "generatedAt": "2026-10-08T12:22:21.176Z",
   "picks": [
     {
-      "title": "Proyecto Salvación",
-      "original": "Project Hail Mary",
-      "director": "Phil Lord, Christopher Miller",
+      "title": "Zootrópolis 2",
+      "original": "Zootopia 2",
+      "director": "Jared Bush, Byron Howard",
       "type": "plataforma",
-      "genre": "Ciencia ficción",
-      "duration": 157,
-      "venue": "Amazon Prime Video",
-      "criticLabel": "Puntaje combinado",
-      "criticScore": "TMDB 8.6 · RT 95% · Metascore 77 · 8.1k votos",
-      "scoreLabel": "Puntaje combinado",
-      "lbScore": 4.26,
-      "lbCount": "8.1k votos",
-      "posterUrl": "https://image.tmdb.org/t/p/w500/7lwOTxajURKEWO6gI370NTrVdBO.jpg",
-      "sources": [
-        {
-          "label": "TMDB",
-          "url": "https://www.themoviedb.org/movie/687163"
-        },
-        {
-          "label": "IMDb",
-          "url": "https://www.imdb.com/title/tt12042730/"
-        }
-      ],
-      "tmdbId": 687163
-    },
-    {
-      "title": "Vengadores: Endgame",
-      "original": "Avengers: Endgame",
-      "director": "Anthony Russo, Joe Russo",
-      "type": "plataforma",
-      "genre": "Aventura",
-      "duration": 181,
+      "genre": "Animación",
+      "duration": 107,
       "venue": "Disney Plus",
       "criticLabel": "Puntaje combinado",
-      "criticScore": "TMDB 8.2 · RT 94% · Metascore 78 · 28.9k votos",
+      "criticScore": "TMDB 7.7 · RT 92% · Metascore 73 · 3.5k votos",
       "scoreLabel": "Puntaje combinado",
-      "lbScore": 4.21,
-      "lbCount": "28.9k votos",
-      "posterUrl": "https://image.tmdb.org/t/p/w500/br6krBFpaYmCSglLBWRuhui7tPc.jpg",
+      "lbScore": 3.94,
+      "lbCount": "3.5k votos",
+      "posterUrl": "https://image.tmdb.org/t/p/w500/4fRdfQPjHiuDSkzaxFAV44k7Iem.jpg",
       "sources": [
         {
           "label": "TMDB",
-          "url": "https://www.themoviedb.org/movie/299534"
+          "url": "https://www.themoviedb.org/movie/1084242"
         },
         {
           "label": "IMDb",
-          "url": "https://www.imdb.com/title/tt4154796/"
+          "url": "https://www.imdb.com/title/tt26443597/"
         }
       ],
-      "tmdbId": 299534
+      "tmdbId": 1084242
     },
     {
-      "title": "Las cartas de la vida",
-      "original": "Doing Life",
-      "director": "Tyler Perry",
-      "type": "plataforma",
-      "genre": "Drama",
-      "duration": 112,
-      "venue": "Netflix",
-      "criticLabel": "Puntaje combinado",
-      "criticScore": "TMDB 7.2 · 59 votos",
-      "scoreLabel": "Puntaje combinado",
-      "lbScore": 3.61,
-      "lbCount": "59 votos",
-      "posterUrl": "https://image.tmdb.org/t/p/w500/oGZkPxg5NqALN7OJbm9DuPOIVEJ.jpg",
-      "sources": [
-        {
-          "label": "TMDB",
-          "url": "https://www.themoviedb.org/movie/1458857"
-        },
-        {
-          "label": "IMDb",
-          "url": "https://www.imdb.com/title/tt36429458/"
-        }
-      ],
-      "tmdbId": 1458857
-    },
-    {
-      "title": "Coyote vs. Acme",
+      "title": "No dejes a los niños solos",
       "original": "",
-      "director": "David Green",
+      "director": "Emilio Portes",
+      "type": "plataforma",
+      "genre": "Terror",
+      "duration": 97,
+      "venue": "VIX ",
+      "criticLabel": "Puntaje combinado",
+      "criticScore": "TMDB 6.9 · 99 votos",
+      "scoreLabel": "Puntaje combinado",
+      "lbScore": 3.21,
+      "lbCount": "99 votos",
+      "posterUrl": "https://image.tmdb.org/t/p/w500/w01yTCLE2nCSj8IMxUjrc8vIwQ9.jpg",
+      "sources": [
+        {
+          "label": "TMDB",
+          "url": "https://www.themoviedb.org/movie/1339274"
+        },
+        {
+          "label": "IMDb",
+          "url": "https://www.imdb.com/title/tt27871792/"
+        }
+      ],
+      "tmdbId": 1339274
+    },
+    {
+      "title": "No confíes en nadie",
+      "original": "Before I Go to Sleep",
+      "director": "Rowan Joffé",
+      "type": "plataforma",
+      "genre": "Suspense",
+      "duration": 92,
+      "venue": "Amazon Prime Video",
+      "criticLabel": "Puntaje combinado",
+      "criticScore": "TMDB 6.5 · RT 37% · Metascore 41 · 2.2k votos",
+      "scoreLabel": "Puntaje combinado",
+      "lbScore": 2.62,
+      "lbCount": "2.2k votos",
+      "posterUrl": "https://image.tmdb.org/t/p/w500/89btN5XPSFzMBWvCkpMsw9sAMr2.jpg",
+      "sources": [
+        {
+          "label": "TMDB",
+          "url": "https://www.themoviedb.org/movie/204922"
+        },
+        {
+          "label": "IMDb",
+          "url": "https://www.imdb.com/title/tt1726592/"
+        }
+      ],
+      "tmdbId": 204922
+    },
+    {
+      "title": "En el corazón de la bestia",
+      "original": "Heart of the Beast",
+      "director": "David Ayer",
       "type": "cine",
-      "genre": "Comedia",
-      "duration": 103,
+      "genre": "Aventura",
+      "duration": 101,
       "venue": "Cines (AR)",
       "criticLabel": "Puntaje combinado",
-      "criticScore": "TMDB 7.5 · RT 96% · Metascore 77 · 676 votos",
+      "criticScore": "TMDB 7.4 · RT 85% · 250 votos",
       "scoreLabel": "Puntaje combinado",
-      "lbScore": 4.04,
-      "lbCount": "676 votos",
-      "posterUrl": "https://image.tmdb.org/t/p/w500/vWFz9spZFBkJvForuYrKK2ntOLB.jpg",
+      "lbScore": 3.91,
+      "lbCount": "250 votos",
+      "posterUrl": "https://image.tmdb.org/t/p/w500/h9Ql2vsltCOuf44c28nInxjzL2m.jpg",
       "sources": [
         {
           "label": "TMDB",
-          "url": "https://www.themoviedb.org/movie/1204680"
+          "url": "https://www.themoviedb.org/movie/1263337"
         },
         {
           "label": "IMDb",
-          "url": "https://www.imdb.com/title/tt1756855/"
+          "url": "https://www.imdb.com/title/tt7526136/"
         }
       ],
-      "tmdbId": 1204680
+      "tmdbId": 1263337
     }
   ]
 }

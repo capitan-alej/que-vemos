@@ -1,0 +1,111 @@
+{
+  "weekKey": "2026-W40",
+  "weekLabel": "1 oct–7 oct",
+  "generatedAt": "2026-10-06T03:01:30.780Z",
+  "picks": [
+    {
+      "title": "Proyecto Salvación",
+      "original": "Project Hail Mary",
+      "director": "Phil Lord, Christopher Miller",
+      "type": "plataforma",
+      "genre": "Ciencia ficción",
+      "duration": 157,
+      "venue": "Amazon Prime Video",
+      "criticLabel": "Puntaje combinado",
+      "criticScore": "TMDB 8.6 · RT 95% · Metascore 77 · 8.1k votos",
+      "scoreLabel": "Puntaje combinado",
+      "lbScore": 4.26,
+      "lbCount": "8.1k votos",
+      "posterUrl": "https://image.tmdb.org/t/p/w500/7lwOTxajURKEWO6gI370NTrVdBO.jpg",
+      "sources": [
+        {
+          "label": "TMDB",
+          "url": "https://www.themoviedb.org/movie/687163"
+        },
+        {
+          "label": "IMDb",
+          "url": "https://www.imdb.com/title/tt12042730/"
+        }
+      ],
+      "tmdbId": 687163
+    },
+    {
+      "title": "Vengadores: Endgame",
+      "original": "Avengers: Endgame",
+      "director": "Anthony Russo, Joe Russo",
+      "type": "plataforma",
+      "genre": "Aventura",
+      "duration": 181,
+      "venue": "Disney Plus",
+      "criticLabel": "Puntaje combinado",
+      "criticScore": "TMDB 8.2 · RT 94% · Metascore 78 · 28.9k votos",
+      "scoreLabel": "Puntaje combinado",
+      "lbScore": 4.21,
+      "lbCount": "28.9k votos",
+      "posterUrl": "https://image.tmdb.org/t/p/w500/br6krBFpaYmCSglLBWRuhui7tPc.jpg",
+      "sources": [
+        {
+          "label": "TMDB",
+          "url": "https://www.themoviedb.org/movie/299534"
+        },
+        {
+          "label": "IMDb",
+          "url": "https://www.imdb.com/title/tt4154796/"
+        }
+      ],
+      "tmdbId": 299534
+    },
+    {
+      "title": "Las cartas de la vida",
+      "original": "Doing Life",
+      "director": "Tyler Perry",
+      "type": "plataforma",
+      "genre": "Drama",
+      "duration": 112,
+      "venue": "Netflix",
+      "criticLabel": "Puntaje combinado",
+      "criticScore": "TMDB 7.2 · 59 votos",
+      "scoreLabel": "Puntaje combinado",
+      "lbScore": 3.61,
+      "lbCount": "59 votos",
+      "posterUrl": "https://image.tmdb.org/t/p/w500/oGZkPxg5NqALN7OJbm9DuPOIVEJ.jpg",
+      "sources": [
+        {
+          "label": "TMDB",
+          "url": "https://www.themoviedb.org/movie/1458857"
+        },
+        {
+          "label": "IMDb",
+          "url": "https://www.imdb.com/title/tt36429458/"
+        }
+      ],
+      "tmdbId": 1458857
+    },
+    {
+      "title": "Coyote vs. Acme",
+      "original": "",
+      "director": "David Green",
+      "type": "cine",
+      "genre": "Comedia",
+      "duration": 103,
+      "venue": "Cines (AR)",
+      "criticLabel": "Puntaje combinado",
+      "criticScore": "TMDB 7.5 · RT 96% · Metascore 77 · 676 votos",
+      "scoreLabel": "Puntaje combinado",
+      "lbScore": 4.04,
+      "lbCount": "676 votos",
+      "posterUrl": "https://image.tmdb.org/t/p/w500/vWFz9spZFBkJvForuYrKK2ntOLB.jpg",
+      "sources": [
+        {
+          "label": "TMDB",
+          "url": "https://www.themoviedb.org/movie/1204680"
+        },
+        {
+          "label": "IMDb",
+          "url": "https://www.imdb.com/title/tt1756855/"
+        }
+      ],
+      "tmdbId": 1204680
+    }
+  ]
+}
