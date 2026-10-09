@@ -1,0 +1,191 @@
+{
+  "updatedAt": "2026-10-09T01:10:23.457Z",
+  "items": [
+    {
+      "sugId": "1922",
+      "suggestedBy": "Leia 🪩🩵",
+      "suggestedAt": "2026-10-09T00:46:09.073Z",
+      "query": "1922",
+      "status": "ok",
+      "title": "1922",
+      "original": "",
+      "director": "Zak Hilditch",
+      "type": "plataforma",
+      "genre": "Terror",
+      "duration": 101,
+      "venue": "Netflix",
+      "criticLabel": "Puntaje combinado",
+      "criticScore": "TMDB 5.9 · RT 92% · Metascore 70 · 3k votos",
+      "scoreLabel": "Puntaje combinado",
+      "lbScore": 3.5,
+      "lbCount": "3k votos",
+      "posterUrl": "https://image.tmdb.org/t/p/w500/1wj8hLGHAP9goBvvJ45TIK2RjsA.jpg",
+      "sources": [
+        {
+          "label": "TMDB",
+          "url": "https://www.themoviedb.org/movie/452507"
+        },
+        {
+          "label": "IMDb",
+          "url": "https://www.imdb.com/title/tt6214928/"
+        }
+      ],
+      "tmdbId": 452507
+    },
+    {
+      "sugId": "verity",
+      "suggestedBy": "Leia 🪩🩵",
+      "suggestedAt": "2026-10-09T00:46:38.666Z",
+      "query": "verity",
+      "status": "ok",
+      "title": "Verity. La sombra de un engaño",
+      "original": "Verity",
+      "director": "Michael Showalter",
+      "type": "cine",
+      "genre": "Misterio",
+      "duration": 114,
+      "venue": "Cines (AR)",
+      "criticLabel": "Puntaje combinado",
+      "criticScore": "TMDB 6.5 · 136 votos",
+      "scoreLabel": "Puntaje combinado",
+      "lbScore": 3.24,
+      "lbCount": "136 votos",
+      "posterUrl": "https://image.tmdb.org/t/p/w500/t1rkXeUMJzsCS142ctqzbz4zGq7.jpg",
+      "sources": [
+        {
+          "label": "TMDB",
+          "url": "https://www.themoviedb.org/movie/1283515"
+        },
+        {
+          "label": "IMDb",
+          "url": "https://www.imdb.com/title/tt32261958/"
+        }
+      ],
+      "tmdbId": 1283515
+    },
+    {
+      "sugId": "backrooms",
+      "suggestedBy": "Leia 🪩🩵",
+      "suggestedAt": "2026-10-09T00:46:45.230Z",
+      "query": "backrooms",
+      "status": "ok",
+      "title": "Backrooms",
+      "original": "",
+      "director": "Kane Parsons",
+      "type": "cine",
+      "genre": "Terror",
+      "duration": 111,
+      "venue": "Cines (AR)",
+      "criticLabel": "Puntaje combinado",
+      "criticScore": "TMDB 7.0 · RT 86% · Metascore 76 · 3.6k votos",
+      "scoreLabel": "Puntaje combinado",
+      "lbScore": 3.73,
+      "lbCount": "3.6k votos",
+      "posterUrl": "https://image.tmdb.org/t/p/w500/ur2yYTVGPkEDmLdoQ1Obm2RKXuU.jpg",
+      "sources": [
+        {
+          "label": "TMDB",
+          "url": "https://www.themoviedb.org/movie/1083381"
+        },
+        {
+          "label": "IMDb",
+          "url": "https://www.imdb.com/title/tt26657236/"
+        }
+      ],
+      "tmdbId": 1083381
+    },
+    {
+      "sugId": "primetime",
+      "suggestedBy": "Leia 🪩🩵",
+      "suggestedAt": "2026-10-09T00:47:05.067Z",
+      "query": "primetime",
+      "status": "ok",
+      "title": "Primetime",
+      "original": "",
+      "director": "Lance Oppenheim",
+      "type": "otra",
+      "genre": "Drama",
+      "duration": 110,
+      "venue": "Sin plataforma en AR",
+      "criticLabel": "Puntaje combinado",
+      "criticScore": "TMDB 6.8 · RT 86% · Metascore 75 · 102 votos",
+      "scoreLabel": "Puntaje combinado",
+      "lbScore": 3.92,
+      "lbCount": "102 votos",
+      "posterUrl": "https://image.tmdb.org/t/p/w500/lmrulvLbmaejTix1YaMxo1oGhH1.jpg",
+      "sources": [
+        {
+          "label": "TMDB",
+          "url": "https://www.themoviedb.org/movie/1375441"
+        },
+        {
+          "label": "IMDb",
+          "url": "https://www.imdb.com/title/tt34206385/"
+        }
+      ],
+      "tmdbId": 1375441
+    },
+    {
+      "sugId": "spiderman-brand-new-day",
+      "suggestedBy": "Leia 🪩🩵",
+      "suggestedAt": "2026-10-09T00:48:04.429Z",
+      "query": "spiderman: brand new day",
+      "status": "ok",
+      "title": "Spider-Man: Brand New Day",
+      "original": "",
+      "director": "Destin Daniel Cretton",
+      "type": "otra",
+      "genre": "Ciencia ficción",
+      "duration": 145,
+      "venue": "Sin plataforma en AR",
+      "criticLabel": "Puntaje combinado",
+      "criticScore": "TMDB 8.3 · RT 90% · Metascore 66 · 4.3k votos",
+      "scoreLabel": "Puntaje combinado",
+      "lbScore": 4.01,
+      "lbCount": "4.3k votos",
+      "posterUrl": "https://image.tmdb.org/t/p/w500/9g0sEFhmvmK4nGhXj8DHuv2noYI.jpg",
+      "sources": [
+        {
+          "label": "TMDB",
+          "url": "https://www.themoviedb.org/movie/969681"
+        },
+        {
+          "label": "IMDb",
+          "url": "https://www.imdb.com/title/tt22084616/"
+        }
+      ],
+      "tmdbId": 969681
+    },
+    {
+      "sugId": "the-dog-stars",
+      "suggestedBy": "Leia 🪩🩵",
+      "suggestedAt": "2026-10-09T00:48:42.438Z",
+      "query": "the dog stars",
+      "status": "ok",
+      "title": "La constelación del perro",
+      "original": "The Dog Stars",
+      "director": "Ridley Scott",
+      "type": "otra",
+      "genre": "Ciencia ficción",
+      "duration": 119,
+      "venue": "Sin plataforma en AR",
+      "criticLabel": "Puntaje combinado",
+      "criticScore": "TMDB 6.6 · RT 41% · Metascore 49 · 307 votos",
+      "scoreLabel": "Puntaje combinado",
+      "lbScore": 2.76,
+      "lbCount": "307 votos",
+      "posterUrl": "https://image.tmdb.org/t/p/w500/vbCb1yHXtXym4V1c420MSasbyyP.jpg",
+      "sources": [
+        {
+          "label": "TMDB",
+          "url": "https://www.themoviedb.org/movie/1384216"
+        },
+        {
+          "label": "IMDb",
+          "url": "https://www.imdb.com/title/tt21285562/"
+        }
+      ],
+      "tmdbId": 1384216
+    }
+  ]
+}
