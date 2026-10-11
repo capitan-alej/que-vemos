@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-11T00:03:37.267Z",
+  "updatedAt": "2026-10-11T20:02:42.581Z",
   "items": [
     {
       "sugId": "1922",
@@ -186,37 +186,6 @@
         }
       ],
       "tmdbId": 1384216
-    },
-    {
-      "sugId": "lady",
-      "suggestedBy": "Narda",
-      "suggestedAt": "2026-10-10T23:21:40.186Z",
-      "query": "Lady",
-      "status": "ok",
-      "title": "Lady Bird",
-      "original": "",
-      "director": "Greta Gerwig",
-      "type": "plataforma",
-      "genre": "Drama",
-      "duration": 94,
-      "venue": "MovistarTV",
-      "criticLabel": "Puntaje combinado",
-      "criticScore": "TMDB 7.2 · RT 99% · Metascore 93 · 9.2k votos",
-      "scoreLabel": "Puntaje combinado",
-      "lbScore": 4.19,
-      "lbCount": "9.2k votos",
-      "posterUrl": "https://image.tmdb.org/t/p/w500/kfst6DxzGXbdibQPawxQSSuDh09.jpg",
-      "sources": [
-        {
-          "label": "TMDB",
-          "url": "https://www.themoviedb.org/movie/391713"
-        },
-        {
-          "label": "IMDb",
-          "url": "https://www.imdb.com/title/tt4925292/"
-        }
-      ],
-      "tmdbId": 391713
     },
     {
       "sugId": "the-invite",
