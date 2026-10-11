@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-09T01:10:23.457Z",
+  "updatedAt": "2026-10-11T00:03:37.267Z",
   "items": [
     {
       "sugId": "1922",
@@ -186,6 +186,157 @@
         }
       ],
       "tmdbId": 1384216
+    },
+    {
+      "sugId": "lady",
+      "suggestedBy": "Narda",
+      "suggestedAt": "2026-10-10T23:21:40.186Z",
+      "query": "Lady",
+      "status": "ok",
+      "title": "Lady Bird",
+      "original": "",
+      "director": "Greta Gerwig",
+      "type": "plataforma",
+      "genre": "Drama",
+      "duration": 94,
+      "venue": "MovistarTV",
+      "criticLabel": "Puntaje combinado",
+      "criticScore": "TMDB 7.2 · RT 99% · Metascore 93 · 9.2k votos",
+      "scoreLabel": "Puntaje combinado",
+      "lbScore": 4.19,
+      "lbCount": "9.2k votos",
+      "posterUrl": "https://image.tmdb.org/t/p/w500/kfst6DxzGXbdibQPawxQSSuDh09.jpg",
+      "sources": [
+        {
+          "label": "TMDB",
+          "url": "https://www.themoviedb.org/movie/391713"
+        },
+        {
+          "label": "IMDb",
+          "url": "https://www.imdb.com/title/tt4925292/"
+        }
+      ],
+      "tmdbId": 391713
+    },
+    {
+      "sugId": "the-invite",
+      "suggestedBy": "Narda",
+      "suggestedAt": "2026-10-10T23:22:31.298Z",
+      "query": "The invite",
+      "status": "ok",
+      "title": "La invitación",
+      "original": "The Invite",
+      "director": "Olivia Wilde",
+      "type": "otra",
+      "genre": "Comedia",
+      "duration": 107,
+      "venue": "Sin plataforma en AR",
+      "criticLabel": "Puntaje combinado",
+      "criticScore": "TMDB 7.2 · RT 96% · Metascore 82 · 762 votos",
+      "scoreLabel": "Puntaje combinado",
+      "lbScore": 4.03,
+      "lbCount": "762 votos",
+      "posterUrl": "https://image.tmdb.org/t/p/w500/21JnfyCARiRkms9AZHtTXiZKbIj.jpg",
+      "sources": [
+        {
+          "label": "TMDB",
+          "url": "https://www.themoviedb.org/movie/950028"
+        },
+        {
+          "label": "IMDb",
+          "url": "https://www.imdb.com/title/tt14173636/"
+        }
+      ],
+      "tmdbId": 950028
+    },
+    {
+      "sugId": "sentimental-value",
+      "suggestedBy": "Narda",
+      "suggestedAt": "2026-10-10T23:23:09.776Z",
+      "query": "Sentimental value",
+      "status": "ok",
+      "title": "Sentimental Value",
+      "original": "",
+      "director": "Steve Collins",
+      "type": "otra",
+      "genre": "Comedia",
+      "duration": 13,
+      "venue": "Sin plataforma en AR",
+      "criticLabel": "Puntaje combinado",
+      "criticScore": "0 votos",
+      "scoreLabel": "Puntaje combinado",
+      "lbScore": 0,
+      "lbCount": "0",
+      "posterUrl": "https://image.tmdb.org/t/p/w500/9PpGfbepwpX7BiHoyyjZgC7bEp9.jpg",
+      "sources": [
+        {
+          "label": "TMDB",
+          "url": "https://www.themoviedb.org/movie/1105422"
+        }
+      ],
+      "tmdbId": 1105422
+    },
+    {
+      "sugId": "rebeca",
+      "suggestedBy": "Narda",
+      "suggestedAt": "2026-10-10T23:24:15.007Z",
+      "query": "Rebeca",
+      "status": "ok",
+      "title": "Rebeca",
+      "original": "Rebecca",
+      "director": "Alfred Hitchcock",
+      "type": "otra",
+      "genre": "Misterio",
+      "duration": 130,
+      "venue": "Sin plataforma en AR",
+      "criticLabel": "Puntaje combinado",
+      "criticScore": "TMDB 7.9 · RT 98% · Metascore 86 · 2k votos",
+      "scoreLabel": "Puntaje combinado",
+      "lbScore": 4.26,
+      "lbCount": "2k votos",
+      "posterUrl": "https://image.tmdb.org/t/p/w500/mJV2zrflpTaAcFgfgQc2VJboZ0Y.jpg",
+      "sources": [
+        {
+          "label": "TMDB",
+          "url": "https://www.themoviedb.org/movie/223"
+        },
+        {
+          "label": "IMDb",
+          "url": "https://www.imdb.com/title/tt0032976/"
+        }
+      ],
+      "tmdbId": 223
+    },
+    {
+      "sugId": "coherence",
+      "suggestedBy": "Narda",
+      "suggestedAt": "2026-10-10T23:25:07.229Z",
+      "query": "Coherence",
+      "status": "ok",
+      "title": "Coherence",
+      "original": "",
+      "director": "James Ward Byrkit",
+      "type": "otra",
+      "genre": "Suspense",
+      "duration": 89,
+      "venue": "Sin plataforma en AR",
+      "criticLabel": "Puntaje combinado",
+      "criticScore": "TMDB 7.2 · RT 89% · Metascore 65 · 3.7k votos",
+      "scoreLabel": "Puntaje combinado",
+      "lbScore": 3.71,
+      "lbCount": "3.7k votos",
+      "posterUrl": "https://image.tmdb.org/t/p/w500/yZP8tg2yX0RGqFwknfCYWuy6bpp.jpg",
+      "sources": [
+        {
+          "label": "TMDB",
+          "url": "https://www.themoviedb.org/movie/220289"
+        },
+        {
+          "label": "IMDb",
+          "url": "https://www.imdb.com/title/tt2866360/"
+        }
+      ],
+      "tmdbId": 220289
     }
   ]
 }
