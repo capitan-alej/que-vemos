@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-11T20:02:42.581Z",
+  "updatedAt": "2026-10-13T12:08:17.630Z",
   "items": [
     {
       "sugId": "1922",
@@ -306,6 +306,68 @@
         }
       ],
       "tmdbId": 220289
+    },
+    {
+      "sugId": "wife-dog",
+      "suggestedBy": "Narda",
+      "suggestedAt": "2026-10-13T11:38:52.910Z",
+      "query": "Wife & Dog",
+      "status": "ok",
+      "title": "Wife & Dog",
+      "original": "",
+      "director": "Guy Ritchie",
+      "type": "otra",
+      "genre": "Drama",
+      "duration": null,
+      "venue": "Sin plataforma en AR",
+      "criticLabel": "Puntaje combinado",
+      "criticScore": "0 votos",
+      "scoreLabel": "Puntaje combinado",
+      "lbScore": 0,
+      "lbCount": "0",
+      "posterUrl": "https://image.tmdb.org/t/p/w500/eoyLMVeP1cuQRTU74W5NAFJBvsu.jpg",
+      "sources": [
+        {
+          "label": "TMDB",
+          "url": "https://www.themoviedb.org/movie/1290000"
+        },
+        {
+          "label": "IMDb",
+          "url": "https://www.imdb.com/title/tt32359344/"
+        }
+      ],
+      "tmdbId": 1290000
+    },
+    {
+      "sugId": "lady",
+      "suggestedBy": "Narda",
+      "suggestedAt": "2026-10-13T11:39:01.230Z",
+      "query": "Lady",
+      "status": "ok",
+      "title": "Lady Bird",
+      "original": "",
+      "director": "Greta Gerwig",
+      "type": "plataforma",
+      "genre": "Drama",
+      "duration": 94,
+      "venue": "MovistarTV",
+      "criticLabel": "Puntaje combinado",
+      "criticScore": "TMDB 7.2 · RT 99% · Metascore 93 · 9.2k votos",
+      "scoreLabel": "Puntaje combinado",
+      "lbScore": 4.19,
+      "lbCount": "9.2k votos",
+      "posterUrl": "https://image.tmdb.org/t/p/w500/kfst6DxzGXbdibQPawxQSSuDh09.jpg",
+      "sources": [
+        {
+          "label": "TMDB",
+          "url": "https://www.themoviedb.org/movie/391713"
+        },
+        {
+          "label": "IMDb",
+          "url": "https://www.imdb.com/title/tt4925292/"
+        }
+      ],
+      "tmdbId": 391713
     }
   ]
 }
