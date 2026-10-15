@@ -1,111 +1,111 @@
 {
-  "weekKey": "2026-W41",
-  "weekLabel": "8 oct–14 oct",
-  "generatedAt": "2026-10-08T12:22:21.176Z",
+  "weekKey": "2026-W42",
+  "weekLabel": "15 oct–21 oct",
+  "generatedAt": "2026-10-15T12:34:26.065Z",
   "picks": [
     {
-      "title": "Zootrópolis 2",
-      "original": "Zootopia 2",
-      "director": "Jared Bush, Byron Howard",
+      "title": "En directo",
+      "original": "रिपोर्टिंग लाइव",
+      "director": "Dhruv Tripathi",
       "type": "plataforma",
-      "genre": "Animación",
-      "duration": 107,
+      "genre": "Crimen",
+      "duration": 116,
+      "venue": "Netflix",
+      "criticLabel": "Puntaje combinado",
+      "criticScore": "TMDB 8.1 · 4 votos",
+      "scoreLabel": "Puntaje combinado",
+      "lbScore": 4.05,
+      "lbCount": "4 votos",
+      "posterUrl": "https://image.tmdb.org/t/p/w500/4MQDsOft2xkNxTpOHvULBwKFbbn.jpg",
+      "sources": [
+        {
+          "label": "TMDB",
+          "url": "https://www.themoviedb.org/movie/1389172"
+        },
+        {
+          "label": "IMDb",
+          "url": "https://www.imdb.com/title/tt47657999/"
+        }
+      ],
+      "tmdbId": 1389172
+    },
+    {
+      "title": "Vengadores: Infinity War",
+      "original": "Avengers: Infinity War",
+      "director": "Anthony Russo, Joe Russo",
+      "type": "plataforma",
+      "genre": "Aventura",
+      "duration": 149,
       "venue": "Disney Plus",
       "criticLabel": "Puntaje combinado",
-      "criticScore": "TMDB 7.7 · RT 92% · Metascore 73 · 3.5k votos",
+      "criticScore": "TMDB 8.2 · RT 85% · Metascore 68 · 33.1k votos",
       "scoreLabel": "Puntaje combinado",
-      "lbScore": 3.94,
-      "lbCount": "3.5k votos",
-      "posterUrl": "https://image.tmdb.org/t/p/w500/4fRdfQPjHiuDSkzaxFAV44k7Iem.jpg",
+      "lbScore": 3.99,
+      "lbCount": "33.1k votos",
+      "posterUrl": "https://image.tmdb.org/t/p/w500/ksBQ4oHQDdJwND8H90ay8CbMihU.jpg",
       "sources": [
         {
           "label": "TMDB",
-          "url": "https://www.themoviedb.org/movie/1084242"
+          "url": "https://www.themoviedb.org/movie/299536"
         },
         {
           "label": "IMDb",
-          "url": "https://www.imdb.com/title/tt26443597/"
+          "url": "https://www.imdb.com/title/tt4154756/"
         }
       ],
-      "tmdbId": 1084242
+      "tmdbId": 299536
     },
     {
-      "title": "No dejes a los niños solos",
-      "original": "",
-      "director": "Emilio Portes",
+      "title": "Matchbox: La película",
+      "original": "Matchbox the Movie",
+      "director": "Sam Hargrave",
       "type": "plataforma",
-      "genre": "Terror",
-      "duration": 97,
-      "venue": "VIX ",
+      "genre": "Acción",
+      "duration": 127,
+      "venue": "Apple TV",
       "criticLabel": "Puntaje combinado",
-      "criticScore": "TMDB 6.9 · 99 votos",
+      "criticScore": "TMDB 7.9 · 311 votos",
       "scoreLabel": "Puntaje combinado",
-      "lbScore": 3.21,
-      "lbCount": "99 votos",
-      "posterUrl": "https://image.tmdb.org/t/p/w500/w01yTCLE2nCSj8IMxUjrc8vIwQ9.jpg",
+      "lbScore": 3.95,
+      "lbCount": "311 votos",
+      "posterUrl": "https://image.tmdb.org/t/p/w500/ev2GnYar3LUyui8sOu4gqeMXvLi.jpg",
       "sources": [
         {
           "label": "TMDB",
-          "url": "https://www.themoviedb.org/movie/1339274"
+          "url": "https://www.themoviedb.org/movie/1148365"
         },
         {
           "label": "IMDb",
-          "url": "https://www.imdb.com/title/tt27871792/"
+          "url": "https://www.imdb.com/title/tt28498219/"
         }
       ],
-      "tmdbId": 1339274
+      "tmdbId": 1148365
     },
     {
-      "title": "No confíes en nadie",
-      "original": "Before I Go to Sleep",
-      "director": "Rowan Joffé",
-      "type": "plataforma",
-      "genre": "Suspense",
-      "duration": 92,
-      "venue": "Amazon Prime Video",
-      "criticLabel": "Puntaje combinado",
-      "criticScore": "TMDB 6.5 · RT 37% · Metascore 41 · 2.2k votos",
-      "scoreLabel": "Puntaje combinado",
-      "lbScore": 2.62,
-      "lbCount": "2.2k votos",
-      "posterUrl": "https://image.tmdb.org/t/p/w500/89btN5XPSFzMBWvCkpMsw9sAMr2.jpg",
-      "sources": [
-        {
-          "label": "TMDB",
-          "url": "https://www.themoviedb.org/movie/204922"
-        },
-        {
-          "label": "IMDb",
-          "url": "https://www.imdb.com/title/tt1726592/"
-        }
-      ],
-      "tmdbId": 204922
-    },
-    {
-      "title": "En el corazón de la bestia",
-      "original": "Heart of the Beast",
-      "director": "David Ayer",
+      "title": "Los mundos de Coraline",
+      "original": "Coraline",
+      "director": "Henry Selick",
       "type": "cine",
-      "genre": "Aventura",
+      "genre": "Animación",
       "duration": 101,
       "venue": "Cines (AR)",
       "criticLabel": "Puntaje combinado",
-      "criticScore": "TMDB 7.4 · RT 85% · 250 votos",
+      "criticScore": "TMDB 7.9 · RT 91% · Metascore 80 · 9.6k votos",
       "scoreLabel": "Puntaje combinado",
-      "lbScore": 3.91,
-      "lbCount": "250 votos",
-      "posterUrl": "https://image.tmdb.org/t/p/w500/h9Ql2vsltCOuf44c28nInxjzL2m.jpg",
+      "lbScore": 4.09,
+      "lbCount": "9.6k votos",
+      "posterUrl": "https://image.tmdb.org/t/p/w500/6SToEuWU2BCI1PRnMdpnzF5FaSW.jpg",
       "sources": [
         {
           "label": "TMDB",
-          "url": "https://www.themoviedb.org/movie/1263337"
+          "url": "https://www.themoviedb.org/movie/14836"
         },
         {
           "label": "IMDb",
-          "url": "https://www.imdb.com/title/tt7526136/"
+          "url": "https://www.imdb.com/title/tt0327597/"
         }
       ],
-      "tmdbId": 1263337
+      "tmdbId": 14836
     }
   ]
 }
