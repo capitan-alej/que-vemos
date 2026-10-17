@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-13T12:08:17.630Z",
+  "updatedAt": "2026-10-17T12:10:32.309Z",
   "items": [
     {
       "sugId": "1922",
@@ -339,35 +339,35 @@
       "tmdbId": 1290000
     },
     {
-      "sugId": "lady",
+      "sugId": "the-incomer",
       "suggestedBy": "Narda",
-      "suggestedAt": "2026-10-13T11:39:01.230Z",
-      "query": "Lady",
+      "suggestedAt": "2026-10-17T11:54:20.417Z",
+      "query": "The incomer",
       "status": "ok",
-      "title": "Lady Bird",
-      "original": "",
-      "director": "Greta Gerwig",
-      "type": "plataforma",
-      "genre": "Drama",
-      "duration": 94,
-      "venue": "MovistarTV",
+      "title": "El Entrante",
+      "original": "The Incomer",
+      "director": "Louis Paxton",
+      "type": "otra",
+      "genre": "Comedia",
+      "duration": 102,
+      "venue": "Sin plataforma en AR",
       "criticLabel": "Puntaje combinado",
-      "criticScore": "TMDB 7.2 · RT 99% · Metascore 93 · 9.2k votos",
+      "criticScore": "TMDB 7.1 · RT 95% · 17 votos",
       "scoreLabel": "Puntaje combinado",
-      "lbScore": 4.19,
-      "lbCount": "9.2k votos",
-      "posterUrl": "https://image.tmdb.org/t/p/w500/kfst6DxzGXbdibQPawxQSSuDh09.jpg",
+      "lbScore": 4.28,
+      "lbCount": "17 votos",
+      "posterUrl": "https://image.tmdb.org/t/p/w500/iccroKK1eUTdCnLfmp7I3YXwAKF.jpg",
       "sources": [
         {
           "label": "TMDB",
-          "url": "https://www.themoviedb.org/movie/391713"
+          "url": "https://www.themoviedb.org/movie/1554956"
         },
         {
           "label": "IMDb",
-          "url": "https://www.imdb.com/title/tt4925292/"
+          "url": "https://www.imdb.com/title/tt36980182/"
         }
       ],
-      "tmdbId": 391713
+      "tmdbId": 1554956
     }
   ]
 }
