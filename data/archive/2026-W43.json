@@ -1,0 +1,111 @@
+{
+  "weekKey": "2026-W43",
+  "weekLabel": "22 oct–28 oct",
+  "generatedAt": "2026-10-22T12:35:33.489Z",
+  "picks": [
+    {
+      "title": "Tenzing",
+      "original": "",
+      "director": "Jennifer Peedom",
+      "type": "plataforma",
+      "genre": "Drama",
+      "duration": 126,
+      "venue": "Apple TV",
+      "criticLabel": "Puntaje combinado",
+      "criticScore": "TMDB 8.4 · RT 95% · Metascore 67 · 134 votos",
+      "scoreLabel": "Puntaje combinado",
+      "lbScore": 4.05,
+      "lbCount": "134 votos",
+      "posterUrl": "https://image.tmdb.org/t/p/w500/5i3qw2aDNQP6SWl2hNQaiIoUYHE.jpg",
+      "sources": [
+        {
+          "label": "TMDB",
+          "url": "https://www.themoviedb.org/movie/1288069"
+        },
+        {
+          "label": "IMDb",
+          "url": "https://www.imdb.com/title/tt6262770/"
+        }
+      ],
+      "tmdbId": 1288069
+    },
+    {
+      "title": "Masterplan",
+      "original": "",
+      "director": "Thomas Vincent",
+      "type": "plataforma",
+      "genre": "Acción",
+      "duration": 110,
+      "venue": "Amazon Prime Video",
+      "criticLabel": "Puntaje combinado",
+      "criticScore": "TMDB 7.1 · 128 votos",
+      "scoreLabel": "Puntaje combinado",
+      "lbScore": 3.55,
+      "lbCount": "128 votos",
+      "posterUrl": "https://image.tmdb.org/t/p/w500/pLLvKhqTngUispTyDofvoEDKrxa.jpg",
+      "sources": [
+        {
+          "label": "TMDB",
+          "url": "https://www.themoviedb.org/movie/1561726"
+        },
+        {
+          "label": "IMDb",
+          "url": "https://www.imdb.com/title/tt38672588/"
+        }
+      ],
+      "tmdbId": 1561726
+    },
+    {
+      "title": "El amor de tu vida",
+      "original": "Love of Your Life",
+      "director": "Rachel Morrison",
+      "type": "plataforma",
+      "genre": "Romance",
+      "duration": 109,
+      "venue": "Amazon Prime Video",
+      "criticLabel": "Puntaje combinado",
+      "criticScore": "TMDB 6.8 · RT 74% · 119 votos",
+      "scoreLabel": "Puntaje combinado",
+      "lbScore": 3.55,
+      "lbCount": "119 votos",
+      "posterUrl": "https://image.tmdb.org/t/p/w500/nqeDR6qGU8mqguQHRkAUg2ySBZv.jpg",
+      "sources": [
+        {
+          "label": "TMDB",
+          "url": "https://www.themoviedb.org/movie/1381078"
+        },
+        {
+          "label": "IMDb",
+          "url": "https://www.imdb.com/title/tt34384900/"
+        }
+      ],
+      "tmdbId": 1381078
+    },
+    {
+      "title": "Clayface",
+      "original": "",
+      "director": "James Watkins",
+      "type": "cine",
+      "genre": "Terror",
+      "duration": 108,
+      "venue": "Cines (AR)",
+      "criticLabel": "Puntaje combinado",
+      "criticScore": "TMDB 7.3 · 41 votos",
+      "scoreLabel": "Puntaje combinado",
+      "lbScore": 3.65,
+      "lbCount": "41 votos",
+      "posterUrl": "https://image.tmdb.org/t/p/w500/6ihSDJlBNcvoTWzSA0jonZyOXTs.jpg",
+      "sources": [
+        {
+          "label": "TMDB",
+          "url": "https://www.themoviedb.org/movie/1400940"
+        },
+        {
+          "label": "IMDb",
+          "url": "https://www.imdb.com/title/tt34890576/"
+        }
+      ],
+      "tmdbId": 1400940
+    }
+  ]
+}
