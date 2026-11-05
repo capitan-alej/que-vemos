@@ -1,111 +1,111 @@
 {
-  "weekKey": "2026-W44",
-  "weekLabel": "29 oct–4 nov",
-  "generatedAt": "2026-10-29T18:18:24.719Z",
+  "weekKey": "2026-W45",
+  "weekLabel": "5 nov–11 nov",
+  "generatedAt": "2026-11-05T19:45:41.075Z",
   "picks": [
     {
-      "title": "Coco",
-      "original": "",
-      "director": "Lee Unkrich",
+      "title": "El caballero oscuro",
+      "original": "The Dark Knight",
+      "director": "Christopher Nolan",
       "type": "plataforma",
-      "genre": "Familia",
-      "duration": 109,
-      "venue": "Disney Plus",
-      "criticLabel": "Puntaje combinado",
-      "criticScore": "TMDB 8.2 · RT 97% · Metascore 81 · 21.7k votos",
-      "scoreLabel": "Puntaje combinado",
-      "lbScore": 4.28,
-      "lbCount": "21.7k votos",
-      "posterUrl": "https://image.tmdb.org/t/p/w500/vwsFGblLYxWBNjg9pdWN1Mm5YfW.jpg",
-      "sources": [
-        {
-          "label": "TMDB",
-          "url": "https://www.themoviedb.org/movie/354912"
-        },
-        {
-          "label": "IMDb",
-          "url": "https://www.imdb.com/title/tt2380307/"
-        }
-      ],
-      "tmdbId": 354912
-    },
-    {
-      "title": "Pesadilla antes de Navidad",
-      "original": "The Nightmare Before Christmas",
-      "director": "Henry Selick",
-      "type": "plataforma",
-      "genre": "Fantasía",
-      "duration": 75,
-      "venue": "Disney Plus",
-      "criticLabel": "Puntaje combinado",
-      "criticScore": "TMDB 7.9 · RT 95% · Metascore 82 · 10.8k votos",
-      "scoreLabel": "Puntaje combinado",
-      "lbScore": 4.17,
-      "lbCount": "10.8k votos",
-      "posterUrl": "https://image.tmdb.org/t/p/w500/pqFPpQ77VZ0moRgRRsxx7p39CS3.jpg",
-      "sources": [
-        {
-          "label": "TMDB",
-          "url": "https://www.themoviedb.org/movie/9479"
-        },
-        {
-          "label": "IMDb",
-          "url": "https://www.imdb.com/title/tt0107688/"
-        }
-      ],
-      "tmdbId": 9479
-    },
-    {
-      "title": "Drive: Los farsantes",
-      "original": "Drive – The Pretenders",
-      "director": "Sergej Moya",
-      "type": "plataforma",
-      "genre": "Romance",
-      "duration": 103,
+      "genre": "Acción",
+      "duration": 152,
       "venue": "Amazon Prime Video",
       "criticLabel": "Puntaje combinado",
-      "criticScore": "TMDB 8.0 · 18 votos",
+      "criticScore": "TMDB 8.5 · RT 94% · Metascore 85 · 37.2k votos",
       "scoreLabel": "Puntaje combinado",
-      "lbScore": 4,
-      "lbCount": "18 votos",
-      "posterUrl": "https://image.tmdb.org/t/p/w500/aSvA1Xat045jh8ck7U626PPkzH1.jpg",
+      "lbScore": 4.42,
+      "lbCount": "37.2k votos",
+      "posterUrl": "https://image.tmdb.org/t/p/w500/8QDQExnfNFOtabLDKqfDQuHDsIg.jpg",
       "sources": [
         {
           "label": "TMDB",
-          "url": "https://www.themoviedb.org/movie/1596275"
+          "url": "https://www.themoviedb.org/movie/155"
         },
         {
           "label": "IMDb",
-          "url": "https://www.imdb.com/title/tt37180686/"
+          "url": "https://www.imdb.com/title/tt0468569/"
         }
       ],
-      "tmdbId": 1596275
+      "tmdbId": 155
     },
     {
-      "title": "Wildwood: El Bosque Salvaje",
-      "original": "Wildwood",
-      "director": "Travis Knight",
-      "type": "cine",
-      "genre": "Animación",
-      "duration": 140,
-      "venue": "Cines (AR)",
+      "title": "Contra el huracán",
+      "original": "",
+      "director": "Jorge Michel Grau",
+      "type": "plataforma",
+      "genre": "Drama",
+      "duration": 97,
+      "venue": "Netflix",
       "criticLabel": "Puntaje combinado",
-      "criticScore": "TMDB 8.6 · 98 votos",
+      "criticScore": "TMDB 7.5 · 122 votos",
       "scoreLabel": "Puntaje combinado",
-      "lbScore": 4.3,
-      "lbCount": "98 votos",
-      "posterUrl": "https://image.tmdb.org/t/p/w500/sJ1uZ4DKsjs2iqLtCX46TifxqoE.jpg",
+      "lbScore": 3.76,
+      "lbCount": "122 votos",
+      "posterUrl": "https://image.tmdb.org/t/p/w500/lFaMt4I8LiQAGW9Rb5gfGFXbvOY.jpg",
       "sources": [
         {
           "label": "TMDB",
-          "url": "https://www.themoviedb.org/movie/791523"
+          "url": "https://www.themoviedb.org/movie/1780005"
         },
         {
           "label": "IMDb",
-          "url": "https://www.imdb.com/title/tt2056785/"
+          "url": "https://www.imdb.com/title/tt37961714/"
         }
       ],
-      "tmdbId": 791523
+      "tmdbId": 1780005
+    },
+    {
+      "title": "La historia de Derry",
+      "original": "A Story of Derry",
+      "director": "Tazbah Chavez",
+      "type": "plataforma",
+      "genre": "Drama",
+      "duration": 30,
+      "venue": "HBO Max",
+      "criticLabel": "Puntaje combinado",
+      "criticScore": "TMDB 6.9 · 69 votos",
+      "scoreLabel": "Puntaje combinado",
+      "lbScore": 3.46,
+      "lbCount": "69 votos",
+      "posterUrl": "https://image.tmdb.org/t/p/w500/5P2wp3vAGnHQvzUiJQDKxhQ3jZm.jpg",
+      "sources": [
+        {
+          "label": "TMDB",
+          "url": "https://www.themoviedb.org/movie/1813355"
+        },
+        {
+          "label": "IMDb",
+          "url": "https://www.imdb.com/title/tt50389959/"
+        }
+      ],
+      "tmdbId": 1813355
+    },
+    {
+      "title": "Godzilla Minus Zero",
+      "original": "ゴジラ-0.0",
+      "director": "Takashi Yamazaki",
+      "type": "cine",
+      "genre": "Ciencia ficción",
+      "duration": 135,
+      "venue": "Cines (AR)",
+      "criticLabel": "Puntaje combinado",
+      "criticScore": "TMDB 8.3 · RT 97% · 34 votos",
+      "scoreLabel": "Puntaje combinado",
+      "lbScore": 4.55,
+      "lbCount": "34 votos",
+      "posterUrl": "https://image.tmdb.org/t/p/w500/taoPyKQTXh0FSwO5rin8Djrt20C.jpg",
+      "sources": [
+        {
+          "label": "TMDB",
+          "url": "https://www.themoviedb.org/movie/1381071"
+        },
+        {
+          "label": "IMDb",
+          "url": "https://www.imdb.com/title/tt34384661/"
+        }
+      ],
+      "tmdbId": 1381071
     }
   ]
 }

@@ -1,0 +1,111 @@
+{
+  "weekKey": "2026-W44",
+  "weekLabel": "29 oct–4 nov",
+  "generatedAt": "2026-10-29T18:18:24.719Z",
+  "picks": [
+    {
+      "title": "Coco",
+      "original": "",
+      "director": "Lee Unkrich",
+      "type": "plataforma",
+      "genre": "Familia",
+      "duration": 109,
+      "venue": "Disney Plus",
+      "criticLabel": "Puntaje combinado",
+      "criticScore": "TMDB 8.2 · RT 97% · Metascore 81 · 21.7k votos",
+      "scoreLabel": "Puntaje combinado",
+      "lbScore": 4.28,
+      "lbCount": "21.7k votos",
+      "posterUrl": "https://image.tmdb.org/t/p/w500/vwsFGblLYxWBNjg9pdWN1Mm5YfW.jpg",
+      "sources": [
+        {
+          "label": "TMDB",
+          "url": "https://www.themoviedb.org/movie/354912"
+        },
+        {
+          "label": "IMDb",
+          "url": "https://www.imdb.com/title/tt2380307/"
+        }
+      ],
+      "tmdbId": 354912
+    },
+    {
+      "title": "Pesadilla antes de Navidad",
+      "original": "The Nightmare Before Christmas",
+      "director": "Henry Selick",
+      "type": "plataforma",
+      "genre": "Fantasía",
+      "duration": 75,
+      "venue": "Disney Plus",
+      "criticLabel": "Puntaje combinado",
+      "criticScore": "TMDB 7.9 · RT 95% · Metascore 82 · 10.8k votos",
+      "scoreLabel": "Puntaje combinado",
+      "lbScore": 4.17,
+      "lbCount": "10.8k votos",
+      "posterUrl": "https://image.tmdb.org/t/p/w500/pqFPpQ77VZ0moRgRRsxx7p39CS3.jpg",
+      "sources": [
+        {
+          "label": "TMDB",
+          "url": "https://www.themoviedb.org/movie/9479"
+        },
+        {
+          "label": "IMDb",
+          "url": "https://www.imdb.com/title/tt0107688/"
+        }
+      ],
+      "tmdbId": 9479
+    },
+    {
+      "title": "Drive: Los farsantes",
+      "original": "Drive – The Pretenders",
+      "director": "Sergej Moya",
+      "type": "plataforma",
+      "genre": "Romance",
+      "duration": 103,
+      "venue": "Amazon Prime Video",
+      "criticLabel": "Puntaje combinado",
+      "criticScore": "TMDB 8.0 · 18 votos",
+      "scoreLabel": "Puntaje combinado",
+      "lbScore": 4,
+      "lbCount": "18 votos",
+      "posterUrl": "https://image.tmdb.org/t/p/w500/aSvA1Xat045jh8ck7U626PPkzH1.jpg",
+      "sources": [
+        {
+          "label": "TMDB",
+          "url": "https://www.themoviedb.org/movie/1596275"
+        },
+        {
+          "label": "IMDb",
+          "url": "https://www.imdb.com/title/tt37180686/"
+        }
+      ],
+      "tmdbId": 1596275
+    },
+    {
+      "title": "Wildwood: El Bosque Salvaje",
+      "original": "Wildwood",
+      "director": "Travis Knight",
+      "type": "cine",
+      "genre": "Animación",
+      "duration": 140,
+      "venue": "Cines (AR)",
+      "criticLabel": "Puntaje combinado",
+      "criticScore": "TMDB 8.6 · 98 votos",
+      "scoreLabel": "Puntaje combinado",
+      "lbScore": 4.3,
+      "lbCount": "98 votos",
+      "posterUrl": "https://image.tmdb.org/t/p/w500/sJ1uZ4DKsjs2iqLtCX46TifxqoE.jpg",
+      "sources": [
+        {
+          "label": "TMDB",
+          "url": "https://www.themoviedb.org/movie/791523"
+        },
+        {
+          "label": "IMDb",
+          "url": "https://www.imdb.com/title/tt2056785/"
+        }
+      ],
+      "tmdbId": 791523
+    }
+  ]
+}
