@@ -1,111 +1,111 @@
 {
-  "weekKey": "2026-W45",
-  "weekLabel": "5 nov–11 nov",
-  "generatedAt": "2026-11-05T19:45:41.075Z",
+  "weekKey": "2026-W46",
+  "weekLabel": "12 nov–18 nov",
+  "generatedAt": "2026-11-12T19:44:27.521Z",
   "picks": [
     {
-      "title": "El caballero oscuro",
-      "original": "The Dark Knight",
-      "director": "Christopher Nolan",
-      "type": "plataforma",
-      "genre": "Acción",
-      "duration": 152,
-      "venue": "Amazon Prime Video",
-      "criticLabel": "Puntaje combinado",
-      "criticScore": "TMDB 8.5 · RT 94% · Metascore 85 · 37.2k votos",
-      "scoreLabel": "Puntaje combinado",
-      "lbScore": 4.42,
-      "lbCount": "37.2k votos",
-      "posterUrl": "https://image.tmdb.org/t/p/w500/8QDQExnfNFOtabLDKqfDQuHDsIg.jpg",
-      "sources": [
-        {
-          "label": "TMDB",
-          "url": "https://www.themoviedb.org/movie/155"
-        },
-        {
-          "label": "IMDb",
-          "url": "https://www.imdb.com/title/tt0468569/"
-        }
-      ],
-      "tmdbId": 155
-    },
-    {
-      "title": "Contra el huracán",
-      "original": "",
-      "director": "Jorge Michel Grau",
+      "title": "Un amor posible",
+      "original": "가능한 사랑",
+      "director": "Lee Chang-dong",
       "type": "plataforma",
       "genre": "Drama",
-      "duration": 97,
+      "duration": 165,
       "venue": "Netflix",
       "criticLabel": "Puntaje combinado",
-      "criticScore": "TMDB 7.5 · 122 votos",
+      "criticScore": "TMDB 7.6 · Metascore 96 · 59 votos",
       "scoreLabel": "Puntaje combinado",
-      "lbScore": 3.76,
-      "lbCount": "122 votos",
-      "posterUrl": "https://image.tmdb.org/t/p/w500/lFaMt4I8LiQAGW9Rb5gfGFXbvOY.jpg",
+      "lbScore": 4.19,
+      "lbCount": "59 votos",
+      "posterUrl": "https://image.tmdb.org/t/p/w500/bYlv7oanFQB4zfTdDSGMz9cz1df.jpg",
       "sources": [
         {
           "label": "TMDB",
-          "url": "https://www.themoviedb.org/movie/1780005"
+          "url": "https://www.themoviedb.org/movie/1483525"
         },
         {
           "label": "IMDb",
-          "url": "https://www.imdb.com/title/tt37961714/"
+          "url": "https://www.imdb.com/title/tt37803364/"
         }
       ],
-      "tmdbId": 1780005
+      "tmdbId": 1483525
     },
     {
-      "title": "La historia de Derry",
-      "original": "A Story of Derry",
-      "director": "Tazbah Chavez",
-      "type": "plataforma",
-      "genre": "Drama",
-      "duration": 30,
-      "venue": "HBO Max",
-      "criticLabel": "Puntaje combinado",
-      "criticScore": "TMDB 6.9 · 69 votos",
-      "scoreLabel": "Puntaje combinado",
-      "lbScore": 3.46,
-      "lbCount": "69 votos",
-      "posterUrl": "https://image.tmdb.org/t/p/w500/5P2wp3vAGnHQvzUiJQDKxhQ3jZm.jpg",
-      "sources": [
-        {
-          "label": "TMDB",
-          "url": "https://www.themoviedb.org/movie/1813355"
-        },
-        {
-          "label": "IMDb",
-          "url": "https://www.imdb.com/title/tt50389959/"
-        }
-      ],
-      "tmdbId": 1813355
-    },
-    {
-      "title": "Godzilla Minus Zero",
-      "original": "ゴジラ-0.0",
+      "title": "Godzilla Minus One",
+      "original": "ゴジラ-1.0",
       "director": "Takashi Yamazaki",
-      "type": "cine",
+      "type": "plataforma",
       "genre": "Ciencia ficción",
-      "duration": 135,
+      "duration": 125,
+      "venue": "Netflix",
+      "criticLabel": "Puntaje combinado",
+      "criticScore": "TMDB 7.6 · RT 99% · Metascore 81 · 3.6k votos",
+      "scoreLabel": "Puntaje combinado",
+      "lbScore": 4.13,
+      "lbCount": "3.6k votos",
+      "posterUrl": "https://image.tmdb.org/t/p/w500/q35kdC8ci9Fm2gVQazJdsohtGpD.jpg",
+      "sources": [
+        {
+          "label": "TMDB",
+          "url": "https://www.themoviedb.org/movie/940721"
+        },
+        {
+          "label": "IMDb",
+          "url": "https://www.imdb.com/title/tt23289160/"
+        }
+      ],
+      "tmdbId": 940721
+    },
+    {
+      "title": "Un poco de compañía antes de morir",
+      "original": "余命一年、男をかう",
+      "director": "Hiroki Kazama",
+      "type": "plataforma",
+      "genre": "Romance",
+      "duration": 109,
+      "venue": "Netflix",
+      "criticLabel": "Puntaje combinado",
+      "criticScore": "TMDB 7.5 · 23 votos",
+      "scoreLabel": "Puntaje combinado",
+      "lbScore": 3.75,
+      "lbCount": "23 votos",
+      "posterUrl": "https://image.tmdb.org/t/p/w500/4mdyjojUihFbw76GBl6ZO8E8bCh.jpg",
+      "sources": [
+        {
+          "label": "TMDB",
+          "url": "https://www.themoviedb.org/movie/1654940"
+        },
+        {
+          "label": "IMDb",
+          "url": "https://www.imdb.com/title/tt39400541/"
+        }
+      ],
+      "tmdbId": 1654940
+    },
+    {
+      "title": "Scrooge y los fantasmas de la Navidad",
+      "original": "Ebenezer",
+      "director": "Ti West",
+      "type": "cine",
+      "genre": "Fantasía",
+      "duration": 115,
       "venue": "Cines (AR)",
       "criticLabel": "Puntaje combinado",
-      "criticScore": "TMDB 8.3 · RT 97% · 34 votos",
+      "criticScore": "TMDB 8.6 · 15 votos",
       "scoreLabel": "Puntaje combinado",
-      "lbScore": 4.55,
-      "lbCount": "34 votos",
-      "posterUrl": "https://image.tmdb.org/t/p/w500/taoPyKQTXh0FSwO5rin8Djrt20C.jpg",
+      "lbScore": 4.3,
+      "lbCount": "15 votos",
+      "posterUrl": "https://image.tmdb.org/t/p/w500/gnG15MkiNeObCoPbHcLUX4zrNWh.jpg",
       "sources": [
         {
           "label": "TMDB",
-          "url": "https://www.themoviedb.org/movie/1381071"
+          "url": "https://www.themoviedb.org/movie/1567605"
         },
         {
           "label": "IMDb",
-          "url": "https://www.imdb.com/title/tt34384661/"
+          "url": "https://www.imdb.com/title/tt38773219/"
         }
       ],
-      "tmdbId": 1381071
+      "tmdbId": 1567605
     }
   ]
 }
