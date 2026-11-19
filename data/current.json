@@ -1,111 +1,111 @@
 {
-  "weekKey": "2026-W46",
-  "weekLabel": "12 nov–18 nov",
-  "generatedAt": "2026-11-12T19:44:27.521Z",
+  "weekKey": "2026-W47",
+  "weekLabel": "19 nov–25 nov",
+  "generatedAt": "2026-11-19T20:20:06.032Z",
   "picks": [
     {
-      "title": "Un amor posible",
-      "original": "가능한 사랑",
-      "director": "Lee Chang-dong",
+      "title": "Madden",
+      "original": "",
+      "director": "David O. Russell",
       "type": "plataforma",
       "genre": "Drama",
-      "duration": 165,
-      "venue": "Netflix",
+      "duration": 112,
+      "venue": "Amazon Prime Video",
       "criticLabel": "Puntaje combinado",
-      "criticScore": "TMDB 7.6 · Metascore 96 · 59 votos",
+      "criticScore": "TMDB 8.1 · 18 votos",
       "scoreLabel": "Puntaje combinado",
-      "lbScore": 4.19,
-      "lbCount": "59 votos",
-      "posterUrl": "https://image.tmdb.org/t/p/w500/bYlv7oanFQB4zfTdDSGMz9cz1df.jpg",
+      "lbScore": 4.05,
+      "lbCount": "18 votos",
+      "posterUrl": "https://image.tmdb.org/t/p/w500/bRa83oPFFPqaAF3wrpVWPqqfFel.jpg",
       "sources": [
         {
           "label": "TMDB",
-          "url": "https://www.themoviedb.org/movie/1483525"
+          "url": "https://www.themoviedb.org/movie/1131943"
         },
         {
           "label": "IMDb",
-          "url": "https://www.imdb.com/title/tt37803364/"
+          "url": "https://www.imdb.com/title/tt24818230/"
         }
       ],
-      "tmdbId": 1483525
+      "tmdbId": 1131943
     },
     {
-      "title": "Godzilla Minus One",
-      "original": "ゴジラ-1.0",
-      "director": "Takashi Yamazaki",
+      "title": "Interstellar",
+      "original": "",
+      "director": "Christopher Nolan",
       "type": "plataforma",
-      "genre": "Ciencia ficción",
-      "duration": 125,
-      "venue": "Netflix",
+      "genre": "Aventura",
+      "duration": 169,
+      "venue": "Amazon Prime Video",
       "criticLabel": "Puntaje combinado",
-      "criticScore": "TMDB 7.6 · RT 99% · Metascore 81 · 3.6k votos",
+      "criticScore": "TMDB 8.5 · RT 73% · Metascore 74 · 42k votos",
       "scoreLabel": "Puntaje combinado",
-      "lbScore": 4.13,
-      "lbCount": "3.6k votos",
-      "posterUrl": "https://image.tmdb.org/t/p/w500/q35kdC8ci9Fm2gVQazJdsohtGpD.jpg",
+      "lbScore": 4,
+      "lbCount": "42k votos",
+      "posterUrl": "https://image.tmdb.org/t/p/w500/d1QKiYtceF3GDtxvTFXFAqwwah9.jpg",
       "sources": [
         {
           "label": "TMDB",
-          "url": "https://www.themoviedb.org/movie/940721"
+          "url": "https://www.themoviedb.org/movie/157336"
         },
         {
           "label": "IMDb",
-          "url": "https://www.imdb.com/title/tt23289160/"
+          "url": "https://www.imdb.com/title/tt0816692/"
         }
       ],
-      "tmdbId": 940721
+      "tmdbId": 157336
     },
     {
-      "title": "Un poco de compañía antes de morir",
-      "original": "余命一年、男をかう",
-      "director": "Hiroki Kazama",
+      "title": "Guardaespaldas por navidad",
+      "original": "Guarding Stars",
+      "director": "Elizabeth Allen Rosenbaum",
       "type": "plataforma",
       "genre": "Romance",
       "duration": 109,
       "venue": "Netflix",
       "criticLabel": "Puntaje combinado",
-      "criticScore": "TMDB 7.5 · 23 votos",
+      "criticScore": "TMDB 7.4 · 27 votos",
       "scoreLabel": "Puntaje combinado",
-      "lbScore": 3.75,
-      "lbCount": "23 votos",
-      "posterUrl": "https://image.tmdb.org/t/p/w500/4mdyjojUihFbw76GBl6ZO8E8bCh.jpg",
+      "lbScore": 3.7,
+      "lbCount": "27 votos",
+      "posterUrl": "https://image.tmdb.org/t/p/w500/baYwDjfwRQud2Eibpay4XgvYSmv.jpg",
       "sources": [
         {
           "label": "TMDB",
-          "url": "https://www.themoviedb.org/movie/1654940"
+          "url": "https://www.themoviedb.org/movie/1551025"
         },
         {
           "label": "IMDb",
-          "url": "https://www.imdb.com/title/tt39400541/"
+          "url": "https://www.imdb.com/title/tt6611324/"
         }
       ],
-      "tmdbId": 1654940
+      "tmdbId": 1551025
     },
     {
-      "title": "Scrooge y los fantasmas de la Navidad",
-      "original": "Ebenezer",
-      "director": "Ti West",
+      "title": "Obsession",
+      "original": "",
+      "director": "Curry Barker",
       "type": "cine",
-      "genre": "Fantasía",
-      "duration": 115,
+      "genre": "Terror",
+      "duration": 109,
       "venue": "Cines (AR)",
       "criticLabel": "Puntaje combinado",
-      "criticScore": "TMDB 8.6 · 15 votos",
+      "criticScore": "TMDB 8.2 · RT 93% · Metascore 77 · 6.7k votos",
       "scoreLabel": "Puntaje combinado",
-      "lbScore": 4.3,
-      "lbCount": "15 votos",
-      "posterUrl": "https://image.tmdb.org/t/p/w500/gnG15MkiNeObCoPbHcLUX4zrNWh.jpg",
+      "lbScore": 4.13,
+      "lbCount": "6.7k votos",
+      "posterUrl": "https://image.tmdb.org/t/p/w500/p1QFjQ8wwlXXlxwaWlehJ37uXVj.jpg",
       "sources": [
         {
           "label": "TMDB",
-          "url": "https://www.themoviedb.org/movie/1567605"
+          "url": "https://www.themoviedb.org/movie/1339713"
         },
         {
           "label": "IMDb",
-          "url": "https://www.imdb.com/title/tt38773219/"
+          "url": "https://www.imdb.com/title/tt37287335/"
         }
       ],
-      "tmdbId": 1567605
+      "tmdbId": 1339713
     }
   ]
 }

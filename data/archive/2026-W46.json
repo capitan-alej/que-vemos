@@ -1,0 +1,111 @@
+{
+  "weekKey": "2026-W46",
+  "weekLabel": "12 nov–18 nov",
+  "generatedAt": "2026-11-12T19:44:27.521Z",
+  "picks": [
+    {
+      "title": "Un amor posible",
+      "original": "가능한 사랑",
+      "director": "Lee Chang-dong",
+      "type": "plataforma",
+      "genre": "Drama",
+      "duration": 165,
+      "venue": "Netflix",
+      "criticLabel": "Puntaje combinado",
+      "criticScore": "TMDB 7.6 · Metascore 96 · 59 votos",
+      "scoreLabel": "Puntaje combinado",
+      "lbScore": 4.19,
+      "lbCount": "59 votos",
+      "posterUrl": "https://image.tmdb.org/t/p/w500/bYlv7oanFQB4zfTdDSGMz9cz1df.jpg",
+      "sources": [
+        {
+          "label": "TMDB",
+          "url": "https://www.themoviedb.org/movie/1483525"
+        },
+        {
+          "label": "IMDb",
+          "url": "https://www.imdb.com/title/tt37803364/"
+        }
+      ],
+      "tmdbId": 1483525
+    },
+    {
+      "title": "Godzilla Minus One",
+      "original": "ゴジラ-1.0",
+      "director": "Takashi Yamazaki",
+      "type": "plataforma",
+      "genre": "Ciencia ficción",
+      "duration": 125,
+      "venue": "Netflix",
+      "criticLabel": "Puntaje combinado",
+      "criticScore": "TMDB 7.6 · RT 99% · Metascore 81 · 3.6k votos",
+      "scoreLabel": "Puntaje combinado",
+      "lbScore": 4.13,
+      "lbCount": "3.6k votos",
+      "posterUrl": "https://image.tmdb.org/t/p/w500/q35kdC8ci9Fm2gVQazJdsohtGpD.jpg",
+      "sources": [
+        {
+          "label": "TMDB",
+          "url": "https://www.themoviedb.org/movie/940721"
+        },
+        {
+          "label": "IMDb",
+          "url": "https://www.imdb.com/title/tt23289160/"
+        }
+      ],
+      "tmdbId": 940721
+    },
+    {
+      "title": "Un poco de compañía antes de morir",
+      "original": "余命一年、男をかう",
+      "director": "Hiroki Kazama",
+      "type": "plataforma",
+      "genre": "Romance",
+      "duration": 109,
+      "venue": "Netflix",
+      "criticLabel": "Puntaje combinado",
+      "criticScore": "TMDB 7.5 · 23 votos",
+      "scoreLabel": "Puntaje combinado",
+      "lbScore": 3.75,
+      "lbCount": "23 votos",
+      "posterUrl": "https://image.tmdb.org/t/p/w500/4mdyjojUihFbw76GBl6ZO8E8bCh.jpg",
+      "sources": [
+        {
+          "label": "TMDB",
+          "url": "https://www.themoviedb.org/movie/1654940"
+        },
+        {
+          "label": "IMDb",
+          "url": "https://www.imdb.com/title/tt39400541/"
+        }
+      ],
+      "tmdbId": 1654940
+    },
+    {
+      "title": "Scrooge y los fantasmas de la Navidad",
+      "original": "Ebenezer",
+      "director": "Ti West",
+      "type": "cine",
+      "genre": "Fantasía",
+      "duration": 115,
+      "venue": "Cines (AR)",
+      "criticLabel": "Puntaje combinado",
+      "criticScore": "TMDB 8.6 · 15 votos",
+      "scoreLabel": "Puntaje combinado",
+      "lbScore": 4.3,
+      "lbCount": "15 votos",
+      "posterUrl": "https://image.tmdb.org/t/p/w500/gnG15MkiNeObCoPbHcLUX4zrNWh.jpg",
+      "sources": [
+        {
+          "label": "TMDB",
+          "url": "https://www.themoviedb.org/movie/1567605"
+        },
+        {
+          "label": "IMDb",
+          "url": "https://www.imdb.com/title/tt38773219/"
+        }
+      ],
+      "tmdbId": 1567605
+    }
+  ]
+}
