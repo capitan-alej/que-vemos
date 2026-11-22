@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-17T12:10:32.309Z",
+  "updatedAt": "2026-11-22T22:12:44.794Z",
   "items": [
     {
       "sugId": "1922",
@@ -368,6 +368,99 @@
         }
       ],
       "tmdbId": 1554956
+    },
+    {
+      "sugId": "la-bola-negra",
+      "suggestedBy": "Narda",
+      "suggestedAt": "2026-11-22T18:27:40.842Z",
+      "query": "La bola negra",
+      "status": "ok",
+      "title": "La bola negra",
+      "original": "",
+      "director": "Javier Ambrossi, Javier Calvo",
+      "type": "otra",
+      "genre": "Drama",
+      "duration": 159,
+      "venue": "Sin plataforma en AR",
+      "criticLabel": "Puntaje combinado",
+      "criticScore": "TMDB 7.9 · Metascore 86 · 250 votos",
+      "scoreLabel": "Puntaje combinado",
+      "lbScore": 3.95,
+      "lbCount": "250 votos",
+      "posterUrl": "https://image.tmdb.org/t/p/w500/t1azKLExwUxKj6v6m2L535evuRa.jpg",
+      "sources": [
+        {
+          "label": "TMDB",
+          "url": "https://www.themoviedb.org/movie/1422041"
+        },
+        {
+          "label": "IMDb",
+          "url": "https://www.imdb.com/title/tt35511966/"
+        }
+      ],
+      "tmdbId": 1422041
+    },
+    {
+      "sugId": "you-can-see-everything",
+      "suggestedBy": "Narda",
+      "suggestedAt": "2026-11-22T18:27:57.695Z",
+      "query": "You can see everything",
+      "status": "ok",
+      "title": "Puedes verlo todo",
+      "original": "You Can See Everything",
+      "director": "Nathan Fielder, Lance Oppenheim",
+      "type": "otra",
+      "genre": "Documental",
+      "duration": 175,
+      "venue": "Sin plataforma en AR",
+      "criticLabel": "Puntaje combinado",
+      "criticScore": "TMDB 8.9 · Metascore 98 · 150 votos",
+      "scoreLabel": "Puntaje combinado",
+      "lbScore": 4.48,
+      "lbCount": "150 votos",
+      "posterUrl": "https://image.tmdb.org/t/p/w500/g2PKUCpDChvYvT7IaUOYfjO0mbG.jpg",
+      "sources": [
+        {
+          "label": "TMDB",
+          "url": "https://www.themoviedb.org/movie/1765072"
+        },
+        {
+          "label": "IMDb",
+          "url": "https://www.imdb.com/title/tt45368240/"
+        }
+      ],
+      "tmdbId": 1765072
+    },
+    {
+      "sugId": "digger",
+      "suggestedBy": "Narda",
+      "suggestedAt": "2026-11-22T18:28:24.117Z",
+      "query": "Digger",
+      "status": "ok",
+      "title": "Digger",
+      "original": "",
+      "director": "Alejandro González Iñárritu",
+      "type": "otra",
+      "genre": "Comedia",
+      "duration": 129,
+      "venue": "Sin plataforma en AR",
+      "criticLabel": "Puntaje combinado",
+      "criticScore": "TMDB 7.5 · 538 votos",
+      "scoreLabel": "Puntaje combinado",
+      "lbScore": 3.75,
+      "lbCount": "538 votos",
+      "posterUrl": "https://image.tmdb.org/t/p/w500/koqE0V2IgIPVy5o2vVkoGJvnB8b.jpg",
+      "sources": [
+        {
+          "label": "TMDB",
+          "url": "https://www.themoviedb.org/movie/1248832"
+        },
+        {
+          "label": "IMDb",
+          "url": "https://www.imdb.com/title/tt31450459/"
+        }
+      ],
+      "tmdbId": 1248832
     }
   ]
 }
