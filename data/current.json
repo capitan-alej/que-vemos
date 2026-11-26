@@ -1,111 +1,111 @@
 {
-  "weekKey": "2026-W47",
-  "weekLabel": "19 nov–25 nov",
-  "generatedAt": "2026-11-19T20:20:06.032Z",
+  "weekKey": "2026-W48",
+  "weekLabel": "26 nov–2 dic",
+  "generatedAt": "2026-11-26T21:14:53.801Z",
   "picks": [
     {
-      "title": "Madden",
+      "title": "Iron Man",
       "original": "",
-      "director": "David O. Russell",
+      "director": "Jon Favreau",
       "type": "plataforma",
-      "genre": "Drama",
-      "duration": 112,
-      "venue": "Amazon Prime Video",
+      "genre": "Acción",
+      "duration": 126,
+      "venue": "Disney Plus",
       "criticLabel": "Puntaje combinado",
-      "criticScore": "TMDB 8.1 · 18 votos",
+      "criticScore": "TMDB 7.7 · Metascore 79 · 29.3k votos",
       "scoreLabel": "Puntaje combinado",
-      "lbScore": 4.05,
-      "lbCount": "18 votos",
-      "posterUrl": "https://image.tmdb.org/t/p/w500/bRa83oPFFPqaAF3wrpVWPqqfFel.jpg",
+      "lbScore": 3.9,
+      "lbCount": "29.3k votos",
+      "posterUrl": "https://image.tmdb.org/t/p/w500/bFj7XRg5avQDvuvWaag3IttjEAw.jpg",
       "sources": [
         {
           "label": "TMDB",
-          "url": "https://www.themoviedb.org/movie/1131943"
+          "url": "https://www.themoviedb.org/movie/1726"
         },
         {
           "label": "IMDb",
-          "url": "https://www.imdb.com/title/tt24818230/"
+          "url": "https://www.imdb.com/title/tt0371746/"
         }
       ],
-      "tmdbId": 1131943
+      "tmdbId": 1726
     },
     {
-      "title": "Interstellar",
-      "original": "",
-      "director": "Christopher Nolan",
+      "title": "Los Juegos del Hambre: En llamas",
+      "original": "The Hunger Games: Catching Fire",
+      "director": "Francis Lawrence",
       "type": "plataforma",
       "genre": "Aventura",
-      "duration": 169,
-      "venue": "Amazon Prime Video",
+      "duration": 146,
+      "venue": "MovistarTV",
       "criticLabel": "Puntaje combinado",
-      "criticScore": "TMDB 8.5 · RT 73% · Metascore 74 · 42k votos",
+      "criticScore": "TMDB 7.4 · Metascore 76 · 19.1k votos",
       "scoreLabel": "Puntaje combinado",
-      "lbScore": 4,
-      "lbCount": "42k votos",
-      "posterUrl": "https://image.tmdb.org/t/p/w500/d1QKiYtceF3GDtxvTFXFAqwwah9.jpg",
+      "lbScore": 3.74,
+      "lbCount": "19.1k votos",
+      "posterUrl": "https://image.tmdb.org/t/p/w500/oxnKI1qiHz7xC0mNthC7dSqTcot.jpg",
       "sources": [
         {
           "label": "TMDB",
-          "url": "https://www.themoviedb.org/movie/157336"
+          "url": "https://www.themoviedb.org/movie/101299"
         },
         {
           "label": "IMDb",
-          "url": "https://www.imdb.com/title/tt0816692/"
+          "url": "https://www.imdb.com/title/tt1951264/"
         }
       ],
-      "tmdbId": 157336
+      "tmdbId": 101299
     },
     {
-      "title": "Guardaespaldas por navidad",
-      "original": "Guarding Stars",
-      "director": "Elizabeth Allen Rosenbaum",
+      "title": "Mosquito Bowl: Un partido en plena guerra",
+      "original": "The Mosquito Bowl",
+      "director": "Peter Berg",
       "type": "plataforma",
-      "genre": "Romance",
-      "duration": 109,
+      "genre": "Bélica",
+      "duration": 128,
       "venue": "Netflix",
       "criticLabel": "Puntaje combinado",
       "criticScore": "TMDB 7.4 · 27 votos",
       "scoreLabel": "Puntaje combinado",
       "lbScore": 3.7,
       "lbCount": "27 votos",
-      "posterUrl": "https://image.tmdb.org/t/p/w500/baYwDjfwRQud2Eibpay4XgvYSmv.jpg",
+      "posterUrl": "https://image.tmdb.org/t/p/w500/yWhMnr8pkhgZ1rGlj4z2dxLbS99.jpg",
       "sources": [
         {
           "label": "TMDB",
-          "url": "https://www.themoviedb.org/movie/1551025"
+          "url": "https://www.themoviedb.org/movie/1458300"
         },
         {
           "label": "IMDb",
-          "url": "https://www.imdb.com/title/tt6611324/"
+          "url": "https://www.imdb.com/title/tt36413910/"
         }
       ],
-      "tmdbId": 1551025
+      "tmdbId": 1458300
     },
     {
-      "title": "Obsession",
-      "original": "",
-      "director": "Curry Barker",
+      "title": "Yo soy Rocky",
+      "original": "I Play Rocky",
+      "director": "Peter Farrelly",
       "type": "cine",
-      "genre": "Terror",
-      "duration": 109,
+      "genre": "Drama",
+      "duration": 128,
       "venue": "Cines (AR)",
       "criticLabel": "Puntaje combinado",
-      "criticScore": "TMDB 8.2 · RT 93% · Metascore 77 · 6.7k votos",
+      "criticScore": "TMDB 8.3 · 79 votos",
       "scoreLabel": "Puntaje combinado",
-      "lbScore": 4.13,
-      "lbCount": "6.7k votos",
-      "posterUrl": "https://image.tmdb.org/t/p/w500/p1QFjQ8wwlXXlxwaWlehJ37uXVj.jpg",
+      "lbScore": 4.17,
+      "lbCount": "79 votos",
+      "posterUrl": "https://image.tmdb.org/t/p/w500/n8Nfb2jIUCOIVHjF0u89TIQ5ZfY.jpg",
       "sources": [
         {
           "label": "TMDB",
-          "url": "https://www.themoviedb.org/movie/1339713"
+          "url": "https://www.themoviedb.org/movie/1286656"
         },
         {
           "label": "IMDb",
-          "url": "https://www.imdb.com/title/tt37287335/"
+          "url": "https://www.imdb.com/title/tt11995650/"
         }
       ],
-      "tmdbId": 1339713
+      "tmdbId": 1286656
     }
   ]
 }
